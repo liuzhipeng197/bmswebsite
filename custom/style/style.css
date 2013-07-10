@@ -1,0 +1,285 @@
+body
+{       
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-color:#404142;
+	width:98%;	
+	width:100%;
+	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+	padding:0px;
+	margin:0px;
+}
+input, textarea, select, p, div, li,
+{
+	font-family: "Verdana", "Bitstream Vera Sans", sans-serif;
+	font-size: 8pt;
+	line-height: 1.4em;
+}
+
+code, pre, tt
+{
+	font-family: monospace;
+	font-size: 8pt;
+}
+
+a { text-decoration: underline; color: rgb(51, 102, 204); background-color: transparent; }
+a:visited { text-decoration: underline; color: rgb(51, 102, 204); background-color: transparent; }
+a:active { text-decoration: underline; color: rgb(51, 102, 204); background-color: transparent; }
+a:hover { text-decoration: none; color: rgb(204, 102, 51); background-color: transparent; }
+
+img
+{
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+
+div.red
+{
+	color: red;
+	background-color: transparent;
+}
+
+div.nastor-logo
+{
+	background: url(../images/login_header.png);
+	height:42px; 
+ 	/*padding-left:20px;*/ 
+ 	vertical-align:middle;
+ 	font-size:18px; 
+ 	color:#edfbfe; 
+ 	font-weight:bold; 
+ 	font-family:Verdana, Arial, Helvetica, sans-serif; 
+ 	line-height:42px;
+ 	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+}
+
+.table_border{
+	border-bottom:1px solid #ada6a6;
+	border-top:1px solid #ada6a6;
+	border-left:1px solid #ada6a6;
+	border-right:1px solid #ada6a6;
+}
+
+.menu_border{
+	border:1px solid #ada6a6;
+	padding-left:15px;
+	padding-top:2px;
+}
+
+#menu dl 
+{
+	MARGIN-TOP: 0px; 
+	MARGIN-BOTTOM: 15px; 
+	TEXT-ALIGN: center
+}
+
+#menu dt{
+	FONT-WEIGHT: bold; 
+	MARGIN: 0px; 
+	WIDTH: 180px; 
+	COLOR: #171717; 
+	LINE-HEIGHT: 24px; 
+	HEIGHT: 24px; 
+	background-image:url(../images/menu.png);
+	TEXT-ALIGN:left;
+	cursor:pointer;
+}
+
+#menu dd {
+    display:inline; 
+	MARGIN: 0px; 
+	WIDTH: 180px; 
+	LINE-HEIGHT: 24px; 
+	HEIGHT: 24px; 
+	BACKGROUND-COLOR: #fff; 
+    list-style:none;
+    margin:1px;
+    padding:0px;
+    display: none;
+	TEXT-ALIGN: center
+}
+
+#menu dl a {
+	DISPLAY: block; 
+	WIDTH: 180px; 
+	COLOR: #666666; 
+	LINE-HEIGHT: 24px; 
+	HEIGHT: 24px; 
+	TEXT-DECORATION: none
+}
+
+#menu dl a:hover {
+	DISPLAY: block; 
+	COLOR: #000; 
+	BACKGROUND-COLOR: #dce5ec; 
+	TEXT-DECORATION: none
+}
+/*add by baowenyu*/
+.container
+{
+	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+}
+#logo
+{
+	width:40px;
+	height:40px;
+	float:left;
+	background-image:url(../images/WFSlogo.png);
+	background-repeat: no-repeat;
+	position:relative;
+	top:8px;
+	left:12px;
+}
+.toptitle
+{
+	font-size:18px; 
+	text-align:left; 
+	vertical-align:middle;
+	color:#ffffff;
+	height:40px;
+	line-height:40px;
+	width:350px;
+	float:left;
+	padding-left:18px;
+}
+#actionicon
+{
+	width:140px;
+	width:120px;
+	height:40px;
+	float:right;
+	position:relative;
+	top:7px;
+}
+
+.surveillance
+{
+	height:32px;
+	width:32px;
+	background-image:url(../images/surveillance.png);/* FF IE7 */
+	background-repeat: no-repeat;
+	cursor:pointer;
+	float:left;
+	margin-right:3px;
+}
+.indexpage
+{
+	height:32px;
+	width:32px;
+	background-image:url(../images/refresh.png);/* FF IE7 */
+	background-repeat: no-repeat;
+	cursor:pointer;
+	float:left;
+	margin-right:3px;
+}
+.changepass
+{
+	height:32px;
+	width:32px;
+	background-image:url(../images/setting.png);/* FF IE7 */
+	background-repeat: no-repeat;
+	cursor:pointer;
+	float:left;
+	margin-right:3px;
+}
+.exit
+{
+	height:32px;
+	width:32px;
+	background-image:url(../images/close.png);/* FF IE7 */
+	background-repeat: no-repeat;
+	cursor:pointer;
+	float:left;
+}
+#main
+{
+	width:200px;
+	height:530px;
+	border-right:1px solid #919191;
+	background:#e8f1f8;
+	float:left;
+	margin-right:0px;
+	margin-right:-3px;
+}
+#main #menu
+{
+	width:200px;
+	height:530px;	
+	text-align:center;
+	padding-top:50px;
+}
+#main #menu dd{
+	background:#ffffff;
+}
+
+.menu_border img
+{
+	vertical-align:middle;
+}
+.firstimg
+{
+	margin-right:10px;
+}
+.lastimg
+{	
+	margin-left:32px;
+}
+/*右边框架css*/
+#right
+{
+	height:530px;
+	background:#fff;
+}
+#righttitle{
+	background:e6edf3;
+	height:30px;
+	line-height:30px;
+}
+#rightcontent
+{
+	height:500px;
+	text-align:center;
+}
+
+/*右边框架css结束*/
+
+#footer
+{
+	clear:both;
+	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+	margin-top:0px;
+	height:30px;
+	line-height:30px;
+	overflow:hidden;
+	text-align:center;
+	background:url(../images/bottom.png);
+	color:#fff;
+}
+
+/*弹出对话框*/
+#box
+{
+	border-top:2px solid #044b8d;
+	border-bottom:2px solid #044b8d;
+	font-size:13px;
+	margin-top:26px;
+}	
+#disk
+{
+	margin-left:40px;
+	margin-top:20px;
+	width:100px;
+	font-size:13px;
+}
+.odd
+{
+	background-color:#d2dbe2;
+}
+
+
+/*元数据吞吐量测试部分*/

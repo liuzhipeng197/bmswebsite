@@ -1,0 +1,51 @@
+object(foo)#%d (0) {
+}
+object(foo)#%d (0) {
+}
+object(foo)#%d (1) {
+  ["a"]=>
+  bool(true)
+}
+object(baz)#%d (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "bar"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+object(baz)#%d (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "mod"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+object(baz)#%d (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "mod"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+===DONE===

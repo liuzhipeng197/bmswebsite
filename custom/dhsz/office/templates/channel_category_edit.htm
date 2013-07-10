@@ -1,0 +1,207 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504377" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+				{if $smarty.section.loop.index == 0}
+					<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" class="Move"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+				{else}
+					<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+					<td width="85" align="center" id="languagesel{$language[loop].language_id}" class="Out"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>			
+				{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,填写不同语言栏目分类信息.</td>
+		  </tr>
+		  
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+	  {else}
+	  <tr>
+		<td class="LineRightBlue1">	  	
+	  {/if}
+		<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">栏目管理 > 编辑栏目</td>
+			<td width="12%" align="right" class="bt_list"><a href="channel_category.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr><td align="right" style="padding-right:5px;">"<img src="images/required_icon.gif" />"号为必填项</td></tr>
+		<tr><td>
+		<form action="channel_category.php?action=update" method="post" name="theForm" onsubmit="return doCategorySubmit()">
+		{section name=loop loop=$category}
+		{if $smarty.section.loop.index == 0}
+			<div id="languageBox{$category[loop].language_id}" class="">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td width="110" style="padding-left:10px;"><img src="{$category[loop].country}" /> <span>栏目名称</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+							<div class="msgbase">
+							<input type="input" class="FormSmall" name="categoryName_{$category[loop].language_id}" style="width:200px;" value="{$category[loop].name|escape}" id="categoryName_{$category[loop].language_id}" onblur="channelCategoryNameCheck('categoryName_{$category[loop].language_id}')" maxlength="30" />
+							 <img src="images/required_icon.gif" />
+							</div>
+							<div class="msg" style="width:205px;">
+								<div class="" id="categoryName_{$category[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div>
+            </td>
+		</tr>
+        {if $is_lock==0}
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><img src="{$category[loop].country}" /> <span>上级栏目</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<input type="hidden" name="parent_id" id="parent_id" value="{$parent_id}" />
+					  <select name="category_{$category[loop].language_id}" id="category_{$category[loop].language_id}" onChange="changecategory(this)">
+							<option value="0" selected="selected">------根栏目------</option>
+							{$category[loop].category}
+						</select></td>
+		</tr>
+		<tr class="firstalt">
+			<td style="padding-left:10px;">　 <span>栏目类型</span></td>
+			<td style="padding-top:10px;padding-bottom:10px;">
+				<input name="sta" type="radio" value="0" {if $sta == '0'}checked="checked"{/if} /> 文章列表　
+				<input name="sta" type="radio" value="3" {if $sta == '3'}checked="checked"{/if} /> 图片列表　
+				<input name="sta" type="radio" value="1" {if $sta == '1'}checked="checked"{/if} /> 单页　
+				<input name="sta" type="radio" value="2" {if $sta == '2'}checked="checked"{/if} /> 外部链接　
+			</td>
+		</tr>
+        {/if}						
+		<tr class="secondalt">
+			<td style="padding-left:10px;">　 <span>栏目排序</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;"><input type="input" class="FormSmall" name="sort_order" size="10" value="{$sort_order}" /> &nbsp;显示顺序按从小到大排列			
+			</td>
+		</tr>			
+	</table>
+		</td></tr>
+	</table>
+			</div>
+		{else}
+			<div id="languageBox{$category[loop].language_id}" class="close">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td width="110" style="padding-left:10px;"><img src="{$category[loop].country}" /> <span>栏目名称</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+			<input type="input" class="FormSmall" name="categoryName_{$category[loop].language_id}" style="width:200px;" value="{$category[loop].name|escape}" id="categoryName_{$category[loop].language_id}" />
+            </td>
+		</tr>
+        {if $is_lock==0}
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><img src="{$category[loop].country}" /> <span>上级栏目</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+					  <select name="category_{$category[loop].language_id}" id="category_{$category[loop].language_id}" onChange="changecategory(this)">
+							<option value="0" selected="selected">------根栏目------</option>
+							{$category[loop].category}
+						</select></td>
+		</tr>
+        {/if}
+	</table>
+		</td></tr>
+	</table>
+			</div>
+		{/if}
+		{/section}
+		<br />
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		<tr>
+			<td align="center">
+				<input type="hidden" value="{$category_id}" name="category_id" />
+				<input class="bginput" type="submit" id="btSubmit" name="submit" value=" 提交 " />
+				<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+		</form>
+		</td></tr>
+	</table>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找栏目信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找栏目信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找栏目信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+}
+
+function changecategory(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('category_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('parent_id').value=selObj.options[selObj.selectedIndex].value;
+}
+function doCategorySubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	{/literal}
+		{section name=loop loop=$category}
+			{if $smarty.section.loop.index == 0}
+	{literal}
+		if(channelCategoryNameCheck("{/literal}categoryName_{$category[loop].language_id}{literal}") == false)
+			CheResult = false;
+		{/literal}
+			{/if}
+		{literal}
+	{/literal}
+		{/section}
+	{literal}
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

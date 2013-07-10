@@ -1,0 +1,164 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504364" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+				{if $smarty.section.loop.index == 0}
+					<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" class="Move"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+				{else}
+					<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+					<td width="85" align="center" id="languagesel{$language[loop].language_id}" class="Out"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>			
+				{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,填写不同语言分类信息.</td>
+		  </tr>
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+	  {else}
+	  <tr>
+		<td class="LineRightBlue1">	  	
+	  {/if}
+	  <table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">产品管理 > 添加品牌</td>
+			<td width="12%" align="right" class="bt_list"><a href="brand.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr><td align="right" style="padding-right:5px;">"<img src="images/required_icon.gif" />"号为必填项</td></tr>
+		<tr><td>
+		<form action="brand.php?action=insert" enctype="multipart/form-data" method="post" name="theForm" onsubmit="return doBrandSubmit()">
+		{section name=loop loop=$brand}
+		{if $smarty.section.loop.index == 0}
+			<div id="languageBox{$brand[loop].language_id}" class="">
+            
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$brand[loop].country}" /> <span>品牌名称</a></span></td>
+        <td><div class="msgbase">
+								<input type="input" class="FormSmall" name="brandName_{$brand[loop].language_id}" style="width:200px;" id="brandName_{$brand[loop].language_id}" onblur="brandNameCheck('brandName_{$brand[loop].language_id}')" />
+								 <img src="images/required_icon.gif" />
+								</div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="brandName_{$brand[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+							</div>
+        </td>
+      </tr>
+    </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>标志图片</span><a href="#" title="图片最佳尺寸为(100 X 50 px),图片最大30KB,允许(.jpg .gif .png)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                    <td><input type="file" style="width:190px!important;width:300px;" class="FormSmall" name="logo" />
+                    </td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>品牌排序</span></td>
+                    <td><input type="input" class="FormSmall" name="sortOrder" style="width:50px;" value="{$sortOrder}" />&nbsp;&nbsp;品牌序号按从小到大排列
+                    </td>
+                  </tr>
+                </table>
+               
+			
+			</div>
+		{else}
+			<div id="languageBox{$brand[loop].language_id}" class="close">
+			                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$brand[loop].country}" /> <span>品牌名称</span></td>
+        <td>
+								<input type="input" class="FormSmall" name="brandName_{$brand[loop].language_id}" style="width:200px;" id="brandName_{$brand[loop].language_id}" />
+							
+								
+								
+        </td>
+      </tr>
+    </table>
+               
+              
+
+                
+			</div>
+		{/if}
+		{/section}
+		<br />
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		<tr>
+			<td align="center">
+			<input type="submit" id="btSubmit"  class="bginput"name="btSubmit" value=" 添加 " />
+			<input name="reset" type="reset"  class="bginput" value=" 重置 " /></td>
+		</tr>
+		</table>
+
+		</form>
+		
+		</td></tr>
+	</table>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+}
+
+
+function doBrandSubmit(){
+
+	CheResult = true;
+	firstErrorControl = "";
+	{/literal}
+		{section name=loop loop=$brand}
+			{if $smarty.section.loop.index == 0}
+	{literal}
+		if(brandNameCheck("{/literal}brandName_{$brand[loop].language_id}{literal}") == false)
+			CheResult = false;
+		{/literal}
+			{/if}
+		{literal}
+	{/literal}
+
+		{/section}
+	{literal}
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

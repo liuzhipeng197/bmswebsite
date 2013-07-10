@@ -1,0 +1,181 @@
+body
+{       
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-color:#404142;
+	width:98%;	
+	width:100%;
+	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+	padding:0px;
+	margin:0px;
+}
+.container
+{
+	width:expression( documentElement.clientWidth < 980 ? (documentElement.clientWidth == 0 ? (body.clientWidth < 980 ? "980" : "auto") : "980px") : "auto" );
+	min-width:980px;
+}
+#main
+{
+	width:200px;
+	height:530px;
+	border-right:1px solid #919191;
+	background:#e8f1f8;
+	float:left;
+	margin-right:0px;
+	margin-right:-3px;
+}
+#main #menu
+{
+	width:200px;
+	height:530px;	
+	text-align:center;
+	padding-top:50px;
+}
+#main #menu dd{
+	background:#ffffff;
+}
+#righttitle{
+	background:#e6edf3;
+	height:30px;
+	line-height:30px;
+	font-family:microsoft Yahei;
+	font-size:14px;
+	border-bottom:1px solid #919191;
+}
+#rightcontent
+{
+	height:520px;
+	text-align:center;
+	overFlow-y:auto; 
+}
+.table_header{
+	line-height:40px;
+	border-bottom:1px solid #95bce2;
+	font-size:20px;
+	text-align:center;
+}
+.table_line{
+	line-height:35px;
+	border-bottom:1px solid #95bce2;
+	float:left;
+}
+.listnode_title{
+	background:#ecf6fc;
+	line-height:25px;
+	border-bottom:1px solid #95bce2;
+}
+.listnode_line{
+	line-height:23px;
+	border-bottom:1px solid #95bce2;
+	float:center;
+}
+
+/*´ÅÅÌÕóÁÐIOPS²âÊÔ*/
+#iops_cfg_right dl{	
+	border:1px solid #8C8C8C;
+	pading:0px;
+	margin:0px;
+	width:100%;
+	margin-top:6px;
+}
+#iops_selDisk dl
+{
+    border:1px solid #8C8C8C;
+	pading:0px;
+	margin:0px;
+	width:100%;
+	margin-top:6px;
+}
+
+#iops_cfg_right dt{
+	background-color:#dddddd;
+	height: 24px;	
+	line-height: 24px;	
+	font-weight: bold;	
+	color:#006EBA;
+	text-align:left;
+	padding-left:6px;
+	font-size:15px;
+}
+#iops_selDisk dt{
+   background-color:#dddddd;
+	height: 24px;	
+	line-height: 24px;	
+	font-weight: bold;	
+	color:#006EBA;
+	text-align:left;
+	padding-left:6px;
+	font-size:15px;
+}
+#iops_cfg_right dd {
+    color:#000;
+    margin: 0 auto;
+	line-height: 27px;	
+	font-size:14px;
+	background-color:#f7fcfd;
+	text-align: left;
+	padding-left:6px;
+	
+}
+#iops_selDisk dd
+{
+     color:#000;
+    margin: 0 auto;
+	line-height: 27px;	
+	font-size:14px;
+	background-color:#f7fcfd;
+	text-align: left;
+	padding-left:6px;
+}
+
+#iops_init_right dl{
+  border:1px solid #8C8C8C;
+	pading:0px;
+	margin:0px;
+	width:100%;
+	margin-top:6px;
+}
+#iops_init_right dt{
+   background-color:#dddddd;
+	height: 24px;	
+	line-height: 24px;	
+	font-weight: bold;	
+	color:#006EBA;
+	text-align:left;
+	padding-left:6px;
+	font-size:15px;
+}
+#iops_init_right dd{
+   color:#000;
+    margin: 0 auto;
+	line-height: 27px;	
+	font-size:14px;
+	background-color:#f7fcfd;
+	text-align: left;
+	padding-left:6px;
+  
+}
+.even{
+ background:#FFF38F;
+}
+.odd
+{
+ background:#FFFFEE;
+}
+
+.checkedBG
+{
+  background:#FFF38F;
+}
+
+#div-a{
+text-align:center;
+height:20px;
+line-height:20px;
+}
+
+.service {width:635px; line-height:1.5em;  margin:0 auto; padding:10px 30px;}
+a.font_gray14:link, a:visited {text-decoration: underline;color: #333333;}a.font_gray14:active{color:#333; text-decoration:underline; font-size:12px;}
+a.font_gray14:hover{color:#f00;}
+main_cen {height:auto; _height:200px; min-height:200px;background:#fff; border-left:1px solid #86adc6; border-right:1px solid #86adc6; padding:10px 0 50px 0;}

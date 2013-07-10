@@ -1,0 +1,200 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504381" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">广告管理 > 编辑广告</td>
+			<td width="12%" align="right" class="bt_list"><a href="ad_manage.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="ad_manage.php?action=update" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return doAdSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;" >
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		{if $language|@count>1}
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">语言</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="language">
+				{section name=loop loop=$language}
+				<option value="{$language[loop].language_id}" {if $language[loop].language_id==$language_id} selected="selected" {/if}>{$language[loop].name}</option>
+				{/section}
+				</select>
+			</td>
+		</tr>	
+		{else}
+			<input type="hidden" value="{$language_id}" name="language" />
+		{/if}
+
+		<tr class="secondalt">
+			<td width="110"><span style="padding-left:10px;">广告位置</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<input type="hidden" name="category" id="category" value="{$category}" /><div id="msgbox">
+				<div class="msgbase">
+					<select name="position" id="position" onChange="changePosition(this)" onblur="positionCheck('position')">
+						<option value="0" selected="selected">------选择广告位置------</option>
+						{section name=loop loop=$adv_array}
+						<option value="{$adv_array[loop].adv_flag}"  advSize="{$adv_array[loop].adv_size}" {if $category == $adv_array[loop].adv_flag} selected="selected" {/if}>{$adv_array[loop].adv_description}</option>
+						{/section}
+					</select>
+					<img src="images/required_icon.gif" />							</div>
+					<div  class="msg" style="width:205px;">
+						<div class="" id="positionMsg" style="display:none;"></div>
+					</div>
+				  </div>
+			</td>
+		</tr>
+		
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">广告名称</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="name" onblur="adNameCheck('name')" class="FormSmall" style="width:250px;" id="name" value="{$name|escape}" /> <img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="nameMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>			
+		
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">广告类型</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<select name="type">
+				<option value="0" {if $type==0} selected="selected" {/if}>图片</option>
+				<option value="1" {if $type==1} selected="selected" {/if}>Flash</option>
+				</select>
+			</td>
+		</tr>			
+		
+		<tr class="firstalt">
+			<td><span style="padding-left:10px;">广告文件</span> <a href="#" title="最佳尺寸请根据前台页面来定，可以通过QQ截图的方式框出图片大小" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<input type="file"  class="FormSmall" name="file" id="file" />
+				 <img src="images/required_icon.gif" />&nbsp;&nbsp;<span style="color:#FF0000;" id="adv_size"></span>
+				 
+				{if $ad_file}
+				  <br />
+				  {if $type==0}
+				  <a href="{$ad_file}" target="_blank"><img src="{$ad_file}" border="0" style="margin:5px 0px" onload="setImgSizeWH(this.src,this,400,150)" /></a>
+				  {/if}
+				  {if $type==1}
+					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0">
+					  <param name="movie" value="{$ad_file}" />
+					  <param name="quality" value="high" />
+					  <embed src="{$ad_file}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+					</object>
+				  {/if}				  
+				  <br /><div style="font-size:12px;"><input name="delimg" type="checkbox" />&nbsp;删除</div>
+				{/if}				 
+				 
+			</td>
+		</tr>	
+	
+		<tr class="secondalt">
+			<td><span style="padding-left:10px;">链接地址</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="url" onblur="adUrlCheck('url')" value="{$url}" class="FormSmall" style="width:250px;" id="url" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="urlMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>		
+	
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">排序</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" class="FormSmall"  name="sort_order" style="width:50px;" value="{$sort_order}" /> 从大到小排列
+			</td>
+		</tr>		
+	</table>
+		</td></tr>
+	</table>
+	
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input type="hidden" id="ad_id" name="ad_id" value="{$ad_id}" />
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function changePosition(selObj){
+	var current = selObj.options[selObj.selectedIndex];
+	var adv_size = current.getAttribute('advSize');
+	if (adv_size){
+		document.getElementById('adv_size').innerHTML=adv_size;
+	}else{
+		document.getElementById('adv_size').innerHTML='';
+	}
+	document.getElementById('position').value=current.value;
+	document.getElementById('category').value=current.value;
+}
+
+changePosition(document.getElementById('position'));
+
+function doAdSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	if(positionCheck("position") == false)
+		CheResult = false;
+
+	if(adNameCheck("name") == false)
+		CheResult = false;
+		
+	if(adUrlCheck("url") == false)
+		CheResult = false;		
+		
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

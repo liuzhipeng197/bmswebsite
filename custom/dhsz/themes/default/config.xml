@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nitc>
+    <conf>
+        <skin_directory>default</skin_directory>
+		<theme_title>NITC 绿色活力主题</theme_title>
+		<theme_author>Longi</theme_author>
+		<theme_version>3.2</theme_version>
+		<logo_size>宽度：275px，高度：94px</logo_size>
+		<theme_description>NITC效益型网站绿色活力主题.</theme_description>
+		
+		<adv_flag>banner</adv_flag>
+		<adv_size>宽度：745px，高度：204px</adv_size>
+		<adv_description>首页Banner广告位</adv_description>
+
+    </conf>
+</nitc>

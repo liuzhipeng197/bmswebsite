@@ -1,0 +1,324 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504378" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh" style="padding-right:15px;">
+			<form name="searchForm" method="get" action="channel_content.php" onsubmit="return doSearchSubmit()">
+			{if $searchText}
+				<input type="text" name="searchText" id="searchText" value="{$searchText}" />	
+			{else}
+				<input type="text" name="searchText" id="searchText" onFocus="javascript:clearSearchText('searchText');" value="查找栏目信息..." />	
+			{/if}
+			<input name="action" value="list" type="hidden" />
+			<input name="category_id" value="{$category_id}" type="hidden" id="category_id" />
+			<input name="language" value="{$default_language}" type="hidden" id="language" />
+			<input type="submit" value="" class="bt_go" />
+			</form>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+					{if $smarty.section.loop.index == 0}
+						<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" {if $language[loop].language_id==$default_language} class="Move" {else} class="Out" {/if}><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+					{else}
+						<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+						<td width="85" align="center" id="languagesel{$language[loop].language_id}" {if $language[loop].language_id==$default_language} class="Move" {else} class="Out" {/if}><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>	
+					{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,显示不同语言栏目信息.</td>
+		  </tr>
+		  
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+	  {else}
+	  <tr>
+		<td class="LineRightBlue1">	  	
+	  {/if}
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">栏目管理 > 信息列表  {if $nav_list} > {$nav_list}{/if}</td>
+			<td width="12%" align="right" class="bt_add">{if $content_manage==true}<a href="channel_content.php?action=add{$type}{$strpass}">添加</a>{/if}</td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+		
+		<form name="theForm" method="post" action="">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				{if $content_del==true}
+				<td width="45" align="left" style="padding-left:10px;"><input type="checkbox" name="check_all_up" value="yes" onClick="return select_all_content('check_all_up','theForm');" /> 全选</td>
+				{/if}
+                		<td width="40">
+				<input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">
+				 </td>
+				{if $content_del==true}
+				<td align="left">
+				<input type="button" value=" 删除 " name="button" OnClick="javascript:dodel();" />
+				</td>
+				  {/if}
+				<td align="right">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+        <div class="tablelisthead">
+        <ul>
+        <li class="li_5">选择</li>
+		<li class="li_5">排序</li>
+        <li class="li_35">标题</li>
+        <li class="li_20">栏目分类</li>
+        <li class="li_25">添加日期</li>
+        {if $content_manage==true or $content_del==true}
+        <li class="li_10">编辑</li>
+        {/if}
+        </ul>
+        </div>
+        {if $content_arr}
+			 {section name=loop loop=$content_arr}
+				 <div id="languageBox{$content_arr[loop].language_id}" {if $content_arr[loop].language_id == $default_language} class=""  {else} class="close"  {/if}>
+        <div class="tablelist">
+        {foreach from=$content_arr[loop].content item=content}
+        <ul onmouseover="overbgcolor('content_{$content_arr[loop].language_id}_{$content.cnt}')" onmouseout="outbgcolor('content_{$content_arr[loop].language_id}_{$content.cnt}')">
+        <li class="li_5">
+		{if $smarty.section.loop.index == 0} 
+			<input type="checkbox" name="content[]" value="{$content.content_id}" id="content_{$content_arr[loop].language_id}_{$content.cnt}" onclick="clickCheckbox({$content.cnt},{$content_arr[loop].language_id})" class="listcheck"/>
+		{else}
+			<input type="checkbox" name="content{$content_arr[loop].language_id}[]" value="" id="content_{$content_arr[loop].language_id}_{$content.cnt}" onclick="clickCheckbox({$content.cnt},{$content_arr[loop].language_id})" class="listcheck"/>
+		{/if}
+		</li>
+        <li class="li_5"><input type="text" value="{$content.sort_order}" onblur="updatesort('{$content.content_id}','{$content_arr[loop].language_id}')" name="sortOrder[{$content.content_id}]" id="sort{$content.content_id}l{$content_arr[loop].language_id}" class="listinput"/></li>
+        <li class="li_35">{$content.name}</li>
+        <li class="li_20">{$content.channel_category_name}</li>
+        <li class="li_25">{$content.date_added}</li>
+        <li class="li_10 operation">{if $content_manage==true}
+							<a href="channel_{if $content.sta==0}content{elseif $content.sta==3}picture{/if}.php?action=edit&content_id={$content.content_id}{$strpass}" title="编辑" class="op_edit"></a> 
+						{else}
+							<span class="op_edit_off"></span>
+						{/if}
+						{if $content_del==true}
+							<a href="channel_content.php?action=del&content_id={$content.content_id}{$strpass}" onClick="return window.confirm('确定删除该信息?');" title="删除" class="op_del"></a>
+						{else}
+							<span class="op_del_off"></span>
+						{/if}</li>
+        </ul>
+        {/foreach}
+        </div>
+        </div>
+			{/section}
+		   {else}
+			{section name=loop loop=$language}
+				 <div id="languageBox{$language[loop].language_id}" {if $language[loop].language_id == $default_language} class=""  {else} class="close"  {/if}>
+				  <div class="tablelist">
+                 <ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+                 <li>您还没有添加信息!</li>
+                 </ul>
+                 </div>
+				 </div>
+			{/section}
+		  {/if}
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+
+				{if $content_del==true}
+				<td width="45" align="left" style="padding-left:10px;"><input type="checkbox" name="check_all_bottom" value="yes" onClick="return select_all_content('check_all_bottom','theForm');" /> 全选</td>
+				{/if}
+                		<td width="40">
+				<input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">
+				 </td>
+				{if $content_del==true}
+				<td align="left">
+				<input type="button" value=" 删除 " name="button" OnClick="javascript:dodel();" />
+				</td>
+				  {/if}
+
+		
+
+
+				<td align="right">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+		
+	</div>
+</div>
+<script type="text/javascript">
+
+var language=new Array();
+{section name=loop loop=$language}
+{literal}
+	language[{/literal}{$smarty.section.loop.index}{literal}]={/literal}{$language[loop].language_id}{literal};
+{/literal}
+{/section}
+{literal}
+
+function clickCheckbox(cnt,language_id){
+	for(i=0;i<language.length;i++){
+		if(language_id!=language[i]){
+			if(document.getElementById("content_"+language[i]+"_"+cnt).checked == true){
+				document.getElementById("content_"+language[i]+"_"+cnt).checked=false;
+				obj=document.getElementById("content_"+language[i]+"_"+cnt);
+				if(obj.checked==false){
+					var tr = obj.parentNode.parentNode;
+					tr.style.backgroundColor ="#FFFFFF";
+				}
+			}else{
+				document.getElementById("content_"+language[i]+"_"+cnt).checked=true;
+				obj=document.getElementById("content_"+language[i]+"_"+cnt);
+				if(obj.checked==true){
+					var tr = obj.parentNode.parentNode;
+					tr.style.backgroundColor ="#FFFDD7";
+				}
+			}
+		}
+	}
+}
+
+function select_all_content(chkName,frmName){
+	var frm=document.forms[frmName];
+	for(var i=0;i<frm.elements.length;i++){
+		var e =frm.elements[i];
+		if ((e.name != chkName) && (e.type=='checkbox')){
+			if (chkName == 'check_all_bottom'){
+				e.checked = frm.check_all_bottom.checked;
+			}
+			if (chkName == 'check_all_up'){
+				e.checked = frm.check_all_up.checked;
+			}			
+			if ((e.name != 'check_all_bottom') && (e.name!='check_all_up')){
+				tr_bgcolor(frm.elements[i]);
+			}
+		}	
+	}
+}
+
+function overbgcolor(id){
+	obj=document.getElementById(id);
+	if(obj.checked==false){
+		var tr = obj.parentNode.parentNode;
+		tr.style.backgroundColor ="#FFFDD7";
+	}		
+}				
+
+function outbgcolor(id){
+	obj=document.getElementById(id);
+	if(obj.checked==false){
+		var tr = obj.parentNode.parentNode;
+		tr.style.backgroundColor ="#FFFFFF";
+	}		
+}
+
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找栏目信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找栏目信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找栏目信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchBox() {
+	if (document.getElementById('searchBox').className=="close"){
+		document.getElementById('searchBox').className ="exp";
+	}else{
+		document.getElementById('searchBox').className="close";
+	}
+}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+	document.getElementById('language').value=id;
+	document.getElementById('language1').value=id;
+}
+
+function dodel(){
+	var num=0; 
+	var content=document.getElementsByName("content[]")
+	for(var i=0;i<content.length;i++){ 
+		if(content[i].checked==true){   
+		  num=num+1; 
+		} 
+	} 
+	if(num==0){
+        alert("没有选择信息!");
+        return;
+    }
+    if(num>0){
+		if(confirm("确认删除选择的信息?")==true){
+			document.theForm.action="channel_content.php?action=del{/literal}{$strpass}{literal}";
+			document.theForm.submit();
+		}
+    }
+}
+function changecategory(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('category_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('channel_category_id').value=selObj.options[selObj.selectedIndex].value;
+}
+
+
+function updatesort(channel_content_id,language_id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('sort'+channel_content_id+'l{/literal}{$language[loop].language_id}{literal}').value=document.getElementById('sort'+channel_content_id+'l'+language_id).value;
+	{/literal}
+	{/section}
+	{literal}
+}
+
+
+function dosort(){
+	document.theForm.action="channel_content.php?action=order{/literal}{$strpass}{literal}";
+	document.theForm.submit();
+}
+
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

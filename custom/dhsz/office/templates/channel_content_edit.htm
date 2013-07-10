@@ -1,0 +1,503 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+<script type="text/javascript">
+{literal}
+var ColorHex=new Array('00','33','66','99','CC','FF')
+var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF')
+var current=null
+function getEvent() ////event ie and firefox 的兼容问题
+{
+if(document.all)    return window.event;//如果是ie
+func=getEvent.caller;
+        while(func!=null){
+            var arg0=func.arguments[0];
+               if(arg0){if((arg0.constructor==Event || arg0.constructor ==MouseEvent) || (typeof(arg0)=="object" && arg0.preventDefault && arg0.stopPropagation)){return arg0;}            }
+            func=func.caller;
+        }
+       return null;
+}
+
+function getElement()   //IE下的srcElement 与firefox 的兼容
+{
+var evt=getEvent();
+var element=evt.srcElement || evt.target;
+return element;
+}
+function intocolor()
+{
+var colorpanel=document.getElementById("colorpanel");
+var colorTable=''
+for (i=0;i<2;i++)
+{
+for (j=0;j<6;j++)
+   {
+    colorTable=colorTable+'<tr height=12>'
+    colorTable=colorTable+'<td width=11 style="background-color:#000000">'
+   
+    if (i==0){
+    colorTable=colorTable+'<td width=11 style="background-color:#'+ColorHex[j]+ColorHex[j]+ColorHex[j]+'">'}
+    else{
+    colorTable=colorTable+'<td width=11 style="background-color:#'+SpColorHex[j]+'">'}
+   
+    colorTable=colorTable+'<td width=11 style="background-color:#000000">'
+    for (k=0;k<3;k++)
+     {
+       for (l=0;l<6;l++)
+       {
+        colorTable=colorTable+'<td width=11 style="background-color:#'+ColorHex[k+i*3]+ColorHex[l]+ColorHex[j]+'">'
+       }
+     }
+}
+}
+colorTable='<table width=253 border="0" cellspacing="0" cellpadding="0" style="border:1px #000000 solid;border-bottom:none;border-collapse: collapse" bordercolor="000000">'
+           +'<tr height=30><td colspan=21 bgcolor=#cccccc>'
+           +'<table cellpadding="0" cellspacing="1" border="0" style="border-collapse: collapse">'
+           +'<tr><td width="3"><td><input type="text" name="DisColor" id="DisColor" size="6" disabled style="border:1px solid #000000;background-color:#ffff00"></td>'
+           +'<td width="3"><td></td></tr></table></td></table>'
+           +'<table border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse" bordercolor="000000" onmouseover="doOver()" onmouseout="doOut()" onclick="doclick()" style="cursor:pointer;">'
+           +colorTable+'</table>';  
+colorpanel.innerHTML=colorTable
+}
+//此函数已被千一网络修改 www.cftea.com
+//将颜色值字母大写 /event+srcElement
+function doOver() {
+obj=getElement();
+      if ((obj.tagName=="TD") && (current!=obj)) {
+      if (current!=null){
+      current.style.backgroundColor = current._background;
+      }    
+        obj._background = obj.style.backgroundColor;
+      var DisColor=document.getElementById("DisColor");
+/* var HexColor=document.getElementById("HexColor");
+         HexColor.value = obj.style.backgroundColor.toUpperCase();*/
+        DisColor.style.backgroundColor = obj.style.backgroundColor;
+        obj.style.backgroundColor = "white"
+        current =obj
+      }
+}
+//将颜色值字母大写
+function doOut() {
+if (current!=null) {
+    current.style.backgroundColor = current._background.toUpperCase();
+    }
+}
+function doclick()
+{
+obj=getElement();
+    if (obj.tagName == "TD")
+    {
+        var clr = obj._background;
+        clr = clr.toUpperCase(); //将颜色值大写
+        if (targetElement)
+        {
+            //给目标无件设置颜色值
+           // targetElement.value = clr;
+            //targetElement.style.backgroundColor =color10To16(clr);
+			targetElement.style.color =color10To16(clr);
+			//targetElement.value =color10To16(clr);
+			document.getElementById('color').value = color10To16(clr);
+        }
+        DisplayClrDlg(false);
+        return clr;
+    }
+}
+{/literal}
+</script>
+<div class="BodyRight">
+	<div class="RightDetill">
+			<ul>
+				<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504378" target="_blank">查看演示文件</a></li>
+				<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+				<li class="Black">操作帮助请详见演示文件!</li>
+				<li class="DetillRigh"></li>
+			</ul>
+		</div>
+
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		 {if $language|@count>1}
+	  	<tr>
+			<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+				{if $smarty.section.loop.index == 0}
+					<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" class="Move"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+				{else}
+					<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+					<td width="85" align="center" id="languagesel{$language[loop].language_id}" class="Out"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>			
+				{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,填写不同语言栏目信息.</td>
+		  </tr>
+		  
+		</table> </td>
+	  	</tr>
+	  <tr>
+		<td class="LineRightBlue">
+	  {else}
+	  <tr>
+		<td class="LineRightBlue1">	  	
+	  {/if}
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">栏目管理 > 编辑信息 > {$nav_list}</td>
+			<td width="12%" align="right" class="bt_list"><a href="channel_content.php?action=list{$type}">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr><td align="right" style="padding-right:5px;">"<img src="images/required_icon.gif" />"号为必填项</td></tr>
+		<tr><td>
+		<form action="channel_content.php?action=update{$strpass}" enctype="multipart/form-data" method="post" name="theForm" onsubmit="return doContentSubmit()">
+		{section name=loop loop=$content}
+		{if $smarty.section.loop.index == 0}
+			<div id="languageBox{$content[loop].language_id}" class="">
+            <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>标题</span></td>
+                <td width="280"><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" name="contentName_{$content[loop].language_id}" style="width:200px;" id="contentName_{$content[loop].language_id}" onblur="contentNameCheck1('contentName_{$content[loop].language_id}')" value="{$content[loop].name|escape}" />
+								 <img src="images/required_icon.gif" />								</div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="contentName_{$content[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+				  </div></td>
+                <td width="110"><img src="{$content[loop].country}" /> <span>栏目分类</span></td>
+                <td><input type="hidden" name="channel_category_id" id="channel_category_id" value="{$channel_category_id}" />
+						 <div id="msgbox">
+							<div class="msgbase">
+							<select name="category_{$content[loop].language_id}" id="category_{$content[loop].language_id}" onChange="changecategory(this)" onblur="contentCategoryCheck('category_{$content[loop].language_id}')">
+						<option value="0" selected="selected">------选择分类------</option>
+						{$content[loop].category}
+						</select>	
+							
+							 <img src="images/required_icon.gif" />
+							</div>
+							<div  class="msg" style="width:205px;">
+								<div class="" id="category_{$content[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="3" cellpadding="0">
+              <tr>
+                <td width="110">&nbsp;</td>
+				<td align="left">
+					<div class="titlepanel">
+					<div id="colorpanel" style="position:absolute;display:none;width:253px;height:177px;z-index:100;"></div>
+					<input name="is_color" type="checkbox" {if $is_color==1} checked{/if} value="1" /><label style="cursor:pointer;{$color}" id="clrDlg">选择颜色</label><input type="hidden" value="{$color_value}" name="color"  size="8" id="color" />
+					<input name="is_underline" type="checkbox" {if $is_underline==1} checked{/if} value="1" /><label>下划线</label>
+					<input name="is_bold" type="checkbox" {if $is_bold==1} checked{/if} value="1" /><label>粗体</label>
+					<input name="is_italic" type="checkbox" {if $is_italic==1} checked{/if} value="1" /><label>斜体</label>
+					</div>
+				</td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+  <tr>
+    <td width="110"><img src="{$content[loop].country}" /> <span>信息摘要</span></td>
+    <td><textarea name="abstract_{$content[loop].language_id}" class="FormSmall" style="width:510px;height:50px;">{$content[loop].abstract}</textarea>
+    </td>
+  </tr>
+</table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+              <tr>
+                <td width="110">　 <span>上传图片/文件</span></td>
+                <td><input type="file" style="width:200px;" class="FormSmall" name="file" />&nbsp;文件最大2MB,允许(zip,rar,pdf,doc,jpg,gif,png)
+						{if $filename}
+						  <br />
+						  {$filename}<br />
+						  <div style="font-size:12px;"><input name="delimg" type="checkbox" />&nbsp;删除</div>
+						{/if}
+                </td>
+              </tr>
+            </table>
+
+			               <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>排序号</span></td>
+                    <td><input type="input" class="FormSmall" name="sortOrder" style="width:50px;" value="{$sortOrder}" />&nbsp;&nbsp;排序号从大到小排列
+                    </td>
+                  </tr>
+                </table>
+
+
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>描述</span></td>
+                <td>{$content[loop].description}
+                </td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                          <tr>
+                            <td width="110"><img src="{$content[loop].country}" /> <span>Title标签</span></td>
+                            <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$content[loop].language_id}" style="width:200px;" 
+            value="{$content[loop].metaTitle|escape}"  /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                            <td width="110"><img src="{$content[loop].country}" /> <span>Keywords标签</span></td>
+                            <td><input type="input" class="FormSmall" name="metaKeywords_{$content[loop].language_id}" style="width:200px;" value="{$content[loop].metaKeywords|escape}"  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                          </tr>
+                        </table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>Description标签</span></td>
+                <td><textarea name="metaDescription_{$content[loop].language_id}" class="FormSmall" style="width:595px;height:60px;">{$content[loop].metaDescription}</textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>
+                </td>
+              </tr>
+            </table>            
+            </div>
+			</div>
+		{else}
+			<div id="languageBox{$content[loop].language_id}" class="close">
+            <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>标题</span></td>
+                <td width="280"><input type="input" class="FormSmall" name="contentName_{$content[loop].language_id}" style="width:200px;" id="contentName_{$content[loop].language_id}" value="{$content[loop].name|escape}" /></td>
+                <td width="110"><img src="{$content[loop].country}" /> <span>栏目分类</span></td>
+                <td><div id="msgbox">
+							<div class="msgbase">
+							<select name="category_{$content[loop].language_id}" id="category_{$content[loop].language_id}" onChange="changecategory(this)" onblur="contentCategoryCheck('category_{$content[loop].language_id}')">
+						<option value="0" selected="selected">------选择分类------</option>
+						{$content[loop].category}
+						</select>	
+							
+							 <img src="images/required_icon.gif" />
+							</div>
+							<div  class="msg" style="width:205px;">
+								<div class="" id="category_{$content[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+  <tr>
+    <td width="110"><img src="{$content[loop].country}" /> <span>信息摘要</span></td>
+    <td><textarea name="abstract_{$content[loop].language_id}" class="FormSmall" style="width:510px;height:50px;">{$content[loop].abstract}</textarea>
+    </td>
+  </tr>
+</table>
+
+
+ 
+
+
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>描述</span></td>
+                <td>{$content[loop].description}
+                </td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+            <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                          <tr>
+                            <td width="110"><img src="{$content[loop].country}" /> <span>Title标签</span></td>
+                            <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$content[loop].language_id}" style="width:200px;" 
+            value="{$content[loop].metaTitle|escape}"  /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                            <td width="110"><img src="{$content[loop].country}" /> <span>Keywords标签</span></td>
+                            <td><input type="input" class="FormSmall" name="metaKeywords_{$content[loop].language_id}" style="width:200px;" value="{$content[loop].metaKeywords|escape}"  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                          </tr>
+                        </table>
+            <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+              <tr>
+                <td width="110"><img src="{$content[loop].country}" /> <span>Description标签</span></td>
+                <td><textarea name="metaDescription_{$content[loop].language_id}" class="FormSmall" style="width:595px;height:60px;">{$content[loop].metaDescription}</textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>
+                </td>
+              </tr>
+            </table>            
+            </div>
+			</div>
+		{/if}
+		{/section}
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+				<input type="hidden" value="{$content_id}" name="content_id" />
+				<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+				<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+
+		</form>
+		
+		</td></tr>
+	</table>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找栏目信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找栏目信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找栏目信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+}
+
+function changecategory(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('category_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('channel_category_id').value=selObj.options[selObj.selectedIndex].value;
+}
+
+function doContentSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	{/literal}
+		{section name=loop loop=$content}
+			{if $smarty.section.loop.index == 0}
+	{literal}
+		if(contentNameCheck1("{/literal}contentName_{$content[loop].language_id}{literal}") == false)
+			CheResult = false;
+		{/literal}
+			{/if}
+		{literal}
+			
+		if(contentCategoryCheck("{/literal}category_{$content[loop].language_id}{literal}") == false)
+			CheResult = false;			
+			
+	{/literal}
+		{/section}
+	{literal}
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+<script type="text/javascript">
+{literal}
+//应用颜色对话框必须注意两点：
+//颜色对话框 id : colorpanel 不能变
+//触发颜色对话框显示的文本框（或其它）必须有 alt 属性，且值为 clrDlg（不能忽略大小写）
+var targetElement = null; //接收颜色对话框返回值的元素
+//当点下鼠标时，确定显示还是隐藏颜色对话框
+//点击颜色对话框以外其它区域时，让对话框隐藏
+//点击颜色对话框色区时，由 doclick 函数来隐藏对话框
+function OnDocumentClick()
+{
+obj=getElement();
+//obj = event.srcElement?event.srcElement:event.target;
+    var srcElement = obj;
+   
+    if (srcElement.id == "clrDlg")
+    {
+        //显示颜色对话框
+        targetElement =obj;
+        DisplayClrDlg(true);
+    }
+    else
+    {
+        //是否是在颜色对话框上点击的
+        while (srcElement && srcElement.id!="colorpanel")
+        {
+            srcElement = srcElement.parentElement;
+        }
+        if (!srcElement)
+        {
+            //不是在颜色对话框上点击的
+            DisplayClrDlg(false);
+        }
+    }
+   
+}
+//显示颜色对话框
+//display 决定显示还是隐藏
+//自动确定显示位置
+function DisplayClrDlg(display)
+{
+var event=getEvent();
+    var clrPanel = document.getElementById("colorpanel");
+    if (display)
+    {
+        var left = document.body.scrollLeft + event.clientX;
+        var top = document.body.scrollTop + event.clientY;
+        if (event.clientX+clrPanel.offsetWidth > document.body.offsetWidth)
+        {
+            //对话框显示在鼠标右方时，会出现遮挡，将其显示在鼠标左方
+            left -= clrPanel.offsetWidth;
+        }
+        if (event.clientY+clrPanel.offsetHeight > document.offsetHeight)
+        {
+            //对话框显示在鼠标下方时，会出现遮挡，将其显示在鼠标上方
+            top -= clrPanel.offsetHeight;
+        }
+       
+        clrPanel.style.left = left;
+        clrPanel.style.top = top;
+        clrPanel.style.display = "inline";
+    }
+    else
+    {
+        clrPanel.style.display = "none";
+    }
+}
+document.body.onclick = function(){
+OnDocumentClick();
+}
+intocolor();
+function color10To16(color){
+if(color.length>7){
+   var reg=/(\d{1,3})/g;
+   colorarr=color.match(reg);
+   R=lengthTo2(Number(colorarr[0]).toString(16));
+   G=lengthTo2(Number(colorarr[1]).toString(16));
+   B=lengthTo2(Number(colorarr[2]).toString(16));
+   color="#"+R+G+B;
+   color = color.toUpperCase()
+   }
+return (color);
+}
+function lengthTo2(str){
+if(str.length<2){
+   str="0"+str;
+}
+return str;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

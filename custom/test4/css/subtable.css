@@ -1,0 +1,77 @@
+
+body {
+	margin-left: 3px;
+	margin-top: 0px;
+	margin-right: 3px;
+	margin-bottom: 0px;
+}
+img {border: none;}
+.table_title {
+	background: #e1e2e3;
+    font-color:#000000;
+	font-size: 12px;
+    font-weight:bold;
+        
+}
+.td_head {
+	color: #000000; 
+	font-size: 18px;
+	background:#EFE6D2;
+	text-align:left;
+	margin:0px 0px 0px 0px;
+	padding:5px 0px 0px 10px;
+	border-style:solid solid none solid;
+	border-color:#a8c7ce; 
+	border-width:1px;
+	height:25px; 
+}
+
+.td_head2 {
+	color: #000000; 
+	font-size: 12px;
+	font-weight:bold; 
+}
+
+
+.td_query_inner {
+        color: #344b50;
+        font-size: 12px;
+/*      background:#EFE6D2; */
+	background:#FFFFFF;
+        height:25px;
+        border-style:solid solid none solid;
+        border-color:#a8c7ce;
+        border-width:1px;
+}
+
+.td_inner {
+	color: #344b50;
+	font-size: 12px;
+	background:#FFFFFF;
+        height:25px;
+}
+
+.operation {
+	font-size: 12px;
+	color: #3b6375;
+        height:25px;
+	
+}
+.op_img {
+	height:16px;
+	weight:16px;
+/*	vertical-align:middle;	*/
+}
+.recoder {
+	font-size: 12px;
+	color: #295568;
+}
+.td_bg {
+/*	background:#99CCFF;*/
+	background:#FFFFFF;
+	margin:10px 0px 0px 0px;
+}
+.op_bg {
+	background:#FFFFFF;
+}
+

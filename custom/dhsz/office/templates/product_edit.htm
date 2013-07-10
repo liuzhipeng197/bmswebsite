@@ -1,0 +1,753 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504364" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+		<tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+				{if $smarty.section.loop.index == 0}
+					<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" class="Move"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}', '{$language[loop].default_value}')">{$language[loop].name}</a></td>
+				{else}
+					<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+					<td width="85" align="center" id="languagesel{$language[loop].language_id}" class="Out"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}', '{$language[loop].default_value}')">{$language[loop].name}</a></td>			
+				{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">
+			点击左侧语言选项,填写不同语言产品信息.
+			</td>					
+		  </tr>
+		</table> </td>
+		</tr>
+		<tr>
+		<td class="LineRightBlue">
+		{else}
+		<tr>
+		<td class="LineRightBlue1">	  	
+		{/if}
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+			<td width="88%" height="24">产品管理 > 编辑产品</td>
+			<td width="12%" align="right" class="bt_list"><a href="product.php?action=list">列表</a></td></tr>
+			</table>
+		</td>
+		</tr>
+		</table>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0"  style="margin-top:10px;">
+			<tr><td align="right" style="padding-right:5px;">"<img src="images/required_icon.gif" />"号为必填项</td></tr>
+			<tr><td>
+			<form action="product.php?action=update{$strpass}" enctype="multipart/form-data" method="post" name="theForm" onsubmit="return doProductSubmit()">
+			{section name=loop loop=$product}
+			{if $smarty.section.loop.index == 0}
+                <div id="languageBox{$product[loop].language_id}" class="">
+                <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$product[loop].country}" /> <span>产品名称</span></td>
+                <td width="280"><div id="msgbox">
+							<div class="msgbase">
+								<input type="input" class="FormSmall" name="productName_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].name|escape}" id="productName_{$product[loop].language_id}" onblur="productNameCheck1('productName_{$product[loop].language_id}')" /> <img src="images/required_icon.gif" />
+							</div>
+							<div  class="msg" style="width:205px;">
+								<div class="" id="productName_{$product[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div></td>
+                <td width="110"><img src="{$product[loop].country}" /> <span>产品分类</span></td>
+                <td><input type="hidden" name="category" id="category" value="{$category}" /><input type="hidden" name="product_brand_id" id="product_brand_id" value="{$product_brand_id}" />
+						<div id="msgbox">
+							<div class="msgbase">
+								<select name="category_{$product[loop].language_id}" id="category_{$product[loop].language_id}" onChange="changecategory(this)" onblur="categorySelectCheck('category_{$product[loop].language_id}')">
+								<option value="0" selected="selected">---选择产品分类---</option>
+									{$product[loop].category}
+								</select> 
+								<img src="images/required_icon.gif" />	
+							</div>
+							<div  class="msg" style="width:160px;">
+								<div class="" id="category_{$product[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div></td>
+              </tr>
+            </table>
+                <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+                  <tr>
+                    <td width="110">　 <span>产品型号</span></td>
+                    <td width="280"><input type="input" class="FormSmall" style="width:200px;" name="model" size="35" value="{$model}"  /></td>
+                    <td width="110">　 <span>价格</span></td>
+                    <td><input type="input" class="FormSmall" style="width:200px;" name="price" size="35" value="{$price}"  /></td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+                  <tr>
+                    <td width="110">　 <span>信息状态</span></td>
+                    <td width="280"><input name="is_featured_product" type="checkbox" {if $is_featured_product==1} checked="checked" {/if}  value="1"  />&nbsp;推荐产品
+					<input name="is_new_product" type="checkbox" {if $is_new_product==1} checked="checked" {/if} value="1" />&nbsp;新产品</td>
+                    <td width="110">　 <span>最小起订量</span></td>
+                    <td><input type="input" class="FormSmall" style="width:200px;" name="minorder" size="35" value="{$minorder}" onKeyUp="value=value.replace(/[^0123456789]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^0123456789]/g,''))" /></td>
+                  </tr>
+                </table>
+
+               {if $product[loop].brand_select}
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>品牌</span></td>
+                    <td><select name="product_brand_id_{$product[loop].language_id}" id="product_brand_id_{$product[loop].language_id}" onChange="changeBrand(this)">
+						<option value="0" selected="selected">------选择品牌------</option>
+					{$product[loop].brand_select}
+					</select>
+                    </td>
+                  </tr>
+                </table>
+				{/if}
+
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$product[loop].country}" /> <span>产品摘要 <a href="#" title="&lt;img src='images/help/padd1.gif'&gt;"><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+        <td><textarea name="abstract_{$product[loop].language_id}" class="FormSmall" style="width:510px;height:50px;">{$product[loop].abstract}</textarea>
+        </td>
+      </tr>
+    </table>
+
+
+	                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>产品相册</span><a href="#" title="图片最佳比例(1:1),图片最大1MB,允许(.jpg .jpeg .gif .png),可以选择多张图片同时上传。" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                    <td>
+						<div id="image-div" class="spage-main-box">
+
+<div id="x-g-basic" class="goods-detail" >
+<div class="tableform" >
+	 	 <table border="0" cellpadding="0" cellspacing="0">
+
+	 <tr>
+          
+            <td>
+				<div class="division" style="margin:0">
+                	<div class="clearfix">
+                    	<span id="pic-uploader">
+				  <button app="desktop" class="btn1 btn-upload btn-has-icon" type="button"><span><span><i class="btn-icon"><img src="images/image_new.gif" app="desktop" class="imgbundle" /></i>添加产品图片</span></span></button>						</span>
+                     </div>
+                    <div class="pic-area" id="pic-area">
+				       <input type="hidden" name="image_default" value="{$product_image[0].original_image}|{$product_image[0].big_image}|{$product_image[0].small_image}" />
+						<div id='all-pics' style="width:100%">
+		     {section name=loop1 loop=$product_image}
+
+
+ <div class="gpic-box" style='margin-top:4px'><div class="gpic{if $product_image[loop1].default} current {/if}"  image_id="{$product_image[loop1].original_image}" onclick="goodsEditor.pic.setDefault('{$product_image[loop1].original_image}', '{$product_image[loop1].big_image}|{$product_image[loop1].small_image}')"><img src="../upload/photo/{$product_image[loop1].small_image}" width="88" height="88" sn='_img_{$product_image[loop1].original_image}'/> <i>默认图</i></div><input name="goods[images][]" value="{$product_image[loop1].original_image}|{$product_image[loop1].big_image}|{$product_image[loop1].small_image}" soucre="../upload/photo/{$product_image[loop1].original_image}" type="hidden"><div class="gpic-btn-bar"><span class="gpic-btn-view" onclick="goodsEditor.pic.viewSource('{$weburl}/upload/photo/{$product_image[loop1].original_image}|{$weburl}/upload/photo/{$product_image[loop1].big_image}|{$weburl}/upload/photo/{$product_image[loop1].small_image}')" title="查看路径"><i>查看路径</i></span>|<span class="gpic-btn-delete" ident="{$product_image[loop1].original_image}" onclick="goodsEditor.pic.del(this, '{$product_image[loop1].original_image}|{$product_image[loop1].big_image}|{$product_image[loop1].small_image}','{$product_image[loop1].image_id}','{$product_image[loop1].default}');" title="删除图片"><i>删除图片</i></span></div></div> 
+
+
+			 {/section}
+</div>    
+					</div>
+                </div>
+			</td>
+        </tr>
+       </table>
+</div>
+</div>
+</div>
+
+
+
+
+                       <table id="image-table" align="center" width="100%" style="display:none">
+						<tbody><tr><td>
+						<input name="img_url[]" class="FormSmall" style="width:190px!important;width:300px;" type="file" /> <a href="javascript:void(0);" onclick="addImg(this)"><span>[添加图片]</span></a> &nbsp;&nbsp;<span style='color:#666'>【<a href="javascript:switchImgUpMode(2)">切换到图片多选上传模式</a>】</span>
+						</td></tr></tbody></table>
+							
+                   
+					
+					</td>
+                  </tr>
+
+
+    <tr id="image-tr" style="display:none">
+                  <td width="110"></td>
+                  <td>
+                  {if $small_image}
+					  <div id="image_p{$product_id}" style="float:left; text-align:center; border: 1px solid #DADADA; margin-right: 4px; padding:2px;">
+						<a href="../upload/photo/{$original_image}" target="_blank">
+						<img src="../upload/photo/{$small_image}" border="0" width="80" height="80"  onload="setImgSizeWH(this.src,this,80,80)" /></a>
+						<table width="80" height="20" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td><a href="javascript:void(0);" onclick="dorpImg('{$product_id}','product')">[删除]</a></td>
+							<td></td>
+						  </tr>
+						</table>
+					  </div>					
+					{/if}
+					{section name=loop1 loop=$product_image}
+
+					{if $product_image[loop1].default!=1}
+					  <div id="image_{$product_image[loop1].image_id}" style="float:left; text-align:center; border: 1px solid #DADADA; margin-right: 4px; padding:2px;">
+						
+						<a href="../upload/photo/{$product_image[loop1].original_image}" target="_blank">
+						<img src="../upload/photo/{$product_image[loop1].small_image}" width="80" height="80"  onload="setImgSizeWH(this.src,this,80,80)" border="0" /></a>
+						<table width="80" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td><a href="javascript:void(0);" onclick="dorpImg('{$product_image[loop1].image_id}','image')">[删除]</a></td>
+							<td><input name="is_default_img" title="是否为默认图片" type="radio" value="{$product_image[loop1].image_id}" /></td>
+						  </tr>
+						</table>
+						
+					  </div>
+					  {/if}
+					 {/section}
+                     </td>
+                  </tr>
+                </table>
+
+
+
+
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>上传附件</span><a href="#" title="附件最大为2MB,允许(Microsoft Office 文档 .pdf .rar .zip .txt .jpg .gif .png .bmp)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                    <td><table id="image-table" align="center" width="100%">
+							<tbody><tr><td>
+							<input name="file_url_{$product[loop].language_id}[]" class="FormSmall" style="width:190px!important;width:300px;" type="file" />  附件最大为2MB,允许(Microsoft Office 文档 .pdf .rar .zip .txt .jpg .gif .png .bmp)
+							</td></tr></tbody></table>
+                    </td>
+                  </tr>
+
+
+                  {if ($product[loop].attachment)}
+				  <tr><td width="110"></td><td>
+					  <div id="attachment" style="float:left; text-align:center; border: 0px solid #DADADA; margin-right: 4px; padding:2px;">
+						<a href="../upload/file/{$product[loop].attachment}" target="_blank">
+						{$product[loop].fileExtIco} {$product[loop].attachment} </a>&nbsp;
+					<a href="javascript:void(0);" onclick="dropFile('{$product_id}', '{$product[loop].attachment}', '{$product[loop].language_id}')">[删除]</a>
+					  </div>
+					 </td></tr>
+					{/if}
+
+
+                </table>
+
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>产品排序</span></td>
+                    <td><input type="input" class="FormSmall" name="sortOrder" style="width:50px;" value="{$sortOrder}" />&nbsp;&nbsp;产品序号按从大到小排列
+                    </td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>产品描述</span></td>
+                    <td>{$product[loop].description}
+                    </td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                              <tr>
+                                <td width="110"><img src="{$product[loop].country}" /> <span>Title标签</span></td>
+                                <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].metaTitle|escape}"  /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                                <td width="110"><img src="{$product[loop].country}" /> <span>Keywords标签</span></td>
+                                <td><input type="input" class="FormSmall" name="metaKeywords_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].metaKeywords|escape}"  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                              </tr>
+                            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>Description标签</span></td>
+                    <td><textarea name="metaDescription_{$product[loop].language_id}" class="FormSmall" style="width:595px;height:60px;">{$product[loop].metaDescription}</textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>自定义文件名</span></td>
+                    <td><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" maxlength=100 name="pageName_{$product[loop].language_id}" id="pageName_{$product[loop].language_id}" style="width:300px;" value="{$product[loop].page_name|escape}"  /> <b>.html</b> <a href="#" title="生成前台静态页面的文件名。有效字符为A-Z,a-z,0-9,_,- 长度不超过100个字符。" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="pageName_{$product[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+                    </td>
+                  </tr>
+
+
+                </table>            
+                </div>
+				</div>
+			{else}
+				<div id="languageBox{$product[loop].language_id}" class="close">
+                <table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$product[loop].country}" /> <span>产品名称</span></td>
+                <td width="280">
+				<input type="input" class="FormSmall" name="productName_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].name|escape}" id="productName_{$product[loop].language_id}" />
+				</td>
+                <td width="110"><img src="{$product[loop].country}" /> <span>产品分类</span></td>
+                <td><div id="msgbox">
+							<div class="msgbase">
+								<select name="category_{$product[loop].language_id}" id="category_{$product[loop].language_id}" onChange="changecategory(this)" onblur="categorySelectCheck('category_{$product[loop].language_id}')">
+								<option value="0" selected="selected">---选择产品分类---</option>
+									{$product[loop].category}
+								</select> 
+								<img src="images/required_icon.gif" />	
+							</div>
+							<div  class="msg" style="width:160px;">
+								<div class="" id="category_{$product[loop].language_id}Msg" style="display:none;"></div>
+							</div>
+						</div></td>
+              </tr>
+            </table>
+
+
+               {if $product[loop].brand_select}
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>品牌</span></td>
+                    <td><select name="product_brand_id_{$product[loop].language_id}" id="product_brand_id_{$product[loop].language_id}" onChange="changeBrand(this)">
+						<option value="0" selected="selected">------选择品牌------</option>
+					{$product[loop].brand_select}
+					</select>
+                    </td>
+                  </tr>
+                </table>
+				{/if}
+
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$product[loop].country}" /> <span>产品摘要 <a href="#" title="&lt;img src='images/help/padd1.gif'&gt;"><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+        <td><textarea name="abstract_{$product[loop].language_id}" class="FormSmall" style="width:510px;height:50px;">{$product[loop].abstract}</textarea>
+        </td>
+      </tr>
+    </table>
+
+
+	                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>上传附件</span><a href="#" title="附件最大为2MB,允许(Microsoft Office 文档 .pdf .rar .zip .txt .jpg .gif .png .bmp)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                    <td><table id="image-table" align="center" width="100%">
+							<tbody><tr><td>
+							<input name="file_url_{$product[loop].language_id}[]" class="FormSmall" style="width:190px!important;width:300px;" type="file" />  附件最大为2MB,允许(Microsoft Office 文档 .pdf .rar .zip .txt .jpg .gif .png .bmp)
+							</td></tr></tbody></table>
+                    </td>
+                  </tr>
+
+
+                  {if ($product[loop].attachment)}
+				  <tr><td width="110"></td><td>
+					  <div id="attachment" style="float:left; text-align:center; border: 0px solid #DADADA; margin-right: 4px; padding:2px;">
+						<a href="../upload/file/{$product[loop].attachment}" target="_blank">
+						{$product[loop].fileExtIco} {$product[loop].attachment} </a>&nbsp;
+					<a href="javascript:void(0);" onclick="dorpFile('{$product_id}', '{$attachment}')">[删除]</a>
+					  </div>
+					 </td></tr>
+					{/if}
+
+
+                </table>
+
+
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>产品描述</span></td>
+                    <td>{$product[loop].description}
+                    </td>
+                  </tr>
+                </table>
+
+
+
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                              <tr>
+                                <td width="110"><img src="{$product[loop].country}" /> <span>Title标签</span></td>
+                                <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].metaTitle|escape}"  /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                                <td width="110"><img src="{$product[loop].country}" /> <span>Keywords标签</span></td>
+                                <td><input type="input" class="FormSmall" name="metaKeywords_{$product[loop].language_id}" style="width:200px;" value="{$product[loop].metaKeywords|escape}"  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                              </tr>
+                            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>Description标签</span></td>
+                    <td><textarea name="metaDescription_{$product[loop].language_id}" class="FormSmall" style="width:595px;height:60px;">{$product[loop].metaDescription}</textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/>
+                    </td>
+                  </tr>
+
+
+
+                  <tr>
+                    <td width="110"><img src="{$product[loop].country}" /> <span>自定义文件名</span></td>
+                    <td><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" maxlength=100 name="pageName_{$product[loop].language_id}" id="pageName_{$product[loop].language_id}" style="width:300px;" value="{$product[loop].page_name|escape}"  /> <b>.html</b> <a href="#" title="生成前台静态页面的文件名。有效字符为A-Z,a-z,0-9,_,- 长度不超过100个字符。" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="pageName_{$product[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+                    </td>
+                  </tr>
+
+
+
+
+                </table>
+                </div>
+				</div>
+			{/if}
+		{/section}
+		<br />
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+		<td align="center">
+		<input type="hidden" value="{$product_id}" name="product_id" />
+		<input type="hidden" name="imgUpMode" id="imgUpMode" value="2">
+		<input type="submit" id="btSubmit" class="bginput" name="btSubmit"  value=" 提交 " />
+		<input name="reset" type="reset" class="bginput" value=" 重置 " /></td>
+		</tr>
+		</table>
+		</form>
+		</td></tr>
+		</table>
+	</div>
+</div>
+<form action="" method="post" name="form1"></form>
+<iframe id="iframe" name="iframe" style="height:1px;width:1px; display:none;" width="1" height="1" src=""></iframe>
+
+<div id="img_txt" class="std-upload-txt" style="top:320px;left:280px;">
+	<div>无法上传图片？【<a href="javascript:switchImgUpMode(1)">点击这里上传</a>】</div>
+	
+</div>
+
+
+<script>
+
+var imageDiv = document.getElementById('image-div');
+imgTxtX = getX(imageDiv) + 150;
+imgTxtY = getY(imageDiv) + 10;
+
+document.getElementById('img_txt').style.left = imgTxtX + 'px';
+document.getElementById('img_txt').style.top = imgTxtY + 'px';
+
+</script>
+
+
+<script type="text/plain" id="__eval_scripts__" >
+  {literal}
+var goodsEditor = null;
+ 
+var goodsEditFrame = (function(){
+
+
+  goodsEditor = new NitcGoodsEditor('gEditor',{imgtype:'',url:'',goods_id:''});
+
+
+	new Swiff.Uploader( {
+		verbose: true,
+		url:'upload.php?randStr={/literal}{$randStr}&hash={$hash}&weburl={$weburl}&small_img_thumb_width={$small_img_thumb_width}&small_img_thumb_height={$small_img_thumb_height}&middle_img_thumb_width={$middle_img_thumb_width}&middle_img_thumb_height={$middle_img_thumb_height}&watermark_value={$watermark_value}&watermark_location={$watermark_location}&watermark_transparency={$watermark_transparency}{literal}',
+		path: 'images/uploader.swf',
+		typeFilter: {
+			'Images (*.jpg, *.jpeg, *.gif, *.png)': '*.jpg; *.jpeg; *.gif; *.png'
+		},
+		fileSizeMax:1048576,
+		target:'pic-uploader',
+		onSelect:function(rs){
+			if(rs)
+			rs.each(function(v){
+				if(v.size>this.fileSizeMax){
+					alert(v.name+'\n\n文件超出大小');
+				};
+			},this);
+		},
+		onSelectFail:function(rs){
+			rs.each(function(v){
+				if(v.validationError=='sizeLimitMax'){
+					alert(v.name+'\n\n文件超出大小');
+				};
+			});
+		},
+		onSelectSuccess:function(rs){
+			
+			var PID='up_';
+			var _this=this;
+			rs.each(function(v,i){
+				 new Element('div',{'class':'gpic-box','id':PID+v.id}).inject($('all-pics'));
+			});
+			this.start();
+		},
+		onFileOpen:function(e){
+	
+			$('up_'+e.id).setHTML('<em style="font-size:13px;font-family:Georgia;">0%</em>');
+					
+		},
+		onFileProgress:function(e){
+
+            $('up_'+e.id).getElement('em').set('text',e.progress.percentLoaded+'%');
+		
+		},
+		onFileComplete: function(res){
+			if(res.response.error){
+				return  new MessageBox('文件'+res.name+'上传失败',{type:'error',autohide:true});
+			}
+				
+			$('up_'+res.id).setHTML(res.response.text);
+			
+			if(!$E('#pic-area .current')&&$E('#pic-area .gpic')){
+				
+             $E('#pic-area .gpic').onclick();
+            }
+		}
+	});
+ 
+
+
+});
+ 
+goodsEditFrame();
+ {/literal}
+</script>      
+ 
+<script hold="true"> 
+{literal}
+		    window.addEvent("domready", function(){
+                /*php会把页面中非<script hold=true><\/script>的脚本提出来放到<script id='__eval_scripts__' type='text/align'><\/script>*/
+			    $exec($("__eval_scripts__").get("html"));   
+			});
+
+{/literal}
+</script>
+
+
+
+<script type="text/javascript">
+{literal}
+
+var Browser1 = new Object();
+
+Browser1.isMozilla = (typeof document.implementation != 'undefined') && (typeof document.implementation.createDocument != 'undefined') && (typeof HTMLDocument != 'undefined');
+Browser1.isIE = window.ActiveXObject ? true : false;
+Browser1.isFirefox = (navigator.userAgent.toLowerCase().indexOf("firefox") != - 1);
+Browser1.isSafari = (navigator.userAgent.toLowerCase().indexOf("safari") != - 1);
+Browser1.isOpera = (navigator.userAgent.toLowerCase().indexOf("opera") != - 1);
+
+function switchImgUpMode(type) {
+if(type==1) {
+document.getElementById('image-div').style.display='none';
+document.getElementById('img_txt').style.display='none';
+document.getElementById('image-table').style.display='';
+document.getElementById('image-tr').style.display='';
+}
+
+else if(type==2) {
+document.getElementById('image-table').style.display='none';
+document.getElementById('image-tr').style.display='none';
+document.getElementById('image-div').style.display='';
+document.getElementById('img_txt').style.display='';
+
+}
+
+document.getElementById('imgUpMode').value=type;
+
+}
+
+
+function rowindex(tr){
+	if (Browser1.isIE){
+		return tr.rowIndex;
+	}else{
+		table = tr.parentNode.parentNode;
+		for (i = 0; i < table.rows.length; i ++ ){
+			if (table.rows[i] == tr){
+				return i;
+			}
+		}
+	}
+}
+
+function dorpImg(image_id,type){
+	if(type=="image"){
+		document.form1.action="product.php?action=dorpimg&imageid="+image_id+"&type=image";
+		document.form1.target="iframe";
+		document.form1.submit();
+		document.getElementById('image_' + image_id).style.display = 'none';		
+	}else{
+		document.form1.action="product.php?action=dorpimg&imageid="+image_id+"&type=product";
+		document.form1.target="iframe";
+		document.form1.submit();
+		document.getElementById('image_p' + image_id).style.display = 'none';		
+	}
+}
+
+function addImg(obj){
+	var src  = obj.parentNode.parentNode;
+	var idx  = rowindex(src);
+	var tbl  = document.getElementById('image-table');
+	var row  = tbl.insertRow(idx + 1);
+	var cell = row.insertCell(-1);
+	cell.innerHTML = src.cells[0].innerHTML.replace(/(.*)(addImg)(.*)(\[)(\添加图片)/i, "$1removeImg$3$4删除");
+	cell.innerHTML = cell.innerHTML.replace("<SPAN ", "<SPAN style='display:none'");
+}
+
+function removeImg(obj){
+	var row = rowindex(obj.parentNode.parentNode);
+	var tbl = document.getElementById('image-table');
+	tbl.deleteRow(row);
+}
+
+
+function dropFile(productId, attachment, language_id){
+	
+		document.form1.action="product.php?action=dropFile&attachmentId=" + productId + "&attachment=" + attachment + "&language_id=" + language_id;
+	
+		document.form1.target="iframe";
+		document.form1.submit();
+		document.getElementById('attachment').style.display = 'none';		
+
+}
+
+
+function removeImg1(img_name_list,img_id, is_default){
+
+		document.form1.action="product.php?action=removeImg&img_name_list="+img_name_list+"&img_id="+img_id+"&is_default="+is_default;
+		document.form1.target="iframe";
+		document.form1.submit();
+}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+
+function languageselect(id, default_value){
+
+   var imgUpMode = document.getElementById('imgUpMode').value;
+
+   if(default_value==1 && imgUpMode==2) document.getElementById("img_txt").style.display='';
+   else document.getElementById("img_txt").style.display='none';
+
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+	document.getElementById('language').value=id;
+	document.getElementById('language1').value=id;	
+}
+
+function changecategory(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('category_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('category').value=selObj.options[selObj.selectedIndex].value;
+}
+
+
+function changeBrand(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('product_brand_id_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('product_brand_id').value=selObj.options[selObj.selectedIndex].value;
+}
+
+
+function doProductSubmit(){
+
+createXMLHttpRequest();
+
+	CheResult = true;
+	firstErrorControl = "";
+	{/literal}
+		{section name=loop loop=$product}
+			{if $smarty.section.loop.index == 0}
+	{literal}
+		if(productNameCheck1("{/literal}productName_{$product[loop].language_id}{literal}") == false)
+			CheResult = false;
+		{/literal}
+			{/if}
+		{literal}
+		if(categorySelectCheck("{/literal}category_{$product[loop].language_id}{literal}") == false)
+			CheResult = false;
+	{/literal}
+
+		{literal}
+		if(pageNameCheck("{/literal}pageName_{$product[loop].language_id}{literal}") == false)
+			CheResult = false;
+
+        else if(isEmpty(GE("{/literal}pageName_{$product[loop].language_id}{literal}").value) != true) {
+          var url = "category.php?action=checkPageName&static_url_id={/literal}{$product[loop].static_url_id}{literal}&pageName="+GE("{/literal}pageName_{$product[loop].language_id}{literal}").value+"&language_id={/literal}{$product[loop].language_id}{literal}";
+
+          xmlHttp.open("GET", url, false);
+          xmlHttp.send(null);
+
+          if(xmlHttp.responseText==1) {SetMsg("error","{/literal}pageName_{$product[loop].language_id}{literal}","block","此文件名已经存在, 请更换一个重试!");
+          CheResult = false;
+          }
+          else SetMsg("success","{/literal}pageName_{$product[loop].language_id}{literal}","none","");
+
+         }
+
+	{/literal}
+
+
+		{/section}
+	{literal}
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

@@ -1,0 +1,134 @@
+<?php
+	session_start();
+	require("../../admin/include/db_mysql.php");
+	if($_SESSION['cus_id']==''){
+		 header("Location:../index.php");
+                 exit();
+
+	}
+	//echo '$_session='.$_SESSION['cus_id'];
+
+?>
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #F8F9FA;
+	/*overflow: scroll; */
+	overflow-x:hidden;
+}
+-->
+</style>
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script>
+	
+	function mysubmit(){
+		
+		var obj_val= $('#test_obj').val();
+		//alert(obj_val);
+		if(obj_val==''){
+			alert("请选择检测对象");
+		}else{
+			//$('#h_test_obj').val()=obj_val;
+			document.form_sel_obj.submit();
+		}
+		
+	}
+
+</script>
+<link href="../style/skin.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../style/datePicker.css" />
+<link rel="stylesheet" type="text/css" href="../style/subtable.css" />
+<script  charset="utf-8" src="../js/jquery-second.js" type="text/javascript"></script>
+<script  charset="utf-8" src="../js/jquery.datePicker-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+      $(window).ready(function(){
+	$('.date-pick').datePicker({clickInput:true,startDate:'0001-01-01'});
+});
+</script>
+
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="17" height="29" valign="top" background="../images/mail_leftbg.gif"><img src="../images/left-top-right.gif" width="17" height="29" /></td>
+    <td width="935" height="29" valign="top" background="../images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
+    </table></td>
+    <td width="16" valign="top" background="../images/mail_rightbg.gif"><img src="../images/nav-right-bg.gif" width="16" height="29" /></td>
+  </tr>
+  <tr>
+    <td height="71" valign="middle" background="../images/mail_leftbg.gif">&nbsp;</td>
+    <td valign="top" bgcolor="#F7F8F9">
+	<table width="100%" height="138" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td height="13" valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        
+          <tr>
+            <td class="left_txt">当前位置：检测业务查询》业务申请查询</td>
+          </tr>
+          <tr>
+            <td height="20"><table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
+            </table></td>
+          </tr>
+          <tr>
+            <td><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="nowtable">
+              <tr>
+                <td class="left_bt2">&nbsp;&nbsp;&nbsp;&nbsp;输入查询条件</td>
+              </tr>
+            </table></td>
+          </tr>
+          <tr>
+            <td>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<form name="form_sel_obj" method="POST" action="req_baseinfo.php">
+              <tr>
+                <td width="20%" height="20" align="left" class="left_txt4">&nbsp;&nbsp;序号：
+			<input type="text" id="test_obj" name="test_obj" size="10"></td>		    	    
+		<td width="20%" height="20" align="left" class="left_txt4">任务申请开始时间：
+			<input type="text" name="query1" class="it date-pick" size="12"/></td>
+		<td width="20%" height="20" align="left" class="left_txt4">任务申请结束时间：
+			<input type="text" name="query2" class="it date-pick" size="12"/></td>
+              </tr>
+          </table>
+		  </td>
+          </tr>
+	     <tr>
+	  	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		
+                                <td width="8%"  height="20" class="td_head"><div align="center"><span class="td_head2">序号</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">用户名</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">真实姓名</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">所在部门名称</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">办公电话</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">邮箱</span></div></td>
+                                <td width="13%" height="20" class="td_head"><div align="center"><span class="td_head2">员工类型</span></div></td>
+                                <td width="14%" height="20" class="td_head"><div align="center"><span class="td_head2">基本操作</span></div></td>  
+		</table>
+	    </tr>
+	  </tr>
+            <tr>
+              <td width="50%" height="30" align="right"><input type="button" value="下一步" name="B1" onclick="mysubmit()" /></td>
+              <td width="6%" height="30" align="right">&nbsp;</td>
+              <td width="44%" height="30"><input type="button" value="取消" name="B12" /></td>
+            </tr>
+            <tr>
+              <td height="30" colspan="3">&nbsp;</td>
+            </tr>
+			
+
+			
+    <td background="../images/mail_rightbg.gif">&nbsp;</td>
+	</table>
+  </tr>
+  <tr>
+    <td valign="middle" background="../images/mail_leftbg.gif"><img src="../images/buttom_left2.gif" width="17" height="17" /></td>
+      <td height="17" valign="top" background="../images/buttom_bgs.gif"><img src="../images/buttom_bgs.gif" width="17" height="17" /></td>
+    <td background="../images/mail_rightbg.gif"><img src="../images/buttom_right2.gif" width="16" height="17" /></td>
+  </tr>
+</table>
+</body>
+

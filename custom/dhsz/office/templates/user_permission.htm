@@ -1,0 +1,319 @@
+{include file="pageheader.htm"}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504389" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理员 > 分派权限</td>
+			<td width="12%" align="right" class="bt_list"><a href="privilege.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form method="post" action="privilege.php?action=dopermission" name="theFrom">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">	
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+				<tr class="firstalt">
+				  	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('home_meta_manage,channel_manage,channel_del,channel_setting,content_manage,content_del',this);" class="checkbox" {if $permission.home_meta_manage and $permission.channel_manage and $permission.channel_del and $permission.channel_setting and $permission.content_manage and $permission.content_del} checked="checked" {/if} /> 
+					<b>网站栏目</b>
+				  </td>
+				  	<td style="padding-top:5px;padding-bottom:5px;">
+					<div style="width:200px;float:left;">
+					<label for="home_meta_manage"><input type="checkbox" name="action_code[]" value="home_meta_manage" id="home_meta_manage" class="checkbox" {if $permission.home_meta_manage} checked="checked" {/if} />
+					首页优化设置</label>
+					</div>
+
+						<div style="width:200px;float:left;">
+					<label for="channel_manage"><input type="checkbox" name="action_code[]" value="channel_manage" id="channel_manage" class="checkbox" {if $permission.channel_manage} checked="checked" {/if} />
+					栏目添加/编辑</label>
+					</div>
+				
+						<div style="width:200px;float:left;">
+					<label for="channel_del"><input type="checkbox" name="action_code[]" value="channel_del" id="channel_del" class="checkbox" {if $permission.channel_del} checked="checked" {/if} />
+					栏目删除</label>
+					</div>
+						<div style="width:200px;float:left;">
+					<label for="channel_setting"><input type="checkbox" name="action_code[]" value="channel_setting" id="channel_setting" class="checkbox" {if $permission.channel_setting} checked="checked" {/if} />
+					栏目排序/显示
+					</label>
+					</div>
+				
+						<div style="width:200px;float:left;">
+					<label for="content_manage"><input type="checkbox" name="action_code[]" value="content_manage" id="content_manage" class="checkbox" {if $permission.content_manage} checked="checked" {/if} />
+					栏目信息添加/编辑</label>
+					</div>
+						<div style="width:200px;float:left;">
+					<label for="content_del"><input type="checkbox" name="action_code[]" value="content_del" id="content_del" class="checkbox" {if $permission.content_del} checked="checked" {/if} />
+					栏目信息删除</label>
+					</div>
+						</td>
+				 </tr>
+
+				<tr class="secondalt" >
+					<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('product_manage,product_del,product_setting,product_import,category_manage,category_del,category_move,category_setting,brand_manage',this);" class="checkbox" {if $permission.product_manage and $permission.product_del and $permission.product_setting and $permission.product_import and $permission.category_manage and $permission.category_del and $permission.category_move and $permission.category_setting and $permission.brand_manage} checked="checked" {/if} />
+					<b>产品管理</b>
+					</td>
+					<td width="81%" style="padding-top:5px;padding-bottom:5px;">
+				<div style="width:200px;float:left;">
+				<label for="product_manage"><input name="action_code[]" type="checkbox" class="checkbox" id="product_manage" value="product_manage" {if $permission.product_manage} checked="checked" {/if}  />
+				产品添加/编辑/复制</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="product_del"><input type="checkbox" name="action_code[]" value="product_del" id="product_del" class="checkbox" {if $permission.product_del} checked="checked" {/if}  />
+				产品删除</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="product_setting"><input type="checkbox" name="action_code[]" value="product_setting" id="product_setting" class="checkbox" {if $permission.product_setting} checked="checked" {/if}  />
+				设置推荐/新产品/显示/排序</label>
+				</div>
+				
+				<div style="width:200px;float:left;">
+				<label for="product_import"><input type="checkbox" name="action_code[]" value="product_import" id="product_import" class="checkbox" {if $permission.product_import} checked="checked" {/if}  />
+				产品批量导入</label>
+				</div>
+				
+				<div style="width:200px;float:left;">
+				<label for="category_manage"><input type="checkbox" name="action_code[]" value="category_manage" id="category_manage" class="checkbox" {if $permission.category_manage} checked="checked" {/if}  />
+				分类添加/编辑</label>
+				
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="category_del"><input type="checkbox" name="action_code[]" value="category_del" id="category_del" class="checkbox"  {if $permission.category_del} checked="checked" {/if} />
+				分类删除</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="category_move"><input type="checkbox" name="action_code[]" value="category_move" id="category_move" class="checkbox" {if $permission.category_move} checked="checked" {/if}  />
+				分类转移</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="category_setting"><input type="checkbox" name="action_code[]" value="category_setting" id="category_setting" class="checkbox" {if $permission.category_setting} checked="checked" {/if} />
+				分类显示/排序</label>
+				</div>
+
+				<div style="width:200px;float:left;">
+				<label for="brand_manage"><input type="checkbox" name="action_code[]" value="brand_manage" id="brand_manage" class="checkbox" {if $permission.brand_manage} checked="checked" {/if} />
+				品牌管理</label>
+				</div>
+
+
+				</td>
+				</tr>
+				
+				<tr class="firstalt">
+				 	<td width="19%">
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('inquiry_show,inquiry_del,inquiry_stat',this);" {if $permission.inquiry_show and $permission.inquiry_del and $permission.inquiry_stat} checked="checked" {/if} class="checkbox">
+					<b>咨询管理</b>
+				  </td>
+				 	<td style="padding-top:5px;padding-bottom:5px;">
+						<div style="width:200px;float:left;">
+					<label for="inquiry_show"><input type="checkbox" name="action_code[]" value="inquiry_show" id="inquiry_show" class="checkbox" {if $permission.inquiry_show} checked="checked" {/if} />
+					查看咨询</label>
+					</div>
+						<div style="width:200px;float:left;">
+					<label for="inquiry_del"><input type="checkbox" name="action_code[]" value="inquiry_del" id="inquiry_del" class="checkbox" {if $permission.inquiry_del} checked="checked" {/if} />
+				
+					删除咨询</label>
+					</div>
+						<div style="width:200px;float:left;">
+					<label for="inquiry_stat"><input type="checkbox" name="action_code[]" value="inquiry_stat" id="inquiry_stat" class="checkbox"  {if $permission.inquiry_stat} checked="checked" {/if} />
+					咨询统计</label>
+					</div>
+					</td>
+				</tr>
+					
+				<tr class="secondalt">
+				 	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('company_edit,home_meta,contact_manage,contact_del',this);" {if $permission.company_edit and $permission.contact_manage and $permission.contact_del} checked="checked" {/if} class="checkbox" />
+					<b>公司信息管理</b>
+				  </td>
+				  	<td style="padding-top:5px;padding-bottom:5px;">
+						<div style="width:200px;float:left;">
+					<label for="company_edit"><input type="checkbox" name="action_code[]" value="company_edit" id="company_edit" class="checkbox" {if $permission.company_edit} checked="checked" {/if} />
+					编辑公司信息</label>
+					</div>
+					<div style="width:200px;float:left;">
+					<label for="contact_manage"><input type="checkbox" name="action_code[]" value="contact_manage" id="contact_manage" class="checkbox" {if $permission.contact_manage} checked="checked" {/if} />
+					联系人添加/编辑
+					</label>
+						</div>
+						<div style="width:200px;float:left;">
+					<label for="contact_del"><input type="checkbox" name="action_code[]" value="contact_del" id="contact_del" class="checkbox" {if $permission.contact_del} checked="checked" {/if} />
+					联系人删除</label>
+						</div>
+						</td>
+				</tr>
+                 
+                 <tr class="firstalt">
+				  	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('adv_manage,adv_del',this);" class="checkbox" {if $permission.adv_manage and $permission.adv_del} checked="checked" {/if}  />
+					<b>广告管理</b>
+				  </td>
+				  	<td style="padding-top:5px;padding-bottom:5px;">
+						<div style="width:200px;float:left;">
+					<label for="adv_manage">
+                    <input type="checkbox" name="action_code[]" value="adv_manage" id="adv_manage" class="checkbox" {if $permission.adv_manage} checked="checked" {/if} />
+					广告添加/编辑
+					</label>
+						</div>
+						<div style="width:200px;float:left;">
+					<label for="adv_del"><input type="checkbox" name="action_code[]" value="adv_del" id="adv_del" class="checkbox" {if $permission.adv_del} checked="checked" {/if} />
+					广告删除</label>
+						</div>
+						</td>
+				 </tr>
+				 
+				 <tr class="secondalt">
+				  	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('link_manage,link_del',this);" class="checkbox" {if $permission.link_manage and $permission.link_del} checked="checked" {/if}  />
+					<b>友情链接</b>
+				  </td>
+				  	<td style="padding-top:5px;padding-bottom:5px;">
+						<div style="width:200px;float:left;">
+					<label for="link_manage"><input type="checkbox" name="action_code[]" value="link_manage" id="link_manage" class="checkbox" {if $permission.link_manage} checked="checked" {/if} />
+					链接添加/编辑
+					</label>
+						</div>
+						<div style="width:200px;float:left;">
+					<label for="link_del"><input type="checkbox" name="action_code[]" value="link_del" id="link_del" class="checkbox" {if $permission.link_del} checked="checked" {/if} />
+					链接删除</label>
+						</div>
+						</td>
+				 </tr>
+				 
+				 {if $permission_flag}
+				 <tr class="firstalt">
+				  	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('user_manage,user_permission',this);" class="checkbox" {if $permission.user_manage and $permission.user_permission} checked="checked" {/if} />
+					<b>权限管理</b>
+				  </td>
+				 	<td style="padding-top:5px;padding-bottom:5px;">
+					<div style="width:200px;float:left;">
+					<label for="user_manage"><input type="checkbox" name="action_code[]" value="user_manage" id="user_manage" class="checkbox" {if $permission.user_manage} checked="checked" {/if} />
+					管理员添加/编辑/删除</label>
+					</div>
+					<div style="width:200px;float:left;">
+					<label for="user_permission"><input type="checkbox" name="action_code[]" value="user_permission" id="user_permission" class="checkbox" {if $permission.user_permission} checked="checked" {/if} />
+					分派权限</label>
+					</div>
+					</td>
+				 </tr>
+				 {else}
+				 <tr class="firstalt">
+				  	<td width="19%" >
+					<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('user_manage',this);" class="checkbox" {if $permission.user_manage} checked="checked" {/if} />
+					<b>权限管理</b>
+				  </td>
+				 	<td style="padding-top:5px;padding-bottom:5px;">
+					<div style="width:200px;float:left;">
+					<label for="user_manage"><input type="checkbox" name="action_code[]" value="user_manage" id="user_manage" class="checkbox" {if $permission.user_manage} checked="checked" {/if} />
+					管理员添加/编辑/删除</label>
+					</div>
+					</td>
+				 </tr>
+				 {/if}
+			 
+				 <tr class="secondalt">
+			  		<td width="19%" >
+				<input name="chkGroup" type="checkbox" value="checkbox" onclick="check('site_manage,language_manage,theme_manage,mail_manage,database_manage,tag_manage',this);" class="checkbox" {if $permission.site_manage and $permission.language_manage and $permission.theme_manage and $permission.mail_manage and $permission.database_manage and $permission.tag_manage} checked="checked" {/if} />
+				<b>网站管理</b>
+			  </td>
+			  		<td style="padding-top:5px;padding-bottom:5px;">
+					<div style="width:200px;float:left;">
+				<label for="site_manage"><input type="checkbox" name="action_code[]" value="site_manage" id="site_manage" class="checkbox" {if $permission.site_manage} checked="checked" {/if} />
+				网站设置</label>
+				</div>
+
+				<div style="width:200px;float:left;">
+				<label for="language_manage"><input type="checkbox" name="action_code[]" value="tag_manage" id="tag_manage" class="checkbox" {if $permission.tag_manage} checked="checked" {/if} />
+				标签管理</label>
+				</div>
+
+
+				<div style="width:200px;float:left;">
+				<label for="language_manage"><input type="checkbox" name="action_code[]" value="language_manage" id="language_manage" class="checkbox" {if $permission.language_manage} checked="checked" {/if} />
+				语言管理</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="theme_manage"><input type="checkbox" name="action_code[]" value="theme_manage" id="theme_manage" class="checkbox" {if $permission.theme_manage} checked="checked" {/if} />
+				主题管理</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="mail_manage"><input type="checkbox" name="action_code[]" value="mail_manage" id="mail_manage" class="checkbox" {if $permission.mail_manage} checked="checked" {/if} />
+				邮件模板设置</label>
+				</div>
+				<div style="width:200px;float:left;">
+				<label for="database_manage"><input type="checkbox" name="action_code[]" value="database_manage" id="database_manage" class="checkbox" {if $permission.database_manage} checked="checked" {/if} />
+				数据库操作</label>
+				</div>
+					</td>
+			 	</tr>
+			</table>
+	
+		</td></tr>
+	</table>	
+	<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			  <input type="checkbox" name="checkall" value="checkbox" onclick="checkAll(this.form, this);" class="checkbox" />全选
+			  <input type="submit"   name="Submit"   value=" 保存 " class="bginput" />
+			  <input type="hidden"   name="user_id"    value="{$user_id}" />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function checkAll(frm, checkbox)
+{
+  for (i = 0; i < frm.elements.length; i++){
+    if (frm.elements[i].name == 'action_code[]' || frm.elements[i].name == 'chkGroup')
+    {
+      frm.elements[i].checked = checkbox.checked;
+    }
+  }
+}
+
+function check(list, obj)
+{
+  var frm = obj.form;
+
+    for (i = 0; i < frm.elements.length; i++)
+    {
+      if (frm.elements[i].name == "action_code[]")
+      {
+          var regx = new RegExp(frm.elements[i].value + "(?!_)", "i");
+          if (list.search(regx) > -1) frm.elements[i].checked = obj.checked;
+      }
+    }
+}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

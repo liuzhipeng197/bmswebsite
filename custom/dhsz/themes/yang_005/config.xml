@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nitc>
+    <conf>
+        <skin_directory>yang_005</skin_directory>
+		<theme_title>NITC 导航右浮白色简洁版</theme_title>
+		<theme_author>Design by Longi,Div by CZ </theme_author>
+		<theme_version>3.2</theme_version>
+		<logo_size>最佳大小为高度：86px，宽度：280px</logo_size>
+		<theme_description>NITC效益型网站导航右浮白色简洁版.</theme_description>
+		
+		<adv_flag>banner</adv_flag>
+		<adv_size>宽度：970px，高度：350px</adv_size>
+		<adv_description>首页Banner广告位</adv_description>
+
+    </conf>
+</nitc>

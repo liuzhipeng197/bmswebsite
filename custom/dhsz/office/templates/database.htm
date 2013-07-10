@@ -1,0 +1,267 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+			<ul>
+				<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504392" target="_blank">查看演示文件</a></li>
+				<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+				<li class="Black">操作帮助请详见演示文件!</li>
+				<li class="DetillRigh"></li>
+			</ul>
+		</div>
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="85" align="center" id="setting1" class="Move"><a href="javascript:void(0);" onclick="javascript:settingselect('1')">数据还原</a></td>
+			
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting2" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('2')">数据备份</a></td>
+
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting3" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('3')">数据优化</a></td>	
+			
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting4" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('4')">数据修复</a></td>	
+
+			<td align="left" class="LineRight" style="padding-left:10px;"></td>	
+		  </tr>
+		  
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理 > 数据库操作</td>
+			<td width="12%" align="right" height="24"></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+			<tr><td style="border:none;">
+				
+				<div id="settingBox1" class="">
+					<form name="theForm" method="post" action="">
+					<div class="tablelisthead">
+						<ul>
+						<li class="li_10">选择</li>
+						<li class="li_35">文件名称</li>
+						<li class="li_15">文件大小</li>
+						<li class="li_20">备份时间</li>
+						<li class="li_15">操作</li>
+						</ul>
+						</div>
+						<div class="tablelist">
+						{section name=loop loop=$infos}
+						<ul>
+						<li class="li_10"><input type="checkbox" name="filenames[]" value="{$infos[loop].filename}" id="filenames_{$smarty.section.loop.index}" onclick="clickCheckbox({$smarty.section.loop.index})" class="listcheck" /></li>
+						<li class="li_35">{$infos[loop].filename}</li>
+						<li class="li_15">{$infos[loop].filesize}&nbsp;M</li>
+						<li class="li_20">{$infos[loop].maketime}</li>
+						<li class="li_15 operation">
+							<a href="database.php?action=import&filename={$infos[loop].filename}" onClick="javascript: return confirm('确认要还原数据库,还原后老的数据将丢失?');" title="数据恢复" class="op_repair"></a>
+						</li>
+						</ul>
+						{/section}
+						</div>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						  <tr>
+							<td height="36" class="BotNavBg">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							  <tr>
+								<td width="50" align="left" style="padding-left:10px;"><input type="checkbox" name="check_all_bottom" value="yes" onClick="return select_all_content('check_all_bottom','theForm');" /> 全选</td>
+								<td width="350" style="padding-left:5px;">
+								<input type="button" value=" 删除备份文件 " name="button" OnClick="javascript:dodel();" />&nbsp;&nbsp;<span style="color:#FF0000">注意：备份数据库目录(/office/backup)</span>
+								</td>
+								<td align="right">&nbsp;</td>
+							  </tr>
+							</table>
+							</td>
+						  </tr>
+						</table>
+					</form>
+				</div>
+				
+				<div id="settingBox2" class="close">
+				<form action="database.php?action=dobackup" method="post" name="backup">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+					<tr><td style="border:none;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="180" style="padding-left:10px;"><span>请选择要备份的表</span></td>
+						<td style="padding:3px 0 3px 5px;">
+							<select name="table[]" multiple size=15>
+							{foreach from=$tables item=table}
+							<option value="{$table.tablename}" selected >{$table.tablename}</option>
+							{/foreach}
+							</select>
+						</td>
+					</tr>
+				</table>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory">
+					<tr class="secondalt">
+						<td width="180" height="30" style="padding-left:10px;"><span>备份数据所保存的路径(backdb/)</span></td>
+						<td style="padding:3px 0 3px 5px;">
+							<input type="input" class="FormSmall" name="path"  style="width:250px;" value="{$path}" />
+						</td>
+					</tr>
+				</table>
+				</td></tr></table>
+				<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+					<tr>
+						<td align="center">
+						<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+						<input class="bginput" name="reset" type="reset" value=" 重置 " />
+						</td>
+					</tr>
+				</table>
+				</form>
+    			</div>
+				
+				<div id="settingBox3" class="close">
+				<form action="database.php?action=dooptimize" method="post" name="backup">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+					<tr><td style="border:none;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="180" style="padding-left:10px;"><span>请选择要优化的表</span></td>
+						<td style="padding:3px 0 3px 5px;">
+							<select name="table[]" multiple size=15>
+							{foreach from=$tables item=table}
+							<option value="{$table.tablename}" selected >{$table.tablename}</option>
+							{/foreach}
+							</select>
+						</td>
+					</tr>							
+				</table>
+					</td></tr>
+				</table>
+				<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+					<tr>
+						<td align="center">
+						<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+						<input class="bginput" name="reset" type="reset" value=" 重置 " />
+						</td>
+					</tr>
+					</table>
+				</form>
+				</div>
+				
+				<div id="settingBox4" class="close">
+				<form action="database.php?action=dorepair" method="post" name="backup">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+					<tr><td style="border:none;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="180" style="padding-left:10px;"><span>请选择要修复的表</span></td>
+						<td style="padding:3px 0 3px 5px;">
+							<select name="table[]" multiple size=15>
+							{foreach from=$tables item=table}
+							<option value="{$table.tablename}" selected >{$table.tablename}</option>
+							{/foreach}
+							</select>
+						</td>
+					</tr>							
+				</table>
+					</td></tr>
+				</table>
+				<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+					<tr>
+						<td align="center">
+						<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+						<input class="bginput" name="reset" type="reset" value=" 重置 " />
+						</td>
+					</tr>
+					</table>
+				</form>
+				</div>
+				
+			</td></tr>
+		</table>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+function settingselect(id){
+	document.getElementById('settingBox1').className="close";
+	document.getElementById('settingBox2').className="close";
+	document.getElementById('settingBox3').className="close";
+	document.getElementById('settingBox4').className="close";
+	document.getElementById('setting1').className="Out";
+	document.getElementById('setting2').className="Out";
+	document.getElementById('setting3').className="Out";
+	document.getElementById('setting4').className="Out";
+	
+	document.getElementById('setting'+id).className="Move";
+	document.getElementById('settingBox'+id).className="";
+}
+function select_all_content(chkName,frmName){
+	var frm=document.forms[frmName];
+	for(var i=0;i<frm.elements.length;i++){
+		var e =frm.elements[i];
+		if ((e.name != chkName) && (e.type=='checkbox')){
+			if (chkName == 'check_all_bottom'){
+				e.checked = frm.check_all_bottom.checked;
+			}
+			if (chkName == 'check_all_up'){
+				e.checked = frm.check_all_up.checked;
+			}			
+			if ((e.name != 'check_all_bottom') && (e.name!='check_all_up')){
+				tr_bgcolor(frm.elements[i]);
+			}
+		}	
+	}
+}
+function clickCheckbox(cnt){
+	if(document.getElementById("filenames_"+cnt).checked == true){
+		obj=document.getElementById("filenames_"+cnt);
+		if(obj.checked==true){
+			var tr = obj.parentNode.parentNode;
+			tr.style.backgroundColor ="#FFFDD7";
+		}
+	}else{
+		obj=document.getElementById("filenames_"+cnt);
+		if(obj.checked==false){
+			var tr = obj.parentNode.parentNode;
+			tr.style.backgroundColor ="#FFFFFF";
+		}
+	}
+}
+function dodel(){
+	var num=0; 
+	var filenames=document.getElementsByName("filenames[]")
+	for(var i=0;i<filenames.length;i++){ 
+		if(filenames[i].checked==true){   
+		  num=num+1; 
+		} 
+	} 
+	if(num==0){
+        alert("请选择要删除的备份文件!");
+        return;
+    }
+    if(num>0){
+		if(confirm("确认删除备份文件?")==true){
+			document.theForm.action="database.php?action=file_delete";
+			document.theForm.submit();
+		}
+    }
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

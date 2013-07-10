@@ -1,0 +1,20 @@
+@charset "utf-8";
+/*CSSDocument*/
+/*全局公共样式的设定*/
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,dl,dt,dd{margin:0;padding:0;border:0;}
+body{background:#fff;color:#333;font:12px verdana,'宋体';}
+li{list-style-type:none;}
+h1,h2,h3,h4,h5,h6{font-size:12px;font-weight:normal;}
+input,button,textarea,select{font:100% verdana,'宋体';}
+/*默认全局样式超链接样式*/
+a{color:#333;text-decoration:none;}
+/*链接基本样式*/
+a:hover{color:#f00;text-decoration:underline;}
+/*链接移上时的样式*/
+/*其它常用样式的定义*/
+.left{margin:0px auto;margin-right:20px;}
+.right{margin:0px auto;margin-right:20px;}
+.clear{clear:both;}
+.noBorder{border:none;}
+img,li{vertical-align:top;}
+.height20px{height:20px;line-height:20px;font-size:0;clear:both}

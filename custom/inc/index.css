@@ -1,0 +1,15 @@
+img{border:0;}
+a{color:#70B817;text-decoration:none;}
+a:hover{color:#FF3992;text-decoration:underline;}
+#header{background:url("../images/bg_top.jpg"/*tpa=http://www.ip112.com/images/bg_top.jpg*/) repeat-x; height:73px;margin:0;padding:0}
+#header img{margin-left:10px;}
+#menu{background:url("../images/bg_search.gif"/*tpa=http://www.ip112.com/images/bg_search.gif*/) repeat-x;height:31px; border-top:2px solid #3D9A13;border-bottom:2px solid #3D9A13;padding:2px 0 0 5px;}
+#menu img{margin-right:5px;}
+#menu .input{margin-bottom:4px;padding:3px;background:url("../images/bg_input.gif"/*tpa=http://www.ip112.com/images/bg_input.gif*/) no-repeat; border:1px solid #369;}
+
+#footer{font-size:8pt;background:url("../images/bg_bottom.jpg"/*tpa=http://www.ip112.com/images/bg_bottom.jpg*/) repeat-x left top;text-align:center;padding-top:81px}
+#main{position:relative;height:600px;background:url("../images/bg_main.jpg"/*tpa=http://www.ip112.com/images/bg_main.jpg*/); z-index:1;}
+#main #shout{float:right;color:#000;padding:2px;z-index:1;FILTER: glow(color=#ffffff,strength=10);}
+#main #shout input{border:1px solid #666;}
+#main #shout a{background:#fff;color:#FF3992;}
+#main #shout a:hover{background:#000;color:#FFf;}

@@ -1,0 +1,128 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504388" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理员 > 编辑管理员</td>
+			<td width="12%" align="right" class="bt_list"><a href="privilege.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	<form action="privilege.php?action=update" method="post" name="theForm" onsubmit="return doUserSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td width="110" style="padding-left:10px;"><span>登陆名</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" class="FormSmall" name="user_name" onblur="userNameCheck('user_name')" style="width:250px;" id="user_name" value="{$user.user_name}" /> <img src="images/required_icon.gif" />
+					</div>
+					<div class="msg" style="width:255px;">
+						<div class="" id="user_nameMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>				
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>密码</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<input type="password" name="password" class="FormSmall" style="width:250px;" id="password" /><br />
+				<span style="padding-left:5px;">密码为空,则不修改密码</span>
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td style="padding-left:10px;"><span>确认密码</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+ 				<input type="password" name="confirm_password" class="FormSmall" style="width:250px;" id="confirm_password" />
+			</td>
+		</tr>
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>邮箱</span>&nbsp;&nbsp;<span style="color:#FF0000;">(找回密码)</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="email" onblur="userEmailCheck('email')" value="{$user.email}" class="FormSmall" style="width:250px;" id="email" />
+						<img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="emailMsg" style="display:none;"></div>
+					</div>
+				</div>			
+			</td>
+		</tr>
+		<tr class="firstalt">
+			<td style="padding-left:10px;"><span>真实姓名</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<input type="input"  class="FormSmall" name="name" onblur="nameCheck('name')" style="width:250px;" id="name"  value="{$user.name}" /> 
+			</td>
+		</tr>
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>电话</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+ 				<input type="input" name="tel" class="FormSmall" value="{$user.tel}" style="width:250px;" id="tel" />		
+			</td>
+		</tr>
+	</table>
+		</td></tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input type="hidden" value="{$user.user_id}" name="user_id" />
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+function doUserSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	if(userNameCheck("user_name") == false)
+		CheResult = false;
+
+	if(userEmailCheck("email") == false)
+		CheResult = false;
+		
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

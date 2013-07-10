@@ -1,0 +1,107 @@
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<script language="JavaScript">
+{literal}
+function loadTemplate(id) {
+	document.theForm.action="mail_template.php?action=list&id="+id;
+	document.theForm.submit();
+}
+
+function change_editor(id) {
+	var em = document.forms['theForm'].elements;
+	var em_radio = em['mail_type'];
+	for (i = 0; i < em_radio.length; i++){
+		if (em_radio[i].checked){
+			type = em_radio[i].value;
+			break;
+		}
+	}
+	var tpl = document.getElementById('selTemplate').value;
+	document.theForm.action="mail_template.php?action=list&id="+tpl+"&mail_type="+type;
+	document.theForm.submit();
+}
+{/literal}
+</script>
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504393" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理 > 邮件模版</td>
+			<td width="12%" align="right"></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	<div id="conent_area">
+	{/if}
+	
+	
+	<form action="mail_template.php?action=update" method="post" name="theForm">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+	
+		<tr class="firstalt">
+			<td width="150"><span style="padding-left:10px;">请选择邮件模版</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+			 <select id="selTemplate" onchange="loadTemplate(this.options[this.options.selectedIndex].value)">
+				<option label="发送密码模板 [send_password]" {if $template.template_id==1} selected="selected" {/if} value="1">发送密码模板 [send_password]</option>
+				<option label="转发咨询模板 [send_inquiry]" {if $template.template_id==2} selected="selected" {/if} value="2">转发咨询模板 [send_inquiry]]</option>
+			</select>
+			</td>
+		</tr>
+		
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">邮件主题</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+			<input type="text" name="subject" class="FormSmall" id="subject" value="{$template.template_subject|escape}" style="width: 300px" />
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">邮件类型</span><a href="#" title="&lt;img src='images/help/mail.gif'&gt;" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+				<input type="radio" name="mail_type" value="0" {if $template.is_html==0} checked="true" {/if} onclick="javascript:change_editor();"  /> 纯文本邮件　
+				<input type="radio" name="mail_type" value="1" {if $template.is_html==1} checked="true" {/if} onclick="javascript:change_editor();" /> HTML 邮件
+			</td>
+		</tr>							
+		<tr class="secondalt">
+			<td colspan="2">
+				{if $template.is_html==0}
+				<textarea id="content" name="content" style="width:90%;padding-left:5px;padding-right:5px;" rows="16">{$template.template_content}</textarea>		
+				{else}
+				{$template.template_content}
+				{/if}
+			</td>
+		</tr>		
+	</table>
+		</td></tr>
+	</table>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input type="hidden" value="{$template.template_id}" name="template_id" id="template_id" />
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+	</div>
+</div>
+
+{include file="pagefooter.htm"}

@@ -1,0 +1,187 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504369" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+		  <tr>
+			<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				{section name=loop loop=$language}
+					{if $smarty.section.loop.index == 0}
+						<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" {if $language[loop].language_id==$default_language} class="Move" {else} class="Out" {/if}><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+					{else}
+						<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+						<td width="85" align="center" id="languagesel{$language[loop].language_id}" {if $language[loop].language_id==$default_language} class="Move" {else} class="Out" {/if}><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>	
+								
+					{/if}
+				{/section}
+				<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,查找不同语言分类信息.</td>
+			  </tr>
+			  
+			</table></td>
+		  </tr>
+			  <tr>
+				<td class="LineRightBlue">
+			  {else}
+			  <tr>
+				<td class="LineRightBlue1">	  	
+			  {/if}
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">产品管理 > 分类列表 > {$navigation}</td>
+				<td width="12%" align="right" class="bt_add">{if $category_manage==true}<a href="category.php?action=add">添加</a>{/if}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+		
+		<form name="theForm" method="post" action="">
+        <div class="tablelisthead">
+        <ul>
+        <li class="li_10">排序</li>
+        <li class="li_40">分类名</li>
+       {if $category_setting==true}
+        <li class="li_25">显示状态</li>
+        {/if}
+        <li class="li_20">
+        {if $category_manage==true or $category_del==true or $category_setting==true or $category_move==true}
+        编辑
+        {/if}
+        </li>
+        </ul>
+        </div>
+        {section name=loop loop=$category_arr}
+			 <div id="languageBox{$category_arr[loop].language_id}" {if $category_arr[loop].language_id == $default_language} class=""  {else} class="close"  {/if}>
+        <div class="tablelist">
+        {foreach from=$category_arr[loop].category item=category}
+        <ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+        <li class="li_10"><input type="text" value="{$category.sort_order}" onblur="updatesort('{$category.category_id}','{$category_arr[loop].language_id}')" name="sortOrder[{$category.category_id}]" id="sort{$category.category_id}l{$category_arr[loop].language_id}" class="listinput"/></li>
+        <li class="li_40">{if $category.is_leaf==0} 
+							<img src="./images/minus.gif" class="listimg"/> 
+							<a href="product.php?action=list&category_id={$category.category_id}" {if $category.image} title="<img src='../upload/photo/{$category.image}'>" {/if}>{if $category.image}<span class='op_pic'>{else}<span>{/if} {$category.name}</span></a>
+						{else}
+							<img src="./images/plus.gif" class="listimg"/> 
+							<a href="category.php?action=list&category_id={$category.category_id}&language_id={$category_arr[loop].language_id}" {if $category.image} title="<img src='../upload/photo/{$category.image}'>" {/if}>{if $category.image}<span class='op_pic'>{else}<span>{/if} {$category.name}</span></a>
+						{/if}</li>
+       {if $category_setting==true}
+        <li class="li_25"><a href="category.php?action=state&category_id={$category.category_id}">{$category.state}</a></li>
+        {/if}
+        <li class="li_20 operation">
+        {if $category_manage==true}
+						<a href="category.php?action=edit&category_id={$category.category_id}" title="编辑" class="op_edit"></a>
+					{else}
+						<span class="op_edit_off"></span>
+					{/if}
+					{if $category_move==true}
+						<a href="category.php?action=move&category_id={$category.category_id}" title="转移" class="op_move"></a>
+					{else}
+						<span class="op_move_off"></span>
+					{/if}
+					<!--
+					{if $category_manage==true}
+						<a href="category.php?action=seo&category_id={$category.category_id}" title="优化设置" class="op_seo"></a> 
+					{else}
+						<span class="op_seo_off"></span>
+					{/if}
+					-->
+					{if $category_del==true}
+						<a href="category.php?action=del&category_id={$category.category_id}" onClick="javascript: return confirm('删除分类将删除它的小类,和类下面的所有产品,确认删除');" title="删除" class="op_del"></a>
+					{else}
+						<span class="op_del_off"></span>
+					{/if}
+        </li>
+        </ul>
+        {/foreach}
+        </div>
+        </div>
+        {/section}
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td style="padding-left:5px;">
+				<input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">
+				 </td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchBox() {
+	if (document.getElementById('searchBox').className=="close"){
+		document.getElementById('searchBox').className ="exp";
+	}else{
+		document.getElementById('searchBox').className="close";
+	}
+}
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+}
+
+function updatesort(category_id,language_id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('sort'+category_id+'l{/literal}{$language[loop].language_id}{literal}').value=document.getElementById('sort'+category_id+'l'+language_id).value;
+	{/literal}
+	{/section}
+	{literal}
+}
+
+function dosort(){
+	document.theForm.action="category.php?action=order&category_id={/literal}{$parent_id}{literal}";
+	document.theForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

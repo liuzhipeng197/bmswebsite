@@ -1,0 +1,80 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504389" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理员 > 管理员列表</td>
+			<td width="12%" align="right" class="bt_add">{if $user_manage==true}<a href="privilege.php?action=add">添加</a>{/if}</td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form name="theForm" method="post" action="">
+    <div class="tablelisthead">
+        <ul>
+        <li class="li_15">登陆名</li>
+        <li class="li_15">真实姓名</li>
+        <li class="li_20">最后登陆</li>
+        <li class="li_15">IP</li>
+        <li class="li_20">添加时间</li>
+        <li class="li_15">编辑</li>
+        </ul>
+        </div>
+        <div class="tablelist" style="border-bottom:1px #d6dfe7 solid;">
+        {section name=loop loop=$user}
+        <ul>
+        <li class="li_15">{$user[loop].user_name}</li>
+        <li class="li_15">{$user[loop].name}&nbsp;</li>
+        <li class="li_20">{$user[loop].last_time}&nbsp;</li>
+        <li class="li_15">{$user[loop].last_ip}&nbsp;</li>
+        <li class="li_20">{$user[loop].date_added}</li>
+        <li class="li_15 operation">
+			<a href="privilege.php?action=edit&user_id={$user[loop].user_id}" title="编辑" class="op_edit"></a>
+			{if $user_permission==true and $user[loop].permission==false}
+				<a href="privilege.php?action=permission&user_id={$user[loop].user_id}" title="权限" class="op_level"></a>
+			{else}
+				<span class="op_level_off"></span>
+			{/if}
+			{if $user_manage==true and $user[loop].permission==false}
+				<a href="privilege.php?action=del&user_id={$user[loop].user_id}" onClick="return window.confirm('确定删除该管理员?');" title="删除" class="op_del"></a>
+			{else}
+				<span class="op_del_off"></span>
+			{/if}</li>
+        </ul>
+        {/section}
+        </div>
+		</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

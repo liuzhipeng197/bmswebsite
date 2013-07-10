@@ -1,0 +1,149 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504385" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">友情链接 > 添加链接</td>
+			<td width="12%" align="right" class="bt_list"><a href="friend_link.php?action=list">列表</a>
+			</td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	<form action="friend_link.php?action=insert" method="post" enctype="multipart/form-data" name="theForm" onsubmit="return doLinkSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		{if $language|@count>1}
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">语言</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="language">
+				{section name=loop loop=$language}
+				<option value="{$language[loop].language_id}">{$language[loop].name}</option>
+				{/section}
+				</select>
+			</td>
+		</tr>	
+		{else}
+			{section name=loop loop=$language}
+				<input type="hidden" value="{$language[loop].language_id}" name="language" />
+			{/section}
+		{/if}
+		
+		<tr class="secondalt" >
+			<td width="110"><span style="padding-left:10px;">链接名</span></td>
+			<td  style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+				<div class="msgbase">
+					<input type="input"  class="FormSmall" name="link_name" style="width:250px;" id="link_name" onblur="linkNameCheck('link_name')" /> <img src="images/required_icon.gif" />				</div>
+				<div  class="msg" style="width:255px;">
+					<div class="" id="link_nameMsg" style="display:none;"></div>
+				</div>
+			</div>			
+			</td>
+		</tr>
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">链接URL</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+				<div class="msgbase">
+					<input type="input" class="FormSmall" name="link_url" style="width:250px;" id="link_url" onblur="linkUrlCheck('link_url')" /> <img src="images/required_icon.gif" />&nbsp;&nbsp;
+				</div>
+				<div  class="msg" style="width:255px;">
+					<div class="" id="link_urlMsg" style="display:none;"></div>
+				</div>
+				</div>
+			</td>
+		</tr>							
+		<tr class="secondalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">Logo</span> <a href="#" title="宽88px,高31px,图片最大100KB,允许(.jpg .gif .png)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<input type='file'  class="FormSmall" name='link_img' style="width:190px!important;width:250px;" />&nbsp;
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">或Logo地址</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="url_logo" onblur="linkLogoUrlCheck('url_logo')" class="FormSmall" style="width:250px;" id="url_logo" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="url_logoMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>							
+		<tr class="secondalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">排序</span></td>
+			<td style="padding-top:3px;padding-bottom:3px;">
+ 				<input type="input" name="sort_order" class="FormSmall" value="{$sort_order}" style="width:250px;" id="sort_order" />
+			</td>
+		</tr>	
+	</table>
+		</td></tr>
+	</table>
+	
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 添加 " />
+<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+function doLinkSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+
+	if(linkNameCheck("link_name") == false)
+		CheResult = false;
+
+	if(linkUrlCheck("link_url") == false)
+		CheResult = false;
+
+	if(linkLogoUrlCheck("url_logo") == false)
+		CheResult = false;
+
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

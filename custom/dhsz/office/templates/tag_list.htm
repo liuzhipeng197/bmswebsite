@@ -1,0 +1,97 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="LineRightBlue1">
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">标签管理 > 标签列表</td>
+				<td width="12%" align="right" class="bt_add"><a href="tag.php?action=add">添加</a></td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+		<form name="theForm" method="post" action="">
+        <div class="tablelisthead">
+        <ul>
+        <li class="li_10">排序</li>
+        <li class="li_30">标签</li>
+        <li class="li_20">URL地址</li>
+        {if $language|@count>1}
+        <li class="li_20">语言</li>
+        {/if}
+
+
+
+        <li class="li_10">编辑</li>
+        </ul>
+        </div>
+        <div class="tablelist">
+        {section name=loop loop=$tag}
+        <ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+        <li class="li_10"><input type="text" value="{$tag[loop].sort_order}" name="sort_order[{$tag[loop].tag_id}]"  maxlength="3" size="2" class="listinput"/></li>
+        <li class="li_30">{$tag[loop].tag}</li>
+	    <li class="li_20">{$tag[loop].url}</li>
+        {if $language|@count>1}
+        <li class="li_20">{$tag[loop].language}</li>
+        {/if}
+       
+ 
+
+    
+        <li class="li_10 operation">
+				<a href="tag.php?action=edit&tag_id={$tag[loop].tag_id}" title="编辑" class="op_edit"></a>
+			
+				<a href="tag.php?action=del&tag_id={$tag[loop].tag_id}" onClick="return window.confirm('确定删除该标签吗?');" title="删除" class="op_del"></a>
+			</li>
+        </ul>
+        {/section}
+        </div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			  <td style="padding-left:5px;"><input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();"></td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function dosort(){
+	document.theForm.action="tag.php?action=order";
+	document.theForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

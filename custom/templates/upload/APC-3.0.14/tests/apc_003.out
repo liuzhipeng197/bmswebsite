@@ -1,0 +1,52 @@
+PHP:  Error parsing /opt/bms/custom/templates/upload/APC-3.0.14/tmp-php.ini on line 1231
+object(foo)#1 (0) {
+}
+object(foo)#1 (0) {
+}
+object(foo)#1 (1) {
+  ["a"]=>
+  bool(true)
+}
+object(baz)#2 (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "bar"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+object(baz)#2 (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "mod"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+object(baz)#2 (6) {
+  ["pri:private"]=>
+  string(3) "baz"
+  ["pub"]=>
+  string(3) "bar"
+  ["pro:protected"]=>
+  string(3) "bar"
+  ["pri:private"]=>
+  string(3) "mod"
+  ["bar"]=>
+  bool(true)
+  ["baz"]=>
+  bool(true)
+}
+===DONE===

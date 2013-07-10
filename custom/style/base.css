@@ -1,0 +1,74 @@
+@charset "gb2312";
+/* CSS Document */
+/*通用模块*/
+html,body,div,span,h1,h2,h3,h4,ul,li,img,p,b,textarea,input,select,form,a,table,tr,td
+{margin:0;padding:0;font-family:Arial,微软雅黑,verdana,, Helvetica, sans-serif;list-style-type:none;font-size:inherit;color:inherit;z-index:inherit; line-height:160%; font-size:12px}
+img,table{border:0;border-collapse:collapse; vertical-align:middle;}
+ul{		list-style:none;		display:block;	}
+li{		cursor:hand;	}
+
+
+.fle{float:left}
+.fri{float:right}
+.hide{display:none}
+.clear{clear:both;font-size:0;height:0;background-color:transparent}
+a{ text-decoration:underline;color:#0679E4}
+.Cblack{color:#000;}
+.Cgray{ color:#999}
+.Cred{ color:#C00}
+.Cwhite{ color:#FFF}
+.Cblue{ color:#0483CC}
+.F12{ font-size:12px}
+.F14{ font-size:14px}
+.txtc{ text-align:center}
+.unnes{ color:#FFF; font-size:14px; line-height:30px}
+.nes{ color:#c00; font-size:14px; line-height:30px}
+label{ margin:0px; padding:0px;cursor:pointer}
+
+/*header*/
+#header{ width:100%;height:50px; background:url(../images/header_bg.gif) repeat-x;}
+#header #logo_castor{float:left;width:409px;height:50px; font-family:Times serif;color:#FFF;font-size:17px;padding:0px;padding-left:10px;padding-top:12px;}
+
+/* 右上角按钮导航 */
+#nav_btn{margin-right:30px;margin-top:0px;}
+#nav_btn li { float:right; width:52px; height:33px; list-style:none;  font-size:12px;}
+#nav_btn li img{vertical-align:middle;}
+#nav_btn li a{ color:#000; text-decoration:none; padding-top:8px; display:block; width:82px; height:33px; text-align:center; }
+#nav_btn li a:hover { color:#fff; }
+/*mainnav导航*/
+#mainnav{width:100%;height:5px; background:url(../images/main_28.gif) repeat-x;}
+
+/*content内容*/	
+#content{ width:100%; }	
+	#mainContent { height:530px;}
+	#sidebar { float:left; width:8px; height:530px; background:#353c44;}
+	#sidebar2 { float:right; width:8px; height:530px; background:#353c44;}
+
+	#c1 { width:147px; height:500px; background:#add2da; float:left}
+	#left_top {width:147px; height:23px; background:url(../images/main_29.gif) no-repeat; padding-left:33px; padding-top:7px;font-size:14px;}
+	
+	#c2 { margin:0 9 0 166 !important;  height:530px; padding:0; }
+	#right_topleft { width:39px;height:30px; background:url(../images/main_30.gif); }
+	#right_topcenter { height:30px; background:url(../images/main_31.gif); font-size:13px; padding-left:10px; padding-top:7px;}
+	#right_topright {width:7px; height:30px; background:url(../images/main_32.gif); }
+	#right{height:530px;}
+	#mainbody{ height:500px;border-left:7px solid;border-color:#add2da; }
+	
+	#f { height:12px; background:#6cf;}	
+
+	#menuDIV{height:474px;; float:right; background-color: #FFFFFF; margin-left:10px} /*左侧导航布局*/
+	.menu1 { width:147px;background-color: #FFFFFF;}
+		/*一级菜单项:menu_h1*/
+		.menu_h1{ width:147px; height:26px; background:url(../images/bar1.gif);padding-top:2px; text-indent:1.5em; display:block;text-decoration:none;color:#000;}
+		.menu_h1:hover { background:url(../images/bar1_1.gif); font-weight:bold;}
+		
+		/*二级菜单项:menu_h2*/
+		.menu_h2{ width:147px; height:26px; background:url(../images/bar2.gif);padding-top:2px; text-indent:2.5em; display:block;text-decoration:none;color:#000;}
+		.menu_h2:hover { background:url(../images/bar2_2.gif); font-weight:bold;}
+		
+		/*三级菜单项：menu_h3*/
+		.menu_h3 li a{width:147px; height:26px; background:url(../images/bar3.gif);padding-top:2px; text-indent:3.5em; display:block;text-decoration:none;color:#000;}
+		.menu_h3 li a:hover{background:url(../images/bar3_2.gif); font-weight:bold;}
+	
+.side3title{ background-image:url(../images/main_47.gif); color:#FFFFFF; text-indent:2em; width:151px; height:23px; margin-top:5px;margin-left:10px; font-weight:bold}
+.side3content{ width:139px; height:auto; padding:5px; border:#6699FF solid 1px; background-color:#FFFFFF; margin-bottom:10px;margin-left:10px;  }

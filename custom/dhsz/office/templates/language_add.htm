@@ -1,0 +1,156 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504394" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理 > 语言管理</td>
+			<td width="12%" align="right" class="bt_list"><a href="language.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	<form action="language.php?action=insert" method="post" name="theForm"  onsubmit="return  doLanguageSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td width="150" style="padding-left:10px;"><span>语言名称</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input"  class="FormSmall" name="name"  onblur="languageNameCheck('name')" style="width:250px;" id="name" />
+						 <img src="images/required_icon.gif" />
+					</div>
+					<div class="msg" style="width:255px;">
+						<div class="" id="nameMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>语言包所在目录</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input"  class="FormSmall" name="directory"  onblur="languageDirectoryCheck('directory')" style="width:50px;" id="directory" maxlength="2" />
+						 <img src="images/required_icon.gif" />
+					</div>
+					<div class="msg" style="width:255px;">
+						<div class="" id="directoryMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		
+		<tr class="firstalt">
+			<td style="padding-left:10px;"><span>语言图片</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input"  class="FormSmall" name="country"  onblur="countryCheck('country')" style="width:250px;" id="country" value="country.png" />
+						 <img src="images/required_icon.gif" />
+					</div>
+					<div class="msg" style="width:255px;">
+						<div class="" id="countryMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>		
+		
+								
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>排序</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="sort_order" class="FormSmall" style="width:50px;" value="{$sort_order}" id="sort_order" />
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td style="padding-left:10px;"><span>状态</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="radio" name="state" value="0"  />&nbsp;禁用
+    			<input type="radio" name="state" value="1" checked="true"  />&nbsp;使用
+			</td>
+		</tr>	
+		
+		<tr class="secondalt">
+			<td style="padding-left:10px;"><span>默认</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="radio" name="default_value" value="0" checked="true"  />&nbsp;否
+    			&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="default_value" value="1"  />&nbsp;是			
+			</td>
+		</tr>			
+
+		
+				<tr class="secondalt">
+			<td style="padding-left:10px;"><span>外链URL地址</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="url" class="FormSmall" style="width:250px;" value="" id="url" /> （说明：该URL地址可以直接链接到外部网站）
+			</td>
+		</tr>		
+
+
+	</table>
+		</td></tr>
+	</table>
+	
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 添加 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function doLanguageSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	if(languageNameCheck("name") == false)
+		CheResult = false;
+
+	if(languageDirectoryCheck("directory") == false)
+		CheResult = false;
+	
+	if(countryCheck("country") == false)
+		CheResult = false;	
+	
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

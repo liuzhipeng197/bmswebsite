@@ -1,0 +1,86 @@
+{include file="pageheader.htm"}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504372" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	<div style="padding-left:15px;padding-right:15px; margin-top:5px; border-bottom:1px solid #BDC9D6">
+	<form name="searchForm1" method="get" action="inquiry.php">
+	<table boder="0" width="100%" cellpadding="4" cellspacing="1">
+	  <tr>
+		<td width="100">年份：
+		<select name="year">
+			{$year}
+		</select>
+		</td>
+		<td width="90">月份:
+		<select name="month">
+			<option value="">全部</option>
+			{$month}
+		</select>	
+		</td>
+		<td>
+		<input type="hidden" name="action" value="statistics" />
+		<input type="submit" value="" class="sbt_go" />
+		</td>
+	  </tr>
+	</table>
+	</form>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="LineRightBlue1">
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">咨询管理 > 咨询信息统计</td>
+				<td width="12%" align="right" class="bt_list"><a href="inquiry.php?action=list">列表</a></td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+			<tr><td style="border:none;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+			<tr>
+				<td>
+					{$num_statistics}
+				</td>
+			</tr>
+			<tr><td height="10"></td></tr>
+			<tr>
+				<td>
+				{$country_statistics}
+				</td>
+			</tr>							
+		</table>
+			</td></tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找咨询信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找咨询信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="inquiry.php";
+	document.searchForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

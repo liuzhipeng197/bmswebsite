@@ -1,0 +1,321 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504368" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		{if $language|@count>1}
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			{section name=loop loop=$language}
+				{if $smarty.section.loop.index == 0}
+					<td width="85" height="29" align="center" id="languagesel{$language[loop].language_id}" class="Move"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>
+				{else}
+					<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+					<td width="85" align="center" id="languagesel{$language[loop].language_id}" class="Out"><a href="javascript:void(0);" onclick="javascript:languageselect('{$language[loop].language_id}')">{$language[loop].name}</a></td>			
+				{/if}
+			{/section}
+			<td align="left" class="LineRight" style="padding-left:10px;">点击左侧语言选项,填写不同语言分类信息.</td>
+		  </tr>
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+	  {else}
+	  <tr>
+		<td class="LineRightBlue1">	  	
+	  {/if}
+	  <table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">产品管理 > 添加分类</td>
+			<td width="12%" align="right" class="bt_list"><a href="category.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr><td align="right" style="padding-right:5px;">"<img src="images/required_icon.gif" />"号为必填项</td></tr>
+		<tr><td>
+		<form action="category.php?action=insert" enctype="multipart/form-data" method="post" name="theForm" onsubmit="return doCategorySubmit()">
+		{section name=loop loop=$category}
+		{if $smarty.section.loop.index == 0}
+			<div id="languageBox{$category[loop].language_id}" class="">
+            	<table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$category[loop].country}" /> <span>分类名</span></td>
+                <td width="280"><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" name="categoryName_{$category[loop].language_id}" style="width:200px;" id="categoryName_{$category[loop].language_id}" onblur="categoryNameCheck('categoryName_{$category[loop].language_id}')" />
+								 <img src="images/required_icon.gif" />
+								</div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="categoryName_{$category[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+							</div></td>
+                <td width="110"><img src="{$category[loop].country}" /> <span>上级类别</span></td>
+                <td><input type="hidden" name="parentCategory" id="parentCategory" value="{$parentCategory}" />
+					  <select name="category_{$category[loop].language_id}" id="category_{$category[loop].language_id}" onChange="changecategory(this)">
+							<option value="0" selected="selected">------根类------</option>
+							{$category[loop].category}
+						</select></td>
+              </tr>
+            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$category[loop].country}" /> <span>分类摘要 <a href="#" title="&lt;img src='images/help/cadd1.gif'&gt;"><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+        <td><textarea name="abstract_{$category[loop].language_id}" id="abstract_{$category[loop].language_id}" onblur="abstractCategoryCheck('abstract_{$category[loop].language_id}')" class="FormSmall" style="width:510px;height:50px;"></textarea>
+        </td>
+      </tr>
+    </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110">　 <span>上传图片</span><a href="#" title="图片最佳比例(1:1),图片最大1MB,允许(.jpg .gif .png)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                    <td><input type="file" style="width:190px!important;width:300px;" class="FormSmall" name="image" />
+                    </td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>分类排序</span></td>
+                    <td><input type="input" class="FormSmall" name="sortOrder" style="width:50px;" value="{$sortOrder}" />&nbsp;&nbsp;分类序号按从大到小排列
+                    </td>
+                  </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>分类描述</span></td>
+                    <td>{$category[loop].description}
+                    </td>
+                  </tr>
+                </table>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                              <tr>
+                                <td width="110"><img src="{$category[loop].country}" /> <span>Title标签</span></td>
+                                <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$category[loop].language_id}" id="metaTitle_{$category[loop].language_id}" style="width:200px;" value="" /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                                <td width="110"><img src="{$category[loop].country}" /> <span>Keywords标签</span></td>
+                                <td><input type="input" class="FormSmall" name="metaKeywords_{$category[loop].language_id}" id="metaKeywords_{$category[loop].language_id}" style="width:200px;" value=""  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                              </tr>
+                            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>Description标签</span></td>
+                    <td><textarea name="metaDescription_{$category[loop].language_id}" id="metaDescription_{$category[loop].language_id}" class="FormSmall" style="width:595px;height:60px;"></textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>自定义文件名</span></td>
+                    <td><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" maxlength=100 name="pageName_{$category[loop].language_id}" id="pageName_{$category[loop].language_id}" style="width:200px;" value=""  /> <b>.html</b> <a href="#" title="生成前台静态页面的文件名。有效字符为A-Z,a-z,0-9,_,- 长度不超过100个字符。" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="pageName_{$category[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+                    </td>
+                  </tr>
+
+
+                </table>            
+                </div>
+			</div>
+		{else}
+			<div id="languageBox{$category[loop].language_id}" class="close">
+				<table width="100%" border="0" cellspacing="3" cellpadding="0" class="Font">
+              <tr>
+                <td width="110"><img src="{$category[loop].country}" /> <span>分类名</span></td>
+                <td width="280">
+				<input type="input" class="FormSmall" name="categoryName_{$category[loop].language_id}" style="width:200px;" id="categoryName_{$category[loop].language_id}" onblur="cateNameCheck('categoryName_{$category[loop].language_id}')"  />
+				</td>
+                <td width="110"><img src="{$category[loop].country}" /> <span>上级类别</span></td>
+                <td>
+					  <select name="category_{$category[loop].language_id}" id="category_{$category[loop].language_id}" onChange="changecategory(this)">
+							<option value="0" selected="selected">------根类------</option>
+							{$category[loop].category}
+						</select></td>
+              </tr>
+            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+      <tr>
+        <td width="110"><img src="{$category[loop].country}" /> <span>分类摘要 <a href="#" title="&lt;img src='images/help/cadd1.gif'&gt;"><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+        <td><textarea name="abstract_{$category[loop].language_id}" id="abstract_{$category[loop].language_id}" onblur="abstractCategoryCheck('abstract_{$category[loop].language_id}')" class="FormSmall" style="width:510px;height:50px;"></textarea>
+        </td>
+      </tr>
+    </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>分类描述</span></td>
+                    <td>{$category[loop].description}
+                    </td>
+                  </tr>
+                </table>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="110" height="24" align="center" bgcolor="#DFEFC7" class="SeoMeta"><a href="#" title="&lt;img src='images/help/title.gif'&gt;" style="float:right;margin-right:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>页面优化设置</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+                <div style="border:2px #DFEFC7 solid;padding:5px 0px;background:#F4F9EC;">
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                              <tr>
+                                <td width="110"><img src="{$category[loop].country}" /> <span>Title标签</span></td>
+                                <td width="280"><input type="input" class="FormSmall" name="metaTitle_{$category[loop].language_id}" id="metaTitle_{$category[loop].language_id}" style="width:200px;" value="" /> <a href="#" title="建议网页标题最多30个汉字(或60个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                                <td width="110"><img src="{$category[loop].country}" /> <span>Keywords标签</span></td>
+                                <td><input type="input" class="FormSmall" name="metaKeywords_{$category[loop].language_id}" id="metaKeywords_{$category[loop].language_id}" style="width:200px;" value=""  /> <a href="#" title="建议关键词2至3个,且用半角逗号隔开." style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+                              </tr>
+                            </table>
+                <table width="100%" border="0" cellpadding="0" cellspacing="3" class="Font">
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>Description标签</span></td>
+                    <td><textarea name="metaDescription_{$category[loop].language_id}" id="metaDescription_{$category[loop].language_id}" class="FormSmall" style="width:595px;height:60px;"></textarea> <a href="#" title="建议描述最多70个汉字(或140个英文字母)" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a>
+                    </td>
+                  </tr>
+
+
+                  <tr>
+                    <td width="110"><img src="{$category[loop].country}" /> <span>自定义文件名</span></td>
+                    <td><div id="msgbox">
+								<div class="msgbase">
+								<input type="input" class="FormSmall" maxlength=100 name="pageName_{$category[loop].language_id}" id="pageName_{$category[loop].language_id}" style="width:200px;" value=""  /> <b>.html</b> <a href="#" title="生成前台静态页面的文件名。有效字符为A-Z,a-z,0-9,_,- 长度不超过100个字符。" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></div>
+								<div  class="msg" style="width:205px;">
+									<div class="" id="pageName_{$category[loop].language_id}Msg" style="display:none;"></div>
+								</div>
+                    </td>
+                  </tr>
+
+
+                </table>            
+                </div>
+			</div>
+		{/if}
+		{/section}
+		<br />
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		<tr>
+			<td align="center">
+			<input type="submit" id="btSubmit"  class="bginput"name="btSubmit" value=" 添加 " />
+			<input name="reset" type="reset"  class="bginput" value=" 重置 " /></td>
+		</tr>
+		</table>
+
+		</form>
+		
+		</td></tr>
+	</table>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+
+function languageselect(id){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('languageBox{/literal}{$language[loop].language_id}{literal}').className="close";
+		document.getElementById('languagesel{/literal}{$language[loop].language_id}{literal}').className="Out";
+	{/literal}
+	{/section}
+	{literal}
+	document.getElementById('languagesel'+id).className="Move";
+	document.getElementById('languageBox'+id).className="";
+}
+
+function changecategory(selObj){
+	{/literal}
+	{section name=loop loop=$language}
+	{literal}
+		document.getElementById('category_{/literal}{$language[loop].language_id}{literal}').value=selObj.options[selObj.selectedIndex].value;		
+		{/literal}
+	{/section}
+	{literal}	
+	document.getElementById('parentCategory').value=selObj.options[selObj.selectedIndex].value;
+}
+
+function doCategorySubmit(){
+
+createXMLHttpRequest();
+
+	CheResult = true;
+	firstErrorControl = "";
+	{/literal}
+		{section name=loop loop=$category}
+			{if $smarty.section.loop.index == 0}
+	{literal}
+		if(categoryNameCheck("{/literal}categoryName_{$category[loop].language_id}{literal}") == false)
+			CheResult = false;
+		{/literal}
+			{/if}
+		{literal}
+	{/literal}
+
+		{literal}
+		if(pageNameCheck("{/literal}pageName_{$category[loop].language_id}{literal}") == false)
+			CheResult = false;
+
+        else if(isEmpty(GE("{/literal}pageName_{$category[loop].language_id}{literal}").value) != true) {
+          var url = "category.php?action=checkPageName&static_url_id={/literal}{$category[loop].static_url_id}{literal}&pageName="+GE("{/literal}pageName_{$category[loop].language_id}{literal}").value+"&language_id={/literal}{$category[loop].language_id}{literal}";
+
+          xmlHttp.open("GET", url, false);
+          xmlHttp.send(null);
+
+          if(xmlHttp.responseText==1) {      SetMsg("error","{/literal}pageName_{$category[loop].language_id}{literal}","block","此文件名已经存在, 请更换一个重试!");
+          CheResult = false;
+          }
+          else SetMsg("success","{/literal}pageName_{$category[loop].language_id}{literal}","none","");
+
+         }
+
+
+	{/literal}
+
+		{/section}
+	{literal}
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

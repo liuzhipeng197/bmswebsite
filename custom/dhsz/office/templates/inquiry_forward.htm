@@ -1,0 +1,132 @@
+{include file="pageheader.htm"}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504371" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh" style="padding-right:5px;">
+			<form name="searchForm" method="get" action="inquiry.php" onsubmit="return searchSubmit()">
+			<input type="text" name="searchText" id="searchText" onFocus="javascript:clearSearchText('searchText');" value="查找咨询信息..." />	
+			<input name="action" value="list" type="hidden" />
+			<input type="submit" value="" class="bt_go" />
+			</form>
+			</li>
+		</ul>
+	</div>
+
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="LineRightBlue1">
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">咨询管理 > 查看咨询信息</td>
+				<td width="12%" align="right" class="bt_list"><a href="inquiry.php?action=list" class="button_margin">列表</a></td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+	<form action="inquiry.php?action=send" method="post" name="theForm" onsubmit="return doInquirySubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="secondalt">
+			<td width="150"><span style="padding-left:10px;">选择转发邮箱</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="contact[]" style="width:300px;" size="5" multiple="multiple">
+				{section name=loop loop=$contact}
+				<option value="{$contact[loop].email}">{$contact[loop].contact_person}({$contact[loop].email})</option>
+				{/section}
+				</select>
+			</td>
+		</tr>
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">邮件主题</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" class="FormSmall" name="mail_subject" value="{$template_subject}" style="width:295px;" />
+			</td>
+		</tr>							
+		<tr class="secondalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">邮件内容</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				{$mail_body}
+			</td>
+		</tr>							
+	</table>
+		
+		
+		</td></tr>
+	</table>
+	
+	
+	<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+				<input type="hidden" value="{$inquiry_id}" name="inquiry_id" />
+				<input class="bginput" type="submit" id="btSubmit" name="sendsubmit" value=" 发送 " />
+				<input class="bginput" OnClick="javascript:history.go(-1);" type="button" name="delbutton" value=" 返回 " />
+
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function doInquirySubmit(){
+	var contact=document.getElementById('contact[]');
+	var mailsubject=document.theForm.mail_subject.value;
+	var mailbody=document.theForm.mail_body.value;
+	var num=0;
+	for(var i=0;i<contact.length;i++){ 
+		if(contact.options[i].selected){   
+			num=num+1; 
+		} 
+	} 
+	if(num==0){
+		alert("请您选择要转发的联系人!");
+        return false;   
+	}
+
+	if(mailsubject == ""){
+		alert("请您输入邮件主题!");
+		document.theForm.mail_subject.focus();  
+		return false;
+	}
+	if(mailbody == ""){
+		alert("请您输入邮件内容!");
+		document.theForm.mail_body.focus();  
+		return false;
+	}	
+	return true;
+}
+function dodel(){
+	if(confirm("确定删除该咨询信息?")==true){
+		document.theForm.action="inquiry.php?action=del{/literal}{$strpass}{literal}";
+		document.theForm.submit();
+	}
+}
+function doforward(){
+	document.theForm.action="inquiry.php?action=forward{/literal}{$strpass}{literal}";
+	document.theForm.submit();
+}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找咨询信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找咨询信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="inquiry.php";
+	document.searchForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

@@ -1,0 +1,51 @@
+/* ######### Marker List Vertical Menu ######### */
+/*markermenu 产品分类模块*/
+.markermenu p{
+font-weight:bold;
+line-height:34px;
+height:34px;
+color:#63ab1e;
+text-indent:15px;
+background:url(../images/ico.gif) 0px -600px;
+}
+.markermenu{
+width: 222px; /*width of side bar menu*/
+clear: left;
+position: relative; /*Preserve this for "right" arrow images (added by script) to be positioned correctly*/
+background:url(../images/sort_bg.jpg) repeat-y;
+margin-bottom:10px;
+}
+.markermenu ul{
+padding:5px 5px 15px 10px;
+background:url(../images/sort_ft.jpg) left bottom no-repeat;
+}
+.markermenu ul li a{
+background: center; /*light gray background*/
+font-size: 12px;
+color: #8a8a8a;
+display: block;
+width:185px;
+padding: 5px 5px 5px 13px;
+text-decoration: none;
+border-bottom: 1px solid #f1f3f2;
+background:url(../images/ico.gif) 4px -493px no-repeat;
+}
+* html .markermenu ul li a{ /*IE6 hack*/
+width:185px;
+}
+.markermenu ul li a:link, .markermenu ul li a:visited{
+color: #666666;
+}
+.markermenu ul li a:hover, .markermenu ul li a.selected{
+color: white;
+background-color: #7cb645;
+}
+
+/* ######### Customized Drop Down ULs CSS (inherits from ddlevelsmenu-base.css) ######### */
+.blackwhite li a{
+background: white;
+}
+.blackwhite li a:hover{
+background: black;
+color: white;
+}

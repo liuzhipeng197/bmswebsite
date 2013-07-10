@@ -1,0 +1,101 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504375" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">增值服务 > 在线客服申请</td>
+			<td width="12%" align="right" class="bt_list">&nbsp;</td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="services.php?action=promiss" method="post" name="theForm" onsubmit="return doOnlineServicesSubmit()">
+	<table width="780" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;" >
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td style="padding-top:5px; padding-bottom:5px;" colspan="2">
+				<div style="margin-bottom:10px;">
+				<img src="images/cq.jpg" border="0" alt="" />
+				</div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在线客服系统是一个基于网页的即时通讯工具，它是一款企业级的网站实时交流系统，网站访客只需点击网页中的对话图标，无需安装或下载任何软件，就能直接和网站客服人员进行即时交流；网站客服将为企业发掘更多的潜在客户，降低成本，提高效率，提升客户满意度，是企业进行在线咨询、在线营销、在线客服的有力工具。
+			</td>
+		</tr>
+
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">公司名称</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" value="{$config.company_name|escape}" class="FormSmall" name="company_name" onblur="companyNameCheck('company_name')" style="width:250px;" id="company_name" />
+						 <img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="company_nameMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+
+		<tr class="secondalt">
+			<td width="110"></td>
+			<td style="padding-top:5px; padding-bottom:5px; line-height:18px;">
+				如果您想使用这个功能，请输入你的公司名称然后点击”申请处理“按钮。<br />
+				 新申请客户免费试用<strong><span style="color:#FF3300">10</span></strong>天，如果您觉得使用比较方便的话，可&nbsp;<b><a href="http://www.nitc.cc/contactus.html" target="_blank">联系我们</a></b>&nbsp;购买使用。&nbsp;<b>价格68元/年</b><br />
+			</td>
+		</tr>
+
+
+
+
+
+	</table>
+		</td></tr>
+	</table>
+	
+	<table width="780" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 申请处理 " />
+<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function doOnlineServicesSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+
+	if(companyNameCheck("company_name") == false)
+		CheResult = false;
+
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

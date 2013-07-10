@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>管理页面</title>
+<script src="./js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="js/prototype.lite.js" type="text/javascript"></script>
+<script src="js/moo.fx.js" type="text/javascript"></script>
+<script src="js/moo.fx.pack.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript"> 
+function getLink(obj){ 
+	var html=document.getElementById(obj).innerHTML;
+	//alert(html);
+	if(html==''){
+	html="欢迎使用NCTC 检测业务系统";
+	}else if(html=='IC卡检测申请'){
+	html="您所在位置: 检测业务申请 >> IC卡检测申请"
+	}else if(html=='RFID检测申请'){
+	html="您所在位置: 检测业务申请 >> RFID检测申请"
+	}else if(html=='节能检测申请'){
+	html="您所在位置: 检测业务申请 >> 节能检测申请"
+	}else if(html=='信息系统测评申请'){
+	html="您所在位置: 检测业务申请 >> 信息系统测评申请"
+	}else if(html=='信息类设备检测申请'){
+	html="您所在位置: 检测业务申请 >> 信息类设备检测申请"
+	}else if(html=='机房检测申请'){
+	html="您所在位置: 检测业务申请 >> 机房检测申请"
+	}else if(html=='软件产品测评申请'){
+	html="您所在位置: 检测业务申请 >> 软件产品测评申请"
+	}else if(html=='电子元器件检测申请'){
+	html="您所在位置: 检测业务申请 >> 电子元器件检测申请"
+	}else if(html=='信息工程监理申请'){
+	html="您所在位置: 检测业务申请 >> 信息工程监理申请"
+	}else if(html=='检测业务申请查询'){
+	html="您所在位置: 客户查询 >> 检测业务申请查询"
+	}else if(html=='检测任务状态查询'){
+	html="您所在位置: 客户查询 >> 检测任务状态查询"
+	}else if(html=='检测报告查询'){
+	html="您所在位置: 客户查询 >> 检测报告查询"
+	}else if(html=='修改注册信息'){
+	html="您所在位置: 注册信息管理 >> 修改注册信息"
+	}else if(html=='修改登录密码'){
+	html="您所在位置: 注册信息管理 >> 修改登录密码"
+	}else if(html=='检测报告查询'){
+	html="您所在位置: 注册信息管理 >> 检测报告查询"
+	}else if(html=='检测业务申请修改'){
+	html="您所在位置: 用户留言 >> 检测业务申请修改"
+	}else if(html=='检测报告修改'){
+	html="您所在位置: 用户留言 >> 检测报告修改"
+	}else if(html=='用户评价'){
+	html="您所在位置: 用户留言 >> 用户评价"
+	}
+	 parent.$("#top_frame")[0].contentWindow.document.getElementById('navigate').innerHTML=html;
+}
+</script>
+<style>
+body {
+	font:12px Arial, Helvetica, sans-serif;
+	color: #000;
+	background-color: #EEF2FB;
+	margin: 0px;
+}
+#container {
+	width: 182px;
+}
+H1 {
+	font-size: 12px;
+	margin: 0px;
+	width: 182px;
+	cursor: pointer;
+	height: 30px;
+	line-height: 20px;	
+}
+H1 a {
+	display: block;
+	width: 182px;
+	color: #000;
+	height: 30px;
+	text-decoration: none;
+	moz-outline-style: none;
+	background-image: url(images/menu_bgS.gif);
+	background-repeat: no-repeat;
+	line-height: 30px;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+.content{
+	width: 182px;
+	height: 26px;
+	
+}
+.MM ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	display: block;
+}
+.MM li {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #333333;
+	list-style-type: none;
+	display: block;
+	text-decoration: none;
+	height: 26px;
+	width: 182px;
+	padding-left: 0px;
+}
+.MM {
+	width: 182px;
+	margin: 0px;
+	padding: 0px;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	clip: rect(0px,0px,0px,0px);
+}
+.MM a:link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #333333;
+	background-image: url(images/menu_bg1.gif);
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 182px;
+	display: block;
+	text-align: center;
+	/*text-align: left;*/
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	text-decoration: none;
+}
+.MM a:visited {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #333333;
+	background-image: url(images/menu_bg1.gif);
+	background-repeat: no-repeat;
+	display: block;
+	text-align: center;
+	/*text-align: left;*/
+	margin: 0px;
+	padding: 0px;
+	height: 26px;
+	width: 182px;
+	text-decoration: none;
+}
+.MM a:active {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #333333;
+	background-image: url(images/menu_bg1.gif);
+	background-repeat: no-repeat;
+	height: 26px;
+	width: 182px;
+	display: block;
+	text-align: center;
+	/*text-align: left;*/
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	text-decoration: none;
+}
+.MM a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	font-weight: bold;
+	color: #006600;
+	/*background-image: url(images/menu_bg2.gif);*/
+	background-repeat: no-repeat;
+	text-align: center;
+	/*text-align: left;*/
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	height: 26px;
+	width: 182px;
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+<table width="100%" height="280" border="0" cellpadding="0" cellspacing="0" bgcolor="#EEF2FB">
+  <tr>
+    <td width="182" valign="top"><div id="container">
+      <h1 class="type"><a href="javascript:void(0)">检测业务申请</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+        <ul class="MM">
+          <li><a id="test_req" href="templates/sel_sample_type.php" target="main" onclick="getLink('test_req')">申请流程</a></li>
+		  <!--<li><a id="ic_card" href="templates/admintitle.php" target="main" onclick="getLink('ic_card')">信息类设备检测申请</a></li>
+		  <li><a id="rfid" href="templates/admintitle.php" target="main" onclick="getLink('rfid')">IC卡及机具检测申请</a></li>		  
+          <li><a id="power" href="templates/admintitle.php" target="main" onclick="getLink('power')">RFID产品检测申请</a></li>
+          <li><a id="info_sys" href="templates/admintitle.php" target="main" onclick="getLink('info_sys')">软件与系统测评申请</a></li>
+          <li><a id="info_dev" href="templates/admintitle.php" target="main" onclick="getLink('info_dev')">信息存储产品检测申请</a></li>
+          <li><a id="center" href="templates/admintitle.php" target="main" onclick="getLink('center')">节能检测申请</a></li>
+          <li><a id="soft" href="templates/admintitle.php" target="main" onclick="getLink('soft')">AFC设备检测测评申请</a></li>
+          <li><a id="elec_dev" href="templates/admintitle.php" target="main" onclick="getLink('elec_dev')">机房设备检测申请</a></li>
+          <li><a id="info_super" href="templates/admintitle.php" target="main" onclick="getLink('info_super')">信息工程监理申请</a></li>-->
+        </ul>
+      </div>
+      <h1 class="type"><a href="javascript:void(0)">检测业务查询</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+        <ul class="MM">
+          <li><a id="query_req" href="templates/busi_apply_query.php" target="main" onclick="getLink('query_req')">业务申请查询</a></li>
+          <li><a id="query_test" href="templates/busi_state_query.php" target="main" onclick="getLink('query_test')">任务状态查询</a></li>
+		  <li><a id="query_report" href="templates/test_report_query.php" target="main" onclick="getLink('query_report')">检测报告查询</a></li>
+        </ul>
+      </div>
+      <h1 class="type"><a href="javascript:void(0)">检测业务变更</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+        <ul class="MM">
+		<li><a id="modify_reginfo" href="templates/busi_modify_apply.php" target="main" onclick="getLink('modify_reginfo')">业务修改申请</a></li>
+         	<li><a id="modify_pwd" href="templates/busi_remove_apply.php" target="main" onclick="getLink('modify_pwd')">业务取消申请</a></li>
+		<li><a id="modify_pwd" href="templates/report_modify_apply.php" target="main" onclick="getLink('modify_pwd')">报告修改申请</a></li>
+          
+        </ul>
+      </div>
+      <h1 class="type"><a href="javascript:void(0)">个人信息管理</a></h1>
+      <div class="content">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+          </tr>
+        </table>
+        <ul class="MM">
+          <li><a id="modify_req" href="templates/modify_personal_info.php" target="main" onclick="getLink('modify_req')">修改个人信息</a></li>
+		  <li><a id="modify_report" href="templates/modify_login_password.php" target="main" onclick="getLink('modify_report')">修改登录密码</a></li>  
+        </ul>
+      </div>
+    </div>
+        <h1 class="type"><a href="javascript:void(0)">问题与解决</a></h1>
+      <div class="content">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td><img src="images/menu_topline.gif" width="182" height="5" /></td>
+            </tr>
+          </table>
+        <ul class="MM">
+            <li><a href="templates/answer_common_questions.php" target="main">常见问题解答</a></li>
+          <li><a href="templates/custom_ask_questions.php" target="main">客户的提问</a></li>
+        </ul>
+      </div>
+      </div>
+        <script type="text/javascript">
+		var contents = document.getElementsByClassName('content');
+		var toggles = document.getElementsByClassName('type');
+	
+		var myAccordion = new fx.Accordion(
+			toggles, contents, {opacity: true, duration: 400}
+		);
+		myAccordion.showThisHideOpen(contents[0]);
+	</script>
+        </td>
+  </tr>
+</table>
+</body>
+</html>

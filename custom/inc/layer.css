@@ -1,0 +1,33 @@
+/* ×ÖÌõÑùÊ½*/
+.Style0{
+	background:url("../images/style0.gif") no-repeat;
+	position:absolute;
+	cursor:move;
+	width:240px;
+	height:190px;
+	text-align:left;
+	top: 81px;
+}
+.Style1{background:url("../images/style1.gif") no-repeat;position:absolute;cursor:move;width:240px;height:190px;text-align:left;	top: 81px;}
+.Style2{background:url("../images/style2.gif") no-repeat;position:absolute;cursor:move;width:240px;height:190px;text-align:left;	top: 81px;}
+.Style3{background:url("../images/style3.gif") no-repeat;position:absolute;cursor:move;width:240px;height:190px;text-align:left;	top: 81px;}
+.Style4{background:url("../images/style4.gif") no-repeat;position:absolute;cursor:move;width:240px;height:190px;text-align:left;	top: 81px;}
+.Style5{background:url("../images/style5.gif") no-repeat;position:absolute;cursor:move;width:240px;height:190px;text-align:left;	top: 81px;}
+.Style0 .Head{color:#FF3992;}
+.Style0 .Sign{color:#FF3992;}
+.Style1 .Head{color:#CC0000;}
+.Style1 .Sign{color:#CC0000;}
+.Style2 .Head{color:#0096EB;}
+.Style2 .Sign{color:#0096EB;}
+.Style3 .Head{color:#00B115;}
+.Style3 .Sign{color:#00B115;}
+.Style4 .Head{color:#A800D8;}
+.Style4 .Sign{color:#A800D8;}
+.Style5 .Head{color:#FF6600;}
+.Style5 .Sign{color:#FF6600;}
+.Num{margin:6px 0 0 30px;}
+.Num img{float:right;cursor:pointer;margin:-17px 10px 0 0;}
+.Detail{margin:5px 10px 0 20px;height:110px;overflow:hidden;word-wrap:break-word;}
+.Detail Img{float:left;margin-right:8px;}
+.Sign{margin:0 10px 0 0;text-align:right;}
+.Date{margin:-2px 10px 0 0;text-align:right;font-size:8pt;}

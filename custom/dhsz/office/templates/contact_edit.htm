@@ -1,0 +1,267 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504375" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">公司信息管理 > 添加联系人</td>
+			<td width="12%" align="right" class="bt_list"><a href="contact.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="contact.php?action=update" method="post" name="theForm" onsubmit="return doContactSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		
+		{if $language|@count>1}
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">语言</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="language">
+				{section name=loop loop=$language}
+				<option value="{$language[loop].language_id}" {if $language[loop].language_id==$language_id} selected="selected" {/if}>{$language[loop].name}</option>
+				{/section}
+				</select>
+			</td>
+		</tr>	
+		{else}
+			<input type="hidden" value="{$language_id}" name="language" />
+		{/if}
+		<tr class="secondalt">
+			<td><span style="padding-left:10px;">联系人</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input"  class="FormSmall" name="contact_person" onblur="contactPersonCheck('contact_person')" style="width:250px;" id="contact_person" value="{$contact_person}" />
+						 <img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="contact_personMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>
+        
+        <tr class="firstalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">部门</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" name="department" class="FormSmall" style="width:250px;" id="department" value="{$department}" />
+			</td>
+		</tr>
+		
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">邮箱</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="email" value="{$email}" class="FormSmall" onblur="contactEmailCheckstr('email')" style="width:400px;" id="email" />
+						 <img src="images/required_icon.gif" />&nbsp;&nbsp;(如有多个邮箱，请用逗号隔开)
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="emailMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">电话</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="tel" value="{$tel}"  class="FormSmall" onblur="contactTelCheck('tel')" style="width:400px;" id="tel" />
+						 <img src="images/required_icon.gif" />&nbsp;&nbsp;(如有多个电话，请用逗号隔开)
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="telMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>							
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">传真</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="fax" class="FormSmall" value="{$fax}"  style="width:250px;" id="fax" />
+			</td>
+		</tr>
+		
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">QQ</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 			<div  style='float:left'>	<textarea type="input" name="qq" class="FormSmall" style="width:400px;height:80px;" id="qq" />{if $qq} {$qq} {else}<a target="_blank" href="  http://wpa.qq.com/msgrd?v=1&uin=QQ号码&site=qq&menu=yes"><img border="0" src="  http://wpa.qq.com/pa?p=2:QQ号码:41" alt="点击这里给我发消息"></a>{/if}
+</textarea></div>
+<div style='float:left; margin-left:8px; line-height:20px;'>
+                  将QQ号码替换成你的号码<br>
+				  企业QQ在线状态生成申请地址：<a href="http://b.qq.com/wp/" target="_blank">http://b.qq.com/wp/</a>
+</div>
+			</td> 
+		</tr>				
+
+		
+
+		<tr class="secondalt">
+
+			<td ><span style="padding-left:10px;">阿里旺旺</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 			<div  style='float:left'>	<textarea type="input" name="aliwangwang" class="FormSmall" style="width:400px;height:80px;" id="aliwangwang" />{if $aliwangwang} {$aliwangwang} {else}<a target="_blank" href="http://amos1.taobao.com/msg.ww?v=2&uid=阿里账号=1" ><img border="0" src="http://amos1.taobao.com/online.ww?v=2&uid=阿里账号=1" alt="点击这里给我发消息" /></a>{/if}
+</textarea></div>
+<div style='float:left; margin-left:8px; line-height:20px;'>
+                  将阿里账号替换成你的账号
+				 
+</div>
+			</td> 
+		</tr>		
+
+		
+
+	
+			<tr class="firstalt">
+			<td ><span style="padding-left:10px;">MSN</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 			<div  style='float:left'>	<textarea type="input" name="msn" class="FormSmall" style="width:400px;height:50px;" id="msn" />{if $msn} {$msn} {else}<a href="msnim:chat?contact=MSN账号"><img src='images/msn.gif' border=0></a>{/if}
+</textarea></div>
+<div style='float:left; margin-left:8px; line-height:20px;'>
+                  将MSN账号替换成你的账号
+				 
+</div>
+			</td> 
+		</tr>	
+
+
+
+		<tr class="secondalt">
+
+			<td ><span style="padding-left:10px;">Skype</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 			<div  style='float:left'>	<textarea type="input" name="skype" class="FormSmall" style="width:400px;height:50px;" id="skype" />{if $skype} {$skype} {else}<a href="skype:Skype账号?call" onclick="return skypeCheck();"><img src='images/skype.gif' border=0></a>{/if}
+</textarea></div>
+<div style='float:left; margin-left:8px; line-height:20px;'>
+                  将Skype账号替换成你的账号
+				 
+</div>
+			</td> 
+		</tr>	
+
+
+	
+	
+
+			<tr class="firstalt">
+			<td ><span style="padding-left:10px;">Yahoo</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 			<div  style='float:left'>	<textarea type="input" name="yahoo" class="FormSmall" style="width:400px;height:50px;" id="yahoo" />{if $yahoo} {$yahoo} {else}<a href="ymsgr:sendIM?yahoo账号（@前面）"><img src='images/yahoo.gif' border=0></a>{/if}
+</textarea></div>
+<div style='float:left; margin-left:8px; line-height:20px;'>
+                  将yahoo账号（@前面）替换成你的账号
+				 
+</div>
+			</td> 
+		</tr>	
+
+	
+        
+        <tr class="secondalt">
+			<td colspan="2" height="35"><span style="padding-left:10px; font-weight:bold;">分公司信息 (请填写以下分公司信息，若无可不填)</span></td>
+		</tr>
+        
+        <tr class="firstalt">
+			<td ><span style="padding-left:10px;">公司名称</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="company_name" class="FormSmall" value="{$company_name|escape}" style="width:250px;" id="company_name" />
+			</td>
+		</tr>
+		
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">地址</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="address" class="FormSmall" value="{$address|escape}"  style="width:250px;" id="address" />
+			</td>
+		</tr>
+        
+        <tr class="firstalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">邮编</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" name="zip" class="FormSmall" value="{$zip}" style="width:250px;" id="zip" />
+			</td>
+		</tr>
+        						
+		<tr class="secondalt">
+			<td sytle="padding-left:10px;"><span style="padding-left:10px;">自动转发咨询信息</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+		<input name="state" type="radio" value="1" checked="checked" />是
+		<input name="state" type="radio" value="0" {if $state == '0' }checked="checked"{/if} />否
+			</td>
+		</tr>		
+	
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">排序</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" class="FormSmall"  name="sort_order" style="width:50px;" value="{$sort_order}" /> 排序号从大到小排序
+			</td>
+		</tr>		
+	</table>
+		</td></tr>
+	</table>
+	
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input type="hidden" value="{$contact_id}" name="contact_id" />
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+function doContactSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+	if(contactPersonCheck("contact_person") == false)
+		CheResult = false;
+		
+	if(contactEmailCheckstr("email") == false)
+		CheResult = false;
+
+	if(contactTelCheck("tel") == false)
+		CheResult = false;
+
+	SetMsgFocus();
+	return CheResult;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

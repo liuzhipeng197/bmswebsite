@@ -1,0 +1,84 @@
+{include file="pageheader.htm"}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">产品管理 > 产品转移</td>
+			<td width="12%" align="right" class="bt_list"><a href="category.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+<form action="category.php?action=domove" enctype="multipart/form-data" method="post" name="theForm">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td colspan="2" style="padding-top:5px; padding-bottom:5px;"><span style="padding-left:10px;">原分类 {$name} 下有<strong style="color:#FF0000;">{$product_cnt}</strong> 个产品</span></td>
+		</tr>
+		<tr class="secondalt">
+			<td width="110"><span style="padding-left:10px;">转移到分类</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="target_category_id">
+					{$category}
+				</select>
+			</td>
+		</tr>
+	</table>
+		</td></tr>
+	</table>
+	
+	<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+				<input type="hidden" name="category_id" value="{$category_id}" />
+				<input type="hidden" name="id_list" value="{$id_list}" />
+				<input type="submit" id="btSubmit"  class="bginput" name="submit" value=" 提交 " />
+				<input name="button" OnClick="javascript:history.go(-1);" type="button"  class="bginput" value=" 返回 " />		
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

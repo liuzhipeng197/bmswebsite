@@ -1,0 +1,78 @@
+<!---->
+<!-- ie -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<link href="skin/skin_0/style/css.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="skin/skin_0/js/swfobject.js"></script>
+<SCRIPT language=vbscript>
+function exitsystem
+	if msgbox ("您确定要退出系统吗？",vbYesNo+vbQuestion,"退出确定")=vbYes then				
+		window.parent.close 
+	end if
+end function
+</SCRIPT>
+</head>
+<body>
+<div id="header">
+  <div style="background:url(skin/skin_0/images/logo.gif) no-repeat;"><a style="width:120px;height:66px;float:left;display:block;" href="#"></a>
+    <div id="innerHeader">
+      <div id="innerHeaders">
+        <table width="270" height="30" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td valign="bottom"><img src="skin/skin_0/images/ss.jpg" alt="" /></td>
+          </tr>
+        </table>
+      </div>
+      <div id="topguide">
+        <ul id="topguide-entry">
+		  
+		  <li><a style="cursor:pointer" href="frame.htm">首 页</a></li>
+          <!---->
+          <li id="gj" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('gj');">工 具</a></li>
+          <!---->
+		  <li id="bg" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('bg');">办 公</a></li>
+          <!---->
+		  <li id="rs" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('rs');">人 事</a></li>
+          <!---->
+		  <li id="da" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide2('da');">档 案</a></li>
+          <!---->
+		  <li id="jx" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('jx');">教 学</a></li>
+          <!---->
+		  <li id="dx" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('dx');">短 信</a></li>
+          <!---->
+          <li id="system" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('system');">系 统</a></li>
+          <!----
+          <li><a style="cursor:pointer" href="javascript:" onclick="return showmenu();">&nbsp;&nbsp;地&nbsp;图<img src="skin/skin_0/images/downer.gif" align="bottom" /></a></li>
+          <!----
+		  <li id="a_xxygj" onmouseover="showguide(this.id);"><a style="cursor:pointer" href="javascript:" onclick="return initguide('a_xxygj');">测 试</a></li>
+          <!---->
+        </ul>
+      </div>
+    </div>
+    <div class="c"></div>
+    <div id="guide"></div>
+  </div>
+</div>
+<div id="selector">
+  <div id="left" class="inner"></div>
+</div>
+<div id="gird">
+  <div class="inner">
+    <iframe name="main" frameborder="0" scrolling=yes style="height:99.9%;visibility:inherit;width:99.95%;z-index:1"></iframe>
+  </div>
+</div>
+<!--下拉目录 开始-->
+<div id="footer">
+  <div id="innerFooter"></div>
+</div>
+<iframe name="notice" frameborder="0" style="height:0;width:0;"></iframe>
+<div id="menu" style="display:none"></div>
+<div id="showmenu" style="display:none"></div>
+<script language="JavaScript" src="skin/skin_0/js/mostly.js"></script>
+<script language="JavaScript" src="skin/skin_0/js/DeployInit.js"></script>
+</body>
+</html>
+<!---->

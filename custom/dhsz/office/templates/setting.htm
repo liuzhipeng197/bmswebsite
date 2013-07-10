@@ -1,0 +1,405 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+			<ul>
+				<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504392" target="_blank">查看演示文件</a></li>
+				<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+				<li class="Black">操作帮助请详见演示文件!</li>
+				<li class="DetillRigh"></li>
+			</ul>
+		</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td width="85" align="center" id="setting1" class="Move"><a href="javascript:void(0);" onclick="javascript:settingselect('1')">基本设置</a></td>
+			
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting2" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('2')">图片设置</a></td>
+
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting3" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('3')">邮件设置</a></td>		
+            
+			<td width="5" align="center"><img src="images/{$skin}/tiao.gif"></td>
+			<td width="85" align="center" id="setting4" class="Out"><a href="javascript:void(0);" onclick="javascript:settingselect('4')">站点地图</a></td>		
+
+			<td align="left" class="LineRight" style="padding-left:10px;"></td>	
+		  </tr>
+		  
+		</table> </td>
+	  </tr>
+	  <tr>
+		<td class="LineRightBlue">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">网站管理 > 网站设置</td>
+			<td width="12%" align="right" height="24"></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+		<form action="setting.php?action=update" method="post" enctype="multipart/form-data" name="theForm">
+		<table width="100%" border="0" cellspacing="0" class="ListCategory" cellpadding="0" style=" margin-top:10px;">
+			<tr><td style="border:none;">
+				
+				<div id="settingBox1" class="">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="150" style="padding-left:5px;"><span>公司名称</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="company_name" style="width:300px;" value="{$config.company_name|escape}" />&nbsp;&nbsp;<a href="company.php?action=edit"><span style="color:#ff0000">网站LOGO设置</span></a></td>
+					</tr>	
+
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>网站首页</span><a href="#" title='如:"http://您的域名"　注:后面不需要加"/"' style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="weburl" style="width:300px;" value="{$config.weburl}" /> </td>
+					</tr>
+					
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>首页推荐产品数量</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+					<input type="input" class="FormSmall" name="featured_product_cnt" style="width:60px;" value="{$config.featured_product_cnt}" />
+						</td>
+						</tr>				
+		
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>首页新产品数量</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="new_product_cnt" style="width:60px;" value="{$config.new_product_cnt}" />
+					</td></tr>
+				
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>首页其它产品数量</span></td>
+					  	<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="other_product_cnt" style="width:60px;" value="{$config.other_product_cnt}" />
+					</td></tr>				
+	
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>产品列表排列方式</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="radio" name="view_style" value="0" {if $config.view_style == 0}checked="true"{/if} /> <a href="#" title="<img src='images/help/liststyle1.gif'>">列表</a>　
+						<input type="radio" name="view_style" value="1" {if $config.view_style == 1}checked="true"{/if}  /> <a href="#" title="<img src='images/help/liststyle2.gif'>">图片</a>
+					</td></tr>
+                    
+                    <tr class="firstalt">
+						<td style="padding-left:5px;"><span>产品列表数量</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+					<input type="input" class="FormSmall" name="product_list_cnt" style="width:60px;" value="{$config.product_list_cnt}" />&nbsp;&nbsp;/&nbsp;页
+						</td>
+						</tr>
+
+
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>栏目文章列表数量</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+					<input type="input" class="FormSmall" name="channel_cnt" style="width:60px;" value="{$config.channel_cnt}" />&nbsp;&nbsp;/&nbsp;页
+						</td>
+					</tr>
+					
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>栏目图片列表数量</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+					<input type="input" class="FormSmall" name="channel_img_cnt" style="width:60px;" value="{$config.channel_img_cnt}" />&nbsp;&nbsp;/&nbsp;页
+						</td>
+					</tr>
+
+
+                    <tr class="firstalt">
+						<td style="padding-left:5px;"><span>产品展示设置<a href="#" title='指前台products.html页面的显示方式。' style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="radio" name="products_show_type" value="0" {if $config.products_show_type == 0}checked="true"{/if} /> 显示产品列表
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="products_show_type" value="1" {if $config.products_show_type == 1}checked="true"{/if}  /> 显示产品分类
+						</td>
+						</tr>
+
+
+
+                    <tr class="firstalt">
+						<td style="padding-left:5px;"><span>自定义URL<a href="#" title='对产品分类和产品生成静态页面名称自定义。' style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="radio" name="custom_url" value="1" {if $config.custom_url == 1}checked="true"{/if} /> 是
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="custom_url" value="0" {if $config.custom_url == 0}checked="true"{/if}  /> 否
+						</td>
+						</tr>
+
+
+
+                    <tr class="firstalt">
+						<td style="padding-left:5px;"><span>网站展示方式<a href="#" title='假静态需要服务器支持URL重写' style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						
+						<input type="radio" name="pseudo_static" value="0" {if $config.pseudo_static == 0}checked="true"{/if}  /> 真静态
+&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="pseudo_static" value="1" {if $config.pseudo_static == 1}checked="true"{/if} /> 假静态
+
+						</td>
+						</tr>
+
+
+				
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>流量统计代码</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+					<textarea name="flow_code" class="FormSmall" style="width:450px;height:80px;">{$config.flow_code}</textarea><br />
+					<a href="http://new.cnzz.com/user/reg.php" target="_blank">CNZZ站长流量统计申请</a>　<a href="http://www.51yes.com/reg-1.htm" target="_blank">51YES流量统计申请</a>
+					</td></tr>
+					
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>网站版权年份</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+							<input type="input" class="FormSmall" name="copyright_year" style="width:100px;" value="{$config.copyright_year}" />
+						</td>
+					</tr>
+                    					
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>备案号</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+							<input type="input" class="FormSmall" name="beian" style="width:100px;" value="{$config.beian}" />
+						</td>
+					</tr>		
+				</table>
+				</div>
+				
+				<div id="settingBox2" class="close">
+				<table width="100%" border="0" cellspacing="0"  cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="150" style="padding-left:5px;"><span>产品小缩略图宽度</span></td>
+						<td width="150" style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="small_img_thumb_width" style="width:60px;" value="{$config.small_img_thumb_width}" />
+					</td>
+                        <td width="150" style="padding-left:5px;"><span>产品小缩略图高度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;"><input type="input" class="FormSmall" name="small_img_thumb_height" style="width:60px;" value="{$config.small_img_thumb_height}" /></td>
+					</tr>	
+	
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>产品大缩略图宽度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="middle_img_thumb_width" style="width:60px;" value="{$config.middle_img_thumb_width}" />
+					</td>
+						<td style="padding-left:5px;"><span>产品大缩略图高度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;"><input type="input" class="FormSmall" name="middle_img_thumb_height" style="width:60px;" value="{$config.middle_img_thumb_height}" /></td>
+					</tr>		
+	
+						
+	
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>图片水印位置</span></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">
+							<input type="radio" name="watermark_location" value="0" checked="true" />无
+							&nbsp;<input type="radio" name="watermark_location" value="1" {if $config.watermark_location == 1}checked="true"{/if} />左上
+							&nbsp;<input type="radio" name="watermark_location" value="2" {if $config.watermark_location == 2}checked="true"{/if} />右上
+							&nbsp;<input type="radio" name="watermark_location" value="3" {if $config.watermark_location == 3}checked="true"{/if} />居中
+							&nbsp;<input type="radio" name="watermark_location" value="4" {if $config.watermark_location == 4}checked="true"{/if} />左下
+							&nbsp;<input type="radio" name="watermark_location" value="5" {if $config.watermark_location == 5}checked="true"{/if} />右下
+						</td>
+					</tr>
+		
+					<tr class="secondalt">
+						<td style="padding-left:5px;"><span>上传水印图片</span> <a href="#" title='图片格式允许(.png .gif .jpg)' style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">
+						<input type="file" class="FormSmall" name="watermark_value" />
+						{if $config.watermark_value}
+						  <br />
+						  <a href="../upload/photo/{$config.watermark_value}" target="_blank"><img src="../upload/photo/{$config.watermark_value}"  border="0" style="margin:5px" /></a><br />
+						  <div style="font-size:12px;"><input name="delimg1" type="checkbox" />&nbsp;删除</div>
+						{/if}							
+					
+					</td></tr>
+		
+					<tr class="firstalt">
+						<td style="padding-left:5px;"><span>水印透明度</span></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">
+							<input type="input" class="FormSmall" name="watermark_transparency" style="width:60px;" value="{$config.watermark_transparency}" />&nbsp;&nbsp;<span style="color:#FF0000;">请填写数字0-100</span>
+						</td>
+					</tr>
+					
+					<tr class="secondalt" height="22">
+						<td style="padding-left:5px;"><span>生成产品缩略图</span><a href="http://www.nitc.cc/templates/bbs.php?action=show&bbs_id=476" title="为什么生成后前台图片还没改变，请点击这里" style="margin-left:5px;" target="_blank"><img src="images/help/help.gif" border="0" alt=""/></a></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">请先点击<strong>“提交”</strong>更改图片设置，再点击这里<a href="setting.php?action=make_product_image"><span style="color:#FF0000; text-decoration:underline;">重新生成产品图片</span></a><br />产品图片生成完之后，请再对应修改产品模块样式.</td>
+					</tr>
+					
+					<tr style="background:#FFC">
+					  <td style="padding-left:5px;">&nbsp;</td>
+					  <td style="padding-top:5px; padding-bottom:5px;">&nbsp;</td>
+					  <td style="padding-left:5px;">&nbsp;</td>
+					  <td style="padding-top:5px; padding-bottom:5px;">&nbsp;</td>
+				  	</tr>
+					<tr class="secondalt">
+						<td width="150" style="padding-left:5px;"><span>新闻缩略图宽度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="news_img_thumb_width" style="width:60px;" value="{$config.news_img_thumb_width}" />
+					</td>
+						<td style="padding-left:5px;"><span>新闻缩略图高度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;"><input type="input" class="FormSmall" name="news_img_thumb_height" style="width:60px;" value="{$config.news_img_thumb_height}" /></td>
+					</tr>
+					<tr class="firstalt" height="22">
+						<td style="padding-left:5px;"><span>生成新闻缩略图</span><a href="http://www.nitc.cc/templates/bbs.php?action=show&bbs_id=476" title="为什么生成后前台图片还没改变，请点击这里" style="margin-left:5px;" target="_blank"><img src="images/help/help.gif" border="0" alt=""/></a></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">请先点击<strong>“提交”</strong>更改图片设置，再点击这里<a href="setting.php?action=make_news_image"><span style="color:#FF0000; text-decoration:underline;">重新生成新闻图片</span></a><br />新闻图片生成完之后，请再对应修改新闻模块样式.</td>
+					</tr>
+					
+					<tr style="background:#FFC">
+					  <td style="padding-left:5px;">&nbsp;</td>
+					  <td style="padding-top:5px; padding-bottom:5px;">&nbsp;</td>
+					  <td style="padding-left:5px;">&nbsp;</td>
+					  <td style="padding-top:5px; padding-bottom:5px;">&nbsp;</td>
+				  	</tr>
+					<tr class="secondalt">
+						<td width="150" style="padding-left:5px;"><span>栏目图片缩略图宽度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="input" class="FormSmall" name="channel_img_thumb_width" style="width:60px;" value="{$config.channel_img_thumb_width}" />
+					</td>
+						<td style="padding-left:5px;"><span>栏目图片缩略图高度</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;"><input type="input" class="FormSmall" name="channel_img_thumb_height" style="width:60px;" value="{$config.channel_img_thumb_height}" /></td>
+					</tr>
+					<tr class="firstalt" height="22">
+						<td style="padding-left:5px;"><span>生成栏目图片缩略图</span><a href="http://www.nitc.cc/templates/bbs.php?action=show&bbs_id=476" title="为什么生成后前台图片还没改变，请点击这里" style="margin-left:5px;" target="_blank"><img src="images/help/help.gif" border="0" alt=""/></a></td>
+						<td colspan="3" style="padding-top:5px; padding-bottom:5px;">请先点击<strong>“提交”</strong>更改图片设置，再点击这里<a href="setting.php?action=make_channel_image"><span style="color:#FF0000; text-decoration:underline;">重新生成栏目图片</span></a><br />栏目图片生成完之后，请再对应修改栏目模块样式.</td>
+					</tr>
+				</table>
+    </div>
+				
+				<div id="settingBox3" class="close">
+				<table width="100%" border="0" cellspacing="0"  cellpadding="0" class="Font">
+					<tr class="firstalt">
+						<td width="150" style="padding-left:5px;"><span>邮件转发方式</span><a href="#" title="如果你选择了采用服务器内置的Mail服务,你不需要填写下面的内容" style="margin-left:5px;" ><img src="images/help/help.gif" border="0" alt=""/></a></td>
+					  	<td style="padding-top:5px; padding-bottom:5px;">
+					    <input type="radio" name="email_type" value="1" onclick="javascript:emailselect('mail')"  {if $config.email_type == 1}checked="true"{/if}  />采用服务器内置的Mail服务&nbsp;<span style="color:#FF0000">(Linux系统)</span>&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="email_type" value="0" onclick="javascript:emailselect('smtp')"  {if $config.email_type == 0}checked="true"{/if} />采用其他的SMTP服务&nbsp;<span style="color:#FF0000">(Windows系统)</span></td></tr>
+						
+						<tr class="secondalt">
+							<td style="padding-left:5px;"><span>发送邮件服务器地址</span></td>
+							<td style="padding-top:5px; padding-bottom:5px;">
+								<input type="input" class="FormSmall" name="smtp_host" id="smtp_host" style="width:200px;" value="{$config.smtp_host}" {if $config.email_type == 1} disabled="disabled" {/if} />
+							</td>
+							</tr>		
+							
+						<tr class="firstalt">
+							<td style="padding-left:5px;"><span>服务器端口</span></td>
+							<td style="padding-top:5px; padding-bottom:5px;">
+								<input type="input" class="FormSmall" name="smtp_port" id="smtp_port" style="width:200px;" value="{$config.smtp_port}" {if $config.email_type == 1} disabled="disabled" {/if} />
+							</td>
+						</tr>
+
+						<tr class="secondalt">
+							<td style="padding-left:5px;"><span>邮箱登陆名</span></td>
+							<td style="padding-top:5px; padding-bottom:5px;">
+							<input type="input" class="FormSmall" id="smtp_user_name" name="smtp_user_name" style="width:200px;" value="{$config.smtp_user_name}" {if $config.email_type == 1} disabled="disabled" {/if} />
+						</td></tr>
+
+						<tr class="firstalt">
+							<td style="padding-left:5px;"><span>邮箱密码</span></td>
+							<td style="padding-top:5px; padding-bottom:5px;">
+						<input type="password" class="FormSmall" id="smtp_password" name="smtp_password" style="width:200px;" value="{$config.smtp_password}" {if $config.email_type == 1} disabled="disabled" {/if} />
+						</td></tr>
+						
+						<tr class="secondalt">
+							<td style="padding-left:5px;"><span>邮箱地址</span></td>
+							<td style="padding-top:5px; padding-bottom:5px;">
+								<input type="input" class="FormSmall" id="smtp_email" name="smtp_email" style="width:200px;" value="{$config.smtp_email}" {if $config.email_type == 1} disabled="disabled" {/if} />
+							</td>
+						</tr>
+				</table>
+				</div>
+
+                <div id="settingBox4" class="close">
+                	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="firstalt">
+                    <td style="padding-top:5px; padding-bottom:5px;">Sitemaps 服务旨在使用 Feed 文件 sitemap.xml 通知 Google、Yahoo! 以及 Microsoft 等 Crawler(爬虫)网站上哪些文件需要索引、这些文件的最后修订时间、更改频率、文件位置、相对优先索引权，这些信息将帮助他们建立索引范围和索引的行为习惯。详细信息请查看 <a href="http://sitemaps.org/" target="_blank">sitemaps.org 网站上的说明。</td>
+					  </tr>
+                      </table>
+                    
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+					<tr class="secondalt">
+						<td width="150" style="padding-left:5px;"><span>首页更新频率</span></td>
+					  	<td style="padding-top:5px; padding-bottom:5px;">
+						<select name="homepage_priority">
+                          {html_options values=$arr_priority output=$arr_priority selected=$config.homepage_priority}
+                        </select>&nbsp;<select name="homepage_changefreq">
+                          {html_options values=$arr_changefreq output=$arr_changefreq selected=$config.homepage_changefreq}
+                          </select></td>
+                    </tr>
+                    <tr class="firstalt">
+						<td style="padding-left:5px;"><span>分类页更新频率</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<select name="category_priority">
+                          {html_options values=$arr_priority output=$arr_priority selected=$config.category_priority}
+                        </select>&nbsp;<select name="category_changefreq">
+                          {html_options values=$arr_changefreq output=$arr_changefreq selected=$config.category_changefreq}
+                          </select></td>
+                    </tr>
+                    <tr class="secondalt">
+						<td style="padding-left:5px;"><span>内容页更新频率</span></td>
+						<td style="padding-top:5px; padding-bottom:5px;">
+						<select name="content_priority">
+                          {html_options values=$arr_priority output=$arr_priority selected=$config.content_priority}
+                        </select>&nbsp;<select name="content_changefreq">
+                          {html_options values=$arr_changefreq output=$arr_changefreq selected=$config.content_changefreq}
+                          </select></td>
+                    </tr>
+				</table>
+			  </div>
+
+			</td></tr>
+		</table>
+		<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+				<tr>
+					<td align="center">
+					<input type="hidden" value="{$config.config_id}" name="config_id" />
+					<input type="submit" id="btSubmit"  class="bginput" name="btSubmit" value=" 提 交 " />
+					<input name="reset"  class="bginput" type="reset" value=" 重置 " /></td>
+				</tr>
+				</table>
+		</form>		
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+function emailselect(type) {
+	if(type=='smtp'){
+		document.getElementById("smtp_host").disabled="";
+		document.getElementById("smtp_port").disabled="";
+		document.getElementById("smtp_user_name").disabled="";
+		document.getElementById("smtp_password").disabled="";
+		document.getElementById("smtp_email").disabled="";
+	}
+	if(type=='mail'){
+		document.getElementById("smtp_host").disabled="disabled";
+		document.getElementById("smtp_port").disabled="disabled";
+		document.getElementById("smtp_user_name").disabled="disabled";
+		document.getElementById("smtp_password").disabled="disabled";
+		document.getElementById("smtp_email").disabled="disabled";
+	}	
+}
+
+function settingselect(id){
+	document.getElementById('settingBox1').className="close";
+	document.getElementById('settingBox2').className="close";
+	document.getElementById('settingBox3').className="close";
+	document.getElementById('settingBox4').className="close";
+	document.getElementById('setting1').className="Out";
+	document.getElementById('setting2').className="Out";
+	document.getElementById('setting3').className="Out";
+	document.getElementById('setting4').className="Out";
+	
+	document.getElementById('setting'+id).className="Move";
+	document.getElementById('settingBox'+id).className="";
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

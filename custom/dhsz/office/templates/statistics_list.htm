@@ -1,0 +1,117 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js,../js/calendar.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li style="padding-right:15px;float:right;width:500px;">
+			<div style="float:right;display:block;">
+			<form name="searchForm" method="get" action="statistics.php">
+			<span>起始日期:</span>
+			
+			<input type="text" name="start_date" style="margin-top:6px;" value="{$start_date|escape}" readonly  onclick="new Calendar().show(this.form.start_date);" />
+			 <span>结束日期:</span>
+			 <input type="text" name="end_date" style="margin-top:6px;" value="{$end_date|escape}" onclick="new Calendar().show(this.form.end_date);" />
+			<input name="action" value="list" type="hidden"  />
+			<input type="submit" value="" style="margin-top:6px;" class="bt_go" >
+			</form>
+			</div>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  	<tr>
+			<td class="LineRightBlue1">	  	
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">关键词统计列表 (<strong>{$start_date} 到 {$end_date}</strong>)</td>
+				<td width="12%" align="right" class="bt_add"></td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>	
+	
+		<form name="theForm" method="post" action="">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td align="right">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+        <div class="tablelisthead">
+			<ul>
+				<li class="li_5">序号</li>
+				<li class="li_35">关键词</li>
+				<li class="li_20">查询次数</li>
+				<li class="li_25">来源</li>
+				<li class="li_10">操作</li>
+			</ul>
+        </div>
+		
+		{if $statistics}
+			<div class="tablelist">
+			{foreach from=$statistics item=stat}
+			<ul onmouseover="overbgcolor('stat_{$stat.cnt}')" onmouseout="outbgcolor('stat_{$stat.cnt}')">
+			<li class="li_5">{$stat.cnt}</li>
+			<li class="li_35">{$stat.search_text}</li>
+			<li class="li_20">{$stat.count}</li>
+			<li class="li_25">{$stat.domain}</li>
+			<li class="li_10 operation">
+			<a href="statistics.php?action=list_show&start_date={$start_date}&end_date={$end_date}&search_text={$stat.search_text}&domain={$stat.domain}" title="浏览" class="op_column"></a> 
+			</li>
+			</ul>
+			{/foreach}
+			</div>
+		{else}
+			<div class="tablelist">
+			<ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+			<li>暂无信息!</li>
+			</ul>
+			</div>
+		{/if}
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td align="right">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+	
+</div>
+<script type="text/javascript">
+{literal}
+function overbgcolor(id){
+	obj=document.getElementById(id);
+	if(obj.checked==false){
+		var tr = obj.parentNode.parentNode;
+		tr.style.backgroundColor ="#FFFDD7";
+	}		
+}				
+
+function outbgcolor(id){
+	obj=document.getElementById(id);
+	if(obj.checked==false){
+		var tr = obj.parentNode.parentNode;
+		tr.style.backgroundColor ="#FFFFFF";
+	}		
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

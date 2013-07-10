@@ -1,0 +1,101 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504375" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="LineRightBlue1">
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">公司信息管理 > 联系人列表</td>
+				<td width="12%" align="right" class="bt_add">{if $contact_manage==true}<a href="contact.php?action=add">添加</a>{/if}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+		<form name="theForm" method="post" action="">
+        <div class="tablelisthead">
+        <ul>
+        <li class="li_10">排序</li>
+        <li class="li_20">联系人</li>
+        <li class="li_10">部门</li>
+        {if $language|@count>1}
+        <li class="li_10">语言</li>
+        {/if}
+        <li class="li_20">添加日期</li>
+        <li class="li_20">修改日期</li>
+        <li class="li_10">编辑</li>
+        </ul>
+        </div>
+        <div class="tablelist">
+        {section name=loop loop=$contact}
+        <ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+        <li class="li_10"><input type="text" value="{$contact[loop].sort_order}" name="sort_order[{$contact[loop].contact_id}]" maxlength="3" size="2" class="listinput" /></li>
+        <li class="li_20">{$contact[loop].contact_person}</li>
+        <li class="li_10">{$contact[loop].department}&nbsp;</li>
+        {if $language|@count>1}
+        <li class="li_10">{$contact[loop].language}</li>
+        {/if}
+        <li class="li_20">{$contact[loop].date_added}</li>
+        <li class="li_20">{$contact[loop].date_modified}</li>
+        <li class="li_10 operation">{if $contact_manage==true}
+					<a href="contact.php?action=edit&contact_id={$contact[loop].contact_id}" title="编辑" class="op_edit"></a> 
+				{else}
+					<span class="op_edit_off"></span>
+				{/if}		
+				{if $contact_del==true}
+					<a href="contact.php?action=del&contact_id={$contact[loop].contact_id}" onClick="return window.confirm('确定删除该联系人?');" title="删除" class="op_del"></a>
+				{else}
+					<span class="op_del_off"></span>
+				{/if}</li>
+        </ul>
+        {/section}
+        </div>
+		
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			  <td style="padding-left:5px;">{if $contact_manage==true}<input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">{/if}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function dosort(){
+	document.theForm.action="contact.php?action=order";
+	document.theForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

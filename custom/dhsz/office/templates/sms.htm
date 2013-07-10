@@ -1,0 +1,27 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js,../js/calendar.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li style="padding-right:15px;float:right;">
+			<div style="float:right;">
+			
+			</div>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+
+		如果您已开通短信服务功能，请点击“进入平台”按钮，如果还没有开通这项服务请<a href="http://www.nitc.cc/contactus.html" target="_blank">联系我们</a>，<strong>短信费用8分一条</strong>。
+		<div style="margin-top:5px;">
+		<form action="sms.php?action=go" method="post" name="theForm">
+		<input type="submit" name="enter" value=" 进入平台 " class="bginput" />
+		</form>
+		</div>
+	</div>
+</div>
+{include file="pagefooter.htm"}

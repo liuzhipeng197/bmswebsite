@@ -1,0 +1,106 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">增值服务 > 在线客服 > 相关信息</td>
+			<td width="12%" align="right" class="bt_list">&nbsp;</td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="services.php?action=promiss_info" method="post" name="theForm" onsubmit="return doOnlineServicesSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;" >
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="secondalt">
+			<td width="110"><span style="padding-left:10px;">使用说明</span><a href="http://www.nitc.cc" title='怎么使用呢？请点我吧！' style="margin-left:5px;" target="_blank"><img src="images/help/help.gif" border="0" alt=""/></a></td>
+			<td style="padding-top:5px; padding-bottom:5px; line-height:18px;">
+				<span style="color:#FF3300">您需要下载CQ2011 (<b><a href="http://www.nitc.cc/download/CQ2011.exe" target="_blank">点击下载</a></b>) 来管理您的在线客服.</span><br> 新申请客户免费试用10天，如果您觉得使用比较方便的话，可&nbsp;<b><a href="http://www.nitc.cc/contactus.html" target="_blank">联系我们</a></b>&nbsp;购买使用.&nbsp;<b>价格68元/年</b>
+			</td>
+		</tr>
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">用户登录名</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<input type="input" value="{$mc.userLoginId|escape}" class="FormSmall" name="userLoginId" style="width:250px;" id="userLoginId" readonly />
+			</td>
+		</tr>
+		<tr class="secondalt">
+			<td width="110"><span style="padding-left:10px;">用户密码</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<input type="input" value="{$mc.userPassword|escape}" class="FormSmall" name="userPassword" style="width:250px;" id="userPassword" />&nbsp;&nbsp;<span style="color:#FF3300">注明：这里是指CQ在线登录密码,作为备注用.</span>
+			</td>
+		</tr>
+		{section name=loop loop=$language}
+			{if $language[loop].language_id == 2}
+				<tr class="firstalt">
+					<td width="110"><span style="padding-left:10px;">代码调用(中文)</span></td>
+					<td style="padding-top:5px; padding-bottom:5px;">
+						<textarea name="code_2" class="FormSmall" style="width:650px;height:50px;">{$mc.code_2}</textarea>
+					</td>
+				</tr>
+			{else}
+				<tr class="firstalt">
+					<td width="110"><span style="padding-left:10px;">代码调用(英文)</span></td>
+					<td style="padding-top:5px; padding-bottom:5px;">
+						<textarea name="code_1" class="FormSmall" style="width:650px;height:50px;">{$mc.code_1}</textarea>
+					</td>
+				</tr>
+			{/if}
+		{/section}
+
+		<tr class="secondalt">
+			<td width="110"><span style="padding-left:10px;">状态</span></td>
+			<td style="padding-top:10px;padding-bottom:10px;">
+				<input name="online_state" type="radio" value="1" {if $online_state == '1'}checked="checked"{/if} /> 启用　
+				<input name="online_state" type="radio" value="2" {if $online_state == '2'}checked="checked"{/if} /> 禁用　&nbsp;&nbsp;<span style="color:#FF3300">注明：是否在您的网站上开启CQ在线咨询.</span>
+			</td>
+		</tr>
+
+
+		<tr class="firstalt">
+			<td style="padding-top:10px;padding-bottom:10px;padding-left:10px;" colspan="2">
+				<span style="color:#FF3300">注明：提交后，请点击"<strong><a href="make_html.php?operate=all">生成营销页面</a></strong>"，前台才能显示在线客户功能。</span>
+			</td>
+		</tr>
+
+	</table>
+		</td></tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 提交 " />
+<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+
+function doOnlineServicesSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

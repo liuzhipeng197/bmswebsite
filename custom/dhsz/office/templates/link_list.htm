@@ -1,0 +1,141 @@
+{include file="pageheader.htm"}
+{insert_scripts files='../js/quickView.js'}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504386" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	<div class="PageContent">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		  <tr>
+			<td class="LineRightBlue1">
+				<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+			  <tr>
+				<td width="88%" height="24">友情链接 > 链接列表</td>
+				<td width="12%" align="right" class="bt_add">{if $link_manage==true}<a href="friend_link.php?action=add">添加</a>{/if}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		
+		<form name="theForm" method="post" action="">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		  <tr>
+			<td height="36" class="BotNavBg" style="border:none;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			  <td style="padding-left:5px;">
+			  <input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">
+			  {if $link_del==true}
+			  <input type="button" value=" 删除 " name="button" OnClick="javascript:dodel();" />
+			 {/if}
+</td>
+<td align="right" style="padding-right:10px;">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+        <div class="tablelisthead">
+        <ul>
+        <li class="li_5">选择</li>
+        <li class="li_10">排序</li>
+        <li class="li_15">链接名</li>
+		{if $language|@count>1}
+        <li class="li_10">语言</li>
+        {/if}
+        <li class="li_30">链接Url</li>
+        <li class="li_15">添加日期</li>
+        <li class="li_10">{if $link_manage==true or $link_del==true}编辑{/if}&nbsp;</li>
+        </ul>
+        </div>
+        <div class="tablelist">
+        {section name=loop loop=$link}
+        <ul onmouseover="this.style.background ='#FFFDD7'" onmouseout="this.style.background ='#FFFFFF'">
+        <li class="li_5"><input type="checkbox" name="link[]" value="{$link[loop].link_id}" id="link_{$link[loop].cnt}" class="listcheck"/></li>
+        <li class="li_10"><input type="text" value="{$link[loop].sort_order}" name="sort_order[{$link[loop].link_id}]" class="listinput" maxlength="3" size="5" /></li>
+        <li class="li_15">{if $link[loop].link_logo}
+					<a href="#" title="{$link[loop].link_logo}">{$link[loop].img} {$link[loop].link_name}</a>
+					{else}
+					{$link[loop].img} {$link[loop].link_name}
+					{/if}</li>
+		{if $language|@count>1}
+        <li class="li_10">{$link[loop].language}</li>
+        {/if}
+        <li class="li_30">{$link[loop].link_url}</li>
+        <li class="li_15">{$link[loop].date_added}</li>
+        <li class="li_10 operation">{if $link_manage==true}
+				<a href="friend_link.php?action=edit&link_id={$link[loop].link_id}{$strpass}" title="编辑" class="op_edit"></a> 
+			{else}
+				<span class="op_edit_off"></span>
+			{/if}
+			{if $link_del==true}
+				<a href="friend_link.php?action=del&link_id={$link[loop].link_id}{$strpass}" onClick="return window.confirm('确定删除该链接?')" title="删除" class="op_del"></a>
+			{else}
+				<span class="op_del_off"></span>
+			{/if}</li>
+        </ul>
+        {/section}
+        </div>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+			  <td style="padding-left:5px;">
+			  {if $link_manage==true}<input type="button" value=" 排序 " name="button" OnClick="javascript:dosort();">{/if}
+			  {if $link_del==true}<input type="button" value=" 删除 " name="button" OnClick="javascript:dodel();" />{/if}
+</td>
+<td align="right" style="padding-right:10px;">{$page}</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function dodel(){
+	var num=0; 
+	var link_url=document.getElementsByName("link[]")
+	for(var i=0;i<link_url.length;i++){ 
+		if(link_url[i].checked==true){   
+		  num=num+1; 
+		} 
+	} 
+	if(num==0){
+        alert("没有选择信息!");
+        return;
+    }
+    if(num>0){
+		if(confirm("确认删除选择的链接?")==true){
+			document.theForm.action="friend_link.php?action=del{/literal}{$strpass}{literal}";
+			document.theForm.submit();
+		}
+    }
+}
+function dosort(){
+	document.theForm.action="friend_link.php?action=order{/literal}{$strpass}{literal}";
+	document.theForm.submit();
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

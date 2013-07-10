@@ -1,0 +1,117 @@
+{include file="pageheader.htm"}
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504367" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">产品管理 > 产品批量上传</td>
+			<td width="12%" align="right"></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="product_import.php?action=importconfirm" enctype="multipart/form-data" method="post" name="theForm" onsubmit="return doSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;">
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		<tr class="firstalt">
+			<td width="150"><span style="padding-left:10px;">分类</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="category" >
+				<option value="0" selected="selected">------选择分类------</option>
+				{$category}
+				</select>
+			</td>
+		</tr>
+		<tr class="secondalt">
+			<td><span style="padding-left:10px;">上传批量Excel文件</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="file" class="FormSmall" style="width:210px;" name="excelfile" />
+			</td>
+		</tr>							
+		<tr class="firstalt">
+			<td style="padding-left:10px;"><span>下载Excel模版</span></td>
+			<td  height="22" style="padding-top:5px; padding-bottom:5px;">
+ 				<a href="product_import.php?action=downloadexcel">下载Excel模版</a>
+			</td>
+		</tr>							
+							
+		<tr class="secondalt">
+			<td valign="top" style="padding-left:10px;padding-top:5px; padding-bottom:5px;"><span>使用说明</span></td>
+			<td  style="padding-top:5px; padding-bottom:5px;">
+   <div style="line-height:40px;"><b>(1)</b> 下载Excel模版文件;</div>
+   <div style="line-height:18px;"><b>(2)</b> 填写Excel文件,可以使用Excel打开下载的模版文件;<br />
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碰到"是否推荐"之字段,填写数字0或者1,0代表"否",1代表"是";<br />
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产品图片请填写带路径的图片文件名,其中路径是相对于 [根目录]/images 的路径,<br />
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例如图片路径为'[根目录]/images/20090101/abc.jpg' 只要填写 20090101/abc.jpg 即可,如果产品有多个图片,用"|"号分隔不同图片路径;</div>
+   <div style="line-height:40px;"><b>(3)</b> 将填写的产品图片上传到'upload/import/'目录下;</div>
+   <div><b>(4)</b> 选择所上传商品的分类,上传Excel文</div>
+   <br />
+		</tr>
+	</table>
+		</td></tr>
+	</table>
+	<table width="100%" height="30" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input type="submit" id="btSubmit"  class="bginput" name="btSubmit" value=" 导入 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+
+function doSubmit(submenu,imgbar) {
+	var category=document.theForm.category.value;
+	var excelfile=document.theForm.excelfile.value;
+	if(category==0){
+		alert("请您选择所属分类!");
+		document.theForm.category.focus();  
+        return false;   
+	}
+	if(excelfile == ""){
+		alert("请您上传批量Excel文件!");
+		return false;
+	}
+	return true;
+}
+{/literal}
+</script>
+{include file="pagefooter.htm"}

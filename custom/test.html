@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>注册</title>
+
+<!-- CSS -->
+<link href="style/css/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
+<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie6.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie7.css" /><![endif]-->
+
+<!-- JavaScripts-->
+<script type="text/javascript" src="style/js/jquery.js"></script>
+<script type="text/javascript" src="style/js/jNice.js"></script>
+<style type="text/css">
+body {
+}
+body,td,th {
+	font-size: 12px;
+}
+</style>
+<script type="text/javascript">
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+</head>
+
+<body onload="MM_preloadImages('images/login_4.gif')">
+<div  style="background:#c7e3f1; width:960px; height:automargin-top: 0px; margin: auto;">
+  <div align="center">
+  <img src="images/tp.gif" width="960" height="130" /></div>
+  <div align="left">
+  <table width="961"> 
+<tr> 
+<td background="images/bart.gif" wdith="480"height="25">
+ <div align="right">
+  <div align="left">欢迎您进入尊冠公司的BMS系统</div></tr> 
+</table>
+  </div>
+  <div align="center">
+  </div>
+  <div> 
+  <meta http-equiv="content-type" content="text/html;charset=gb2312">
+<style type="text/css">
+.sv3 dl,.sv3 dt,.sv3 dd{
+	padding:0;
+	margin:0;
+}
+.sv3{
+	width:200px;
+	border:1px solid #BFC7D9;
+}
+.sv3 dl{
+	width:200px;
+	height:380px;
+	background:#c7e3f1;
+	overflow:hidden;
+}
+.sv3 dt{
+	padding:5px 10px;
+	height:13px;
+	font-size:13px;
+	color:#000;
+	background:#c7e3f1;
+	border-top:1px solid #fff;
+	border-bottom:1px solid #BFC7D9;
+}
+.sv3 dl.on dt{
+	background:#3366CC;
+	color:#FFF;
+	font-weight:bold;
+}
+.sv3 dd{
+	padding:10px;
+	color:#333;
+	font-size:12px;
+	line-height:1.5em;
+}
+.sv3 dd a:link,
+.sv3 dd a:visited,
+.sv3 dd a:hover,
+.sv3 dd a:active{
+	color:#333;
+	display:block;
+	text-align:right;
+}
+</style>
+  <div id="idSlideView3" class="sv3">
+  <dl class="on">
+    <dt>业务申请 </dt>
+    <dd>业务申请信息</dd>
+    <dd>样品信息表</dd>
+    <dd>样品信息表</dd>
+  </dl>
+  <dl>
+    <dt> 就是点不到</dt>
+    <dd> 内容二 </dd>
+  </dl>
+  <dl>
+    <dt> 你点不到我</dt>
+    <dd>内容三 </dd>
+  </dl>
+  <dl>
+    <dt> 啊，你点到我了</dt>
+    <dd> 内容四</dd>
+  </dl>
+  <dl>
+    <dt>这个字念什么</dt>
+    <dd> 内容五 </dd>
+  </dl>
+</div>
+    <div align="center">
+      <p><img src="images/bart.gif" width="960" height="25" />Copyright&copy;国家电子计算机质量监督检验中心 <br />
+      备案序号:京ICP备06062869号</p>
+      <p><br />
+  </p>
+    </div>
+  </div>
+  <script language="javascript">
+function SlideView(e){
+   for(var r=document.getElementById(e).getElementsByTagName('dl'),c=clearInterval,i=-1,p=r[0],j; j=r[++i];){
+       j.style.height=(i?24:379)+'px';
+       j.onmouseover=function(){clearTimeout(j);var i=this;j=setTimeout(function(){if(p!=i)_(p,379,24)(p=i,24,379)},200)};
+   }
+   function _(el,f,t){
+       c(el.$1);el.className=f>t?'':'on';
+       return el.$1=setInterval(function(){el.style.height=(f+=Math[f>t?'floor':'ceil']((t-f)*.3))+'px';if (f==t)c(el.$1)},10),_
+   }
+};
+new SlideView( "idSlideView3");
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+{include file="pageheader.htm"}
+{insert_scripts files='./js/form.js'}
+{insert_scripts files='./js/checkForm.js'}
+{insert_scripts files='../js/quickView.js'}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	
+	<div class="PageContent">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	  <tr>
+		<td class="LineRightBlue1">
+			<table width="95%" border="0" cellpadding="0" cellspacing="0" style="margin-left:20px;">
+		  <tr>
+			<td width="88%" height="24">标签管理 > 添加标签</td>
+			<td width="12%" align="right" class="bt_list"><a href="tag.php?action=list">列表</a></td>
+		  </tr>
+		</table>
+		</td>
+	  </tr>
+	</table>
+	
+	<form action="tag.php?action=insert" method="post" name="theForm" enctype="multipart/form-data" onsubmit="return doTagSubmit()">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory" style="margin-top:10px;" >
+		<tr><td style="border:none;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="Font">
+		{if $language|@count>1}
+		<tr class="firstalt">
+			<td width="110"><span style="padding-left:10px;">语言</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<select name="language">
+				{section name=loop loop=$language}
+				<option value="{$language[loop].language_id}">{$language[loop].name}</option>
+				{/section}
+				</select>
+			</td>
+		</tr>	
+		{else}
+			{section name=loop loop=$language}
+				<input type="hidden" value="{$language[loop].language_id}" name="language" />
+			{/section}
+		{/if}
+
+
+		
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">标签名</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="tagName" onblur="tagNameCheck('tagName')" class="FormSmall" style="width:250px;" id="tagName" /> <img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="tagNameMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>			
+		
+		<tr class="secondalt">
+			<td ><span style="padding-left:10px;">URL地址</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+				<div id="msgbox">
+					<div class="msgbase">
+						<input type="input" name="tagUrl" onblur="tagUrlCheck('tagUrl')" class="FormSmall" style="width:250px;" id="tagUrl" /> <img src="images/required_icon.gif" />
+					</div>
+					<div  class="msg" style="width:255px;">
+						<div class="" id="tagUrlMsg" style="display:none;"></div>
+					</div>
+				</div>
+			</td>
+		</tr>			
+		
+	
+	
+		<tr class="firstalt">
+			<td ><span style="padding-left:10px;">排序</span></td>
+			<td style="padding-top:5px; padding-bottom:5px;">
+ 				<input type="input" class="FormSmall"  name="sort_order" style="width:50px;" value="{$sort_order}" /> 从大到小排列
+			</td>
+		</tr>
+	</table>
+		</td></tr>
+	</table>
+	
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+		<tr>
+			<td align="center">
+			<input class="bginput" type="submit" id="btSubmit" name="btSubmit" value=" 添加 " />
+			<input class="bginput" name="reset" type="reset" value=" 重置 " />
+			</td>
+		</tr>
+		</table>
+	</form>
+	</div>
+
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}	
+}
+
+function changePosition(selObj){
+	var current = selObj.options[selObj.selectedIndex];
+	var adv_size = current.getAttribute('advSize');
+	if (adv_size){
+		document.getElementById('adv_size').innerHTML=adv_size;
+	}else{
+		document.getElementById('adv_size').innerHTML='';
+	}
+	document.getElementById('position').value=current.value;
+	document.getElementById('category').value=current.value;
+}
+
+function doTagSubmit(){
+	CheResult = true;
+	firstErrorControl = "";
+
+	if(tagNameCheck("tagName") == false)
+		CheResult = false;
+		
+	if(tagUrlCheck("tagUrl") == false)
+		CheResult = false;		
+		
+	SetMsgFocus();
+	return CheResult;
+}
+
+{/literal}
+</script>
+{include file="pagefooter.htm"}

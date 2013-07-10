@@ -1,0 +1,274 @@
+{include file="pageheader.htm"}
+
+<div class="BodyRight">
+	<div class="RightDetill">
+		<ul>
+			<li class="Green"><a href="http://www.nitc.cc/About-nitc/488.html#_Toc239504367" target="_blank">查看演示文件</a></li>
+			<li class="SkyBlue"><a href="help_document.php?action=download">下载演示文档</a></li>
+			<li class="Black">操作帮助请详见演示文件!</li>
+			<li class="DetillRigh"></li>
+		</ul>
+	</div>
+	<div class="PageContent">
+	<form name="theForm" method="post" action="product_import.php?action=importinsert">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ListCategory">
+		  <tr>
+			<th height="35" align="center" width="5%"><span>选择</span></th>
+			{foreach from=$field key=field item=title}
+			{if $field_show.$field=='true'}<th>{$title}</th>{/if}
+			{/foreach}
+		  </tr>
+		  
+			{foreach from=$product_list key=key item=product}
+			<tr style="line-height:27px;">
+			
+			<td align="center" nowrap height="35"> 
+			<input type="checkbox" name="checked[{$key}]" value="1" checked />
+			</td>
+			{foreach from=$product key=field item=value}
+				{if $field_show.$field=='true'}
+					<td><input type="text" class="FormSmall" style="width:110px;" name="{$field}[{$key}]" value="{$value}" /></td>
+				{else}
+					<input type="hidden" name="{$field}[{$key}]" value="{$value}" />
+				{/if}
+			{/foreach}
+			</tr>
+			{/foreach}
+		</table>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		  <tr>
+			<td height="15" ></td>
+		  </tr>
+		  <tr>
+			<td height="36" class="BotNavBg">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			  <tr>
+				<td width="50" align="left" style="padding-left:13px;"><input type="checkbox" name="check_all" checked value="yes" onClick="return select_all('product_','theForm');" /> 全选</td>
+				<td style="padding-left:5px;" align="left">
+					<input type="hidden" name="category_id" value="{$category_id}" />
+					<input type="button" id="btSubmit" name="btSubmit" value=" 批量导入 " onClick="go();" />
+				</td>
+			  </tr>
+			</table>
+			</td>
+		  </tr>
+		</table>	
+		
+
+<div id="progressHtml" style="position: absolute; display:none;"> 
+		<table align="center">
+<tbody>
+<tr><td>
+<div id="progressBar"
+style="padding:1px;border:solid black 1px;visibility:visible;  width:400px; height:22px; ">
+
+
+
+
+		<div id="progress" style="padding: 0; border: 0; width: 0%; height: 22px;background-color:#68b73a;"></div>
+
+</div>
+</td></tr>
+<tr><td align="center" id="complete"></td></tr>
+</tbody>
+</table>
+</div>
+
+
+	</form>
+	</div>
+</div>
+<script type="text/javascript">
+{literal}
+function clearSearchText(searchText){
+	if(document.getElementById(searchText).value=="查找产品信息..."){
+		document.getElementById(searchText).value="";
+	}
+}
+function doSearchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	if(document.getElementById("searchText1").value=="查找产品信息..."){
+		document.getElementById("searchText1").value="";
+	}	
+}
+
+function searchSubmit(){
+	if(document.getElementById("searchText").value=="查找产品信息..."){
+		document.getElementById("searchText").value="";
+	}
+	document.searchForm.action="product.php";
+	document.searchForm.submit();
+}
+{/literal}
+</script>
+
+
+
+
+<script type="text/javascript">
+
+{literal}
+
+
+var xmlHttp;
+var checkBoxs=new Array();
+
+function createXMLHttpRequest() {
+if (window.ActiveXObject) {
+xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+else if (window.XMLHttpRequest) {
+xmlHttp = new XMLHttpRequest();
+}
+}
+function go() {
+createXMLHttpRequest();
+checkBoxs = buildPOST("theForm");
+
+
+if(checkBoxs.length > 0) {
+
+document.getElementById("progressHtml").style.display = '';
+
+var url = "product_import.php?action=importinsert&total=" + checkBoxs.length;
+
+var button = document.getElementById("btSubmit");
+button.disabled = true;
+xmlHttp.open("GET", url, true);
+xmlHttp.onreadystatechange = goCallback;
+xmlHttp.send(null);
+
+}
+
+}
+function goCallback() {
+if (xmlHttp.readyState == 4) {
+if (xmlHttp.status == 200) {
+
+var ff=xmlHttp.responseText;
+
+eval(ff);
+var counter=arr[0];
+
+setTimeout("pollServer("+counter+")", 100);
+}
+}
+}
+
+
+
+function pollServer(counter) {
+createXMLHttpRequest();
+
+var xmlMessage = getXmlMessage("theForm", checkBoxs[counter-1]);
+
+var url = "product_import.php?action=importinsert&counter="+counter+"&total="+checkBoxs.length+"&checkBoxId=" + checkBoxs[counter-1];
+
+    xmlHttp.open("POST", url, true)
+	xmlHttp.onreadystatechange = pollCallback;
+    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")    
+    xmlHttp.send(xmlMessage)   
+
+
+}
+
+
+function pollCallback() {
+if (xmlHttp.readyState == 4) {
+if (xmlHttp.status == 200) {
+var ff=xmlHttp.responseText;
+
+eval(ff);
+var percent_complete=arr[1];
+
+
+document.getElementById("progress").style.width = percent_complete + "%";
+document.getElementById("complete").innerHTML = "产品数据导入进度：" + percent_complete + "%";
+
+
+
+if (percent_complete < 100) {
+var ff=xmlHttp.responseText;
+eval(ff);
+var counter=arr[0];
+setTimeout("pollServer("+counter+")", 200);
+} else {
+document.getElementById("complete").innerHTML = "产品数据导入完成！";
+document.getElementById("btSubmit").disabled = false;
+}
+}
+}
+}
+
+
+
+function buildPOST(theFormName) {    
+    	
+	theForm1 = document.forms[theFormName];
+    var checkBoxs = new Array();
+    for (e=0;e<theForm1.elements.length;e++) { 
+		
+        if (theForm1.elements[e].type=='checkbox' && theForm1.elements[e].checked && theForm1.elements[e].name!='check_all') {
+
+         checkBoxId=theForm1.elements[e].name.replace(/checked\[/g,"");
+         checkBoxId=checkBoxId.replace(/\]/g,"");
+
+         checkBoxs[checkBoxs.length] = checkBoxId;
+		 
+		}
+
+    } 
+
+	return checkBoxs;
+ 
+}
+
+
+ function getXmlMessage(theFormName, checkBoxId) {
+
+	theForm1 = document.forms[theFormName];
+    var qs = ''
+	eleStart = checkBoxId * 18;
+	eleEnd = eleStart + 17;
+    for (e=eleStart;e<=eleEnd;e++) { 
+
+        if (theForm1.elements[e].name!='') {    
+            var name = theForm1.elements[e].name;    
+            qs+=(qs=='')?'':'&'    
+            qs+= name+'='+theForm1.elements[e].value;    
+        }
+		
+
+    }
+
+	qs+="&category_id="+theForm1.category_id.value;
+
+    return qs  
+ }
+
+
+
+
+var btSubmitObj = document.getElementById('btSubmit');
+
+
+btSubmitObjX = getX(btSubmitObj) + 60;
+
+btSubmitObjY = getY(btSubmitObj) - 3;
+
+document.getElementById('progressHtml').style.left = btSubmitObjX + 'px';
+
+document.getElementById('progressHtml').style.top = btSubmitObjY + 'px';
+
+
+
+
+{/literal}
+
+</script>
+
+
+{include file="pagefooter.htm"}
