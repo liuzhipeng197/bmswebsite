@@ -19,7 +19,7 @@
 <div class="home_nav">
 	<div class='container'>
 	     <div class='row-fluid'>
-                <h2 class='fea' align='center'>实验室检验项目</h2>
+                <h2 class='fea' align='center'>检验能力介绍</h2>
                 <div class="tabbable">
                         <ul class="bmsnav bmsnav-tabs" style='margin-left:10px'>
                                 <li class='active'>
