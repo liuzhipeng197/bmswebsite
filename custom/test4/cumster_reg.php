@@ -431,11 +431,8 @@ var str_sel_city = [["东城","西城","崇文","宣武","朝阳","丰台","石景山","海淀","
       <!-- Inline Checkboxes -->
       		<label class="checkbox inline">
         		<input type="checkbox" name='checkbox1' value="checkbox">
-        		仔细阅读并接受
-      		</label>
-      		</br>
-      		<label>
-        		<a href='#myModal' style='color:blue' data-toggle='modal' value="NCTC业务申请协议">NCTC业务申请协议</a>
+        		阅读并接受
+        		<a href='#myModal' style='font-size:14px;color:blue' data-toggle='modal' value="NCTC业务申请协议">NCTC业务申请协议</a>
       		</label>
   	</div>
        </div>
