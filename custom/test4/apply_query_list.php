@@ -109,11 +109,11 @@
 			if($int_deal==0){
 				$str_deal="未处理";
 			}elseif($int_deal==1){
-				$str_deal="接受";
+				$str_deal="已受理";
 				$int_fee=$row[7];
 				$int_time=$row[8];
 			}else{
-				$str_deal="拒绝";
+				$str_deal="已拒绝";
 			}
 			$str_ps=$row['ps'];
 			if($str_ps==""){

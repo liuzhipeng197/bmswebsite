@@ -41,7 +41,6 @@
 	<script src=\"js/moo.fx.js\" type=\"text/javascript\"></script>
 	<script src=\"js/moo.fx.pack.js\" type=\"text/javascript\"></script>
 
-	<script src=\"bootstrap/js/bootstrap.js\" type=\"text/javascript\" ></script>        
 	
 	</head>";
 	
@@ -74,9 +73,9 @@
 		<li><a href=\"index.php\">Ê×Ò³</a></li>
 		<li><a href=\"sel_sample_type.php\">¼ìÑéÒµÎñÉêÇë</a></li>
 		<li><a href=\"busi_apply_query.php\">¼ìÑéÒµÎñ²éÑ¯</a></li>
-            	<li><a href=\"busi_apply_query.php\">¼ìÑéÒµÎñ±ä¸ü</a></li>
+            	<!--li><a href=\"busi_apply_query.php\">¼ìÑéÒµÎñ±ä¸ü</a></li-->
 		<li><a href=\"modify_personal_info.php\">¸öÈËÐÅÏ¢¹ÜÀí</a></li>
-		<li><a href=\"answer_common_questions.php\">ÎÊÌâÓë½â¾ö</a></li>
+		<li><a href=\"answer_common_questions.php\">³£¼ûÎÊÌâÓë½â¾ö</a></li>
 	    </ul>
 	    <ul class=\"bmsnav pull-right\">";
 	    if($_SESSION['cus_id']=='')
@@ -180,7 +179,7 @@
           <li><a  href=\"busi_apply_query.php\"  id='sqcx' onclick=\"getLink('sqcx')\" >ÒµÎñÉêÇë²éÑ¯</a></li>
           <!--<li><a  href=\"busi_state_query.php\"  >ÈÎÎñ×´Ì¬²éÑ¯</a></li>
 		  <li><a  href=\"test_report_query.php\"  >¼ì²â±¨¸æ²éÑ¯</a></li>-->
-		  <li><a  href=\"busi_apply_query.php\" id='ztcx' onclick=\"getLink('ztcx')\" >ÈÎñ×´Ì¬²éÑ¯</a></li>
+		  <li><a  href=\"busi_apply_query.php\" id='ztcx' onclick=\"getLink('ztcx')\" >ÈÎÎñ×´Ì¬²éÑ¯</a></li>
 		  <li><a  href=\"busi_apply_query.php\" id='bgcx' onclick=\"getLink('bgcx')\" >¼ì²â±¨¸æ²éÑ¯</a></li>
         </ul>
       </div>

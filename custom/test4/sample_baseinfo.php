@@ -125,7 +125,7 @@ $(document).ready(function(){
 			    <tr  ><td height="1"  ><table width="100%" height="1" border="0" cellpadding="0" cellspacing="0"></table></td></tr>
 				
 				<tr>
-                <td width="25%" height="30" align="right" class="left_txt4"style="font-weight:bold;">µçÔ´ÊÊäÆ÷(¸ö)£º</td>
+                <td width="25%" height="30" align="right" class="left_txt4"style="font-weight:bold;">µçÔ´ÊÊÅäÆ÷(¸ö)£º</td>
                 <td width="25%"  class="left_txt4"><input type='text' id='power_adapt' width='180px' ></td>
 				<td width="25%" height="30" align="right" class="left_txt4"style="font-weight:bold;">ÊÊÅäÆ÷(±¸×¢)£º</td>
                 <td width="25%"  class="left_txt4"><input type='text' id='power_adapt_ps' width='180px' > </td>
