@@ -271,7 +271,24 @@ span.fea {
 
 .nctc_img {
   margin:30px 0px 0px 50px;
-  
- 
-
 }
+
+.question_form {
+  background-color:#FFFFFF;
+  padding:10px 10px 10px 10px;
+  margin-bottom:20px;
+}
+
+.question_title {
+  text-align:left;
+  font-size:15px;
+  font-weight:700px;
+  margin:0px 0px 0px 30px;
+}
+
+.question_answer {
+  text-align:left;
+  font-size:13px;
+  margin:0px 0px 0px 30px;
+}  
+
