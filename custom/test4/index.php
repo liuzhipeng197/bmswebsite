@@ -21,10 +21,10 @@
 	     <div class='row-fluid'>
                 <h2 class='fea' align='center'>检验能力介绍</h2>
                 <div class="tabbable">
-                        <ul class="bmsnav bmsnav-tabs" style='margin-left:10px'>
+                        <ul class="bmsnav bmsnav-tabs" style='margin-left:2px'>
                                 <li class='active'>
                                         <a href='#tab1' data-toggle="tab">
-						<span class='icon_image'><img src='images/dianci_logo.png'></span>  
+						<span class='icon_image'><img  src='images/dianci_logo.png'></span>  
                                                 <span class='fea' align='center'>电磁兼容</span>
                                         </a>
                                 </li>
@@ -36,7 +36,7 @@
 
                                 <li>
                                         <a href="#tab3" data-toggle="tab">
-						<span class='icon_image'><img src='images/huanjing_logo.png'></span> 
+						<span class='icon_image'><img style='padding-left:10px' src='images/huanjing_logo.png'></span> 
                                                 <span class='fea' align='center'>环境与可靠性</span>
                                         </a>
                                 </li>
@@ -44,37 +44,37 @@
                                 <li>
                                         <a href="#tab3" data-toggle="tab">
 						<span class='icon_image'><img src='images/jifang_logo.png'></span> 
-                                                <span class='fea' align='center'>机房</span>
+                                                <span class='fea' align='center'>机房工程</span>
                                         </a>
                                 </li>
 
                                 <li>
                                         <a href='#tab4' data-toggle="tab">
-						<span class='icon_image'><img src='images/ic_logo.png'></span>
-                                                <span class='fea' align='center'>IC卡</span>
+						<span class='icon_image'><img style='padding-left:10px' src='images/ic_logo.png'></span>
+                                                <span class='fea' align='center'>IC卡及机具</span>
                                         </a>
                                 </li>
 				<li>                                                                                                                                                                  
                                         <a href='#tab5' data-toggle="tab">                       
 						<span class='icon_image'><img src='images/RFID_logo.png'></i></span>
-						<span class='fea' align='center'>RFID</span></a>
+						<span class='fea' align='center'>RFID产品</span></a>
                                 </li>
 				<li>                                                                                                                                                                  
                                         <a href='#tab4' data-toggle="tab">
                                                 <span class='icon_image'><img src='images/performance_logo.png'></span>                                                          
-                                                <span class='fea' align='center'>性能</span>                                                                                                          
+                                                <span class='fea' align='center'>性能检验</span>                                                                                                          
                                         </a>                                                                                                                                                          
                                 </li> 
 				<li>                                                                                                                                                                  
                                         <a href='#tab4' data-toggle="tab">
 						<span class='icon_image'><img src='images/software_logo.png'></span> 
-                                                <span class='fea' align='center'>软件</span>                                                                                                          
+                                                <span class='fea' align='center'>软件产品</span>                                                                                                          
                                         </a>                                                                                                                                                          
                                 </li>
 				<li>                                                                                                                                                                  
                                         <a href='#tab4' data-toggle="tab">
 						<span class='icon_image' align='center'><img src='images/jianli_logo.png'></span>
-						<span class='fea' align='center'>系统监理</span>
+						<span class='fea' align='center'>工程监理</span>
 					</a>  
                                 </li> 
 				<li>

@@ -51,8 +51,8 @@ function modifypwd(){
   
   <div align='left'>
                 <ul class="bmsbreadcrumb">
-                        <li><a href="index.php">首页</a> <span class="divider">/</span></li>
-                        <li><a href="#">个人信息管理</a> <span class="divider">/</span></li>
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>
+                        <li><a href="#">个人信息管理</a> <span class="divider">>></span></li>
                         <li class="active">修改登陆密码</li>
                 </ul>
           

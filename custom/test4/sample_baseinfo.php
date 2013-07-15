@@ -40,9 +40,9 @@ $(document).ready(function(){
       <div class="right_nr">
             <div align='left'>                                                                                                                                                                                        <ul class="bmsbreadcrumb">
                                       
-                        <li><a href="index.php">首页</a> <span class="divider">/</span></li>                                                                   
-                        <li><a href="#">检测业务申请</a> <span class="divider">/</span></li>                                                                                                          
-                        <li class="active">填写样品基本信息</li>                                                                                                                                                      </ul>
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>                                                                   
+                        <li><a href="#">检测业务申请</a> <span class="divider">>></span>
+			<li class="active">填写样品基本信息</li>                                                                                                                                                      </ul>
             </div>
 	<div class="anlie_basicinfo">
           <div class="anlie_nr">

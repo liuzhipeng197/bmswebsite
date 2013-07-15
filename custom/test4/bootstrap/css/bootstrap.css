@@ -3986,7 +3986,7 @@ input[type="submit"].btn.btn-mini {
 
 .bmsnav-header {
   display: block;
-  padding: 3px 15px;
+  padding: 15px 15px 15px 15px;
   font-size: 15px;
   font-weight: bold;
   line-height: 20px;
@@ -4015,7 +4015,7 @@ input[type="submit"].btn.btn-mini {
   border-style:solid none none none;
   border-width:1px;
   border-color:#C2C2C2;
-  padding: 3px 15px;
+  padding: 10px 15px 10px 15px;
 }
 
 .bmsnav-list > .active > a,
@@ -4096,14 +4096,15 @@ input[type="submit"].btn.btn-mini {
   border-color: #eeeeee #eeeeee #dddddd;
 }
 
+/*index首页的内容*/
 .bmsnav-tabs > .active > a,
 .bmsnav-tabs > .active > a:hover,
 .bmsnav-tabs > .active > a:focus {
+  align:center;
   color: #555555;
   cursor: default;
   background-color: #ffffff;
   border: 2px solid #0099CC;
-  
 }
 
 .bmsnav-pills > li > a {
@@ -4951,7 +4952,6 @@ input[type="submit"].btn.btn-mini {
 }
 
 .bmsnavbar-inverse .btn-bmsnavbar:hover,
-.bmsnavbar-inverse .btn-bmsnavbar:focus,
 .bmsnavbar-inverse .btn-bmsnavbar:active,
 .bmsnavbar-inverse .btn-bmsnavbar.active,
 .bmsnavbar-inverse .btn-bmsnavbar.disabled,
@@ -5972,7 +5972,8 @@ a.badge:focus {
 }
 
 .accordion-group {
-  margin-bottom: 2px;
+  margin-bottom: 10px;
+  background-color:#FFFFFF;
   border: 1px solid #e5e5e5;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
@@ -5986,6 +5987,10 @@ a.badge:focus {
 .accordion-heading .accordion-toggle {
   display: block;
   padding: 8px 15px;
+  text-align:left;
+  font-size:15px;
+  color:#006699;
+  text-decoration:none;
 }
 
 .accordion-toggle {
@@ -5993,6 +5998,7 @@ a.badge:focus {
 }
 
 .accordion-inner {
+  text-align:left;
   padding: 9px 15px;
   border-top: 1px solid #e5e5e5;
 }

@@ -37,11 +37,15 @@
     <div class="right_2">
         <div align='left'>                                                                                                                                                                                        <ul class="bmsbreadcrumb">
                                       
-                        <li><a href="index.php">首页</a> <span class="divider">/</span></li>                                                                   
-                        <li><a href="#">检测业务申请</a> <span class="divider">/</span></li>                                                                                                          
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>                                                                   
+                        <li><a href="#">检测业务申请</a> <span class="divider">>></span></li>                                                                                                          
                         <li class="active">填写申请基本信息</li>                                                                                                                                                      </ul>
             </div>
 	<div class="anlie_basicinfo">
+	  <div class='row'>
+                        <img style='margin:-20px 0px 20px 20px' src='../images/second.png' />
+          </div>
+
           <div class="anlie_nr">
           
                           <table width="100%" border="0" cellpadding="0" cellspacing="0">

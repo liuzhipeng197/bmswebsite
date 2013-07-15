@@ -23,8 +23,8 @@
 	
             <div align='left'>                                                                                                                                                                                        <ul class="bmsbreadcrumb">
                                       
-                        <li><a href="index.php">首页</a> <span class="divider">/</span></li>                                                                   
-                        <li><a href="#">检测业务申请</a> <span class="divider">/</span></li>                                                                                                          
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>                                                                   
+                        <li><a href="#">检测业务申请</a> <span class="divider">>></span></li>                                                                                                          
                         <li class="active">核对申请信息</li>                                                                                                                                                          </ul>            
 	    </div>
 	<div class="anlie_basicinfo">

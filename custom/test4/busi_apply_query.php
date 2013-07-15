@@ -136,8 +136,8 @@ text-decoration:none;
    ?>
       <div align='left'>                                                                                                                                                                          
                 <ul class="bmsbreadcrumb">                                                                                                                                                            
-                        <li><a href="index.php">首页</a> <span class="divider">></span></li>                                                                                                          
-                        <li><a href="#">检测业务查询</a> <span class="divider">></span></li>                                                                                                          
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>                                                                                                          
+                        <li><a href="#">检测业务查询</a> <span class="divider">>></span></li>                                                                                                          
                         <li class="active">业务申请查询</li>                                                                                                                                          
                 </ul>
       </div>  
@@ -146,8 +146,8 @@ text-decoration:none;
    	<div class='span2'>
 	    <div class='left-tag'>
 		<ul class="bmsnav bmsnav-list">
-  			<li class="bmsnav-header" align='left'><i class='icon-home'></i>检验业务查询</li>
-  			<li class="active" align='left'><a href="#"><i class='icon-search'></i> &nbsp;&nbsp;业务申请查询</a></li>
+  			<li class="bmsnav-header">检验业务查询</li>
+  			<li class="active" align='left' style=''><a href="#"><i class='icon-search'></i> &nbsp;&nbsp;业务申请查询</a></li>
 			<li align='left'><a href="#"><i class='icon-tag'></i> &nbsp;&nbsp;任务状态查询</a></li>
   			<li align='left'><a href="#"><i class='icon-book'></i> &nbsp;&nbsp;检测报告查询</a></li>
 		</ul>

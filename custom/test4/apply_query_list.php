@@ -25,20 +25,18 @@
 				if($str_class==1){
 					echo "&nbsp;&nbsp;<input type='radio'  id='search_type' name='search_type'  value='0' checked=\"checked\">&nbsp;&nbsp;<b>按条件</b>";
 				}else{
-					echo "&nbsp;&nbsp;<input type='radio'  id='search_type' name='search_type'  value='0'>&nbsp;&nbsp;<b class='text_css'>按样品名称</b>";
+					echo "&nbsp;&nbsp;<input type='radio'  id='search_type' name='search_type'  value='0' style='margin-top:-3px'>&nbsp;&nbsp;<b class='text_css'>按样品名称</b>";
 				}
-				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"text\" id=\"condition1\" name=\"condition1\" size=\"15\" style=\"display:inline\";>
-					&nbsp;&nbsp;
-			</div>
-			<div class='row' align='left'>";
+				echo "&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"text\" id=\"condition1\" name=\"condition1\"  style='width:120px' size=\"15\" style=\"display:inline\";>
+					&nbsp;&nbsp;";
 			
                 		if($str_class!=2){
-					echo "</br>&nbsp;&nbsp;<input type='radio' id='search_type' name='search_type'  value='1'>&nbsp;&nbsp;<b class='text_css'>按日期</b>";
+					echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' id='search_type' name='search_type'  value='1' style='margin-top:-3px'>&nbsp;&nbsp;按日期";
 				}else{
-					echo "</br>&nbsp;&nbsp;<input type='radio' id='search_type' name='search_type'  value='1' checked=\"checked\">&nbsp;&nbsp;<b>按日期</b>";
+					echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='radio' id='search_type' name='search_type'  value='1' checked=\"checked\">&nbsp;&nbsp;按日期";
 				}
-				echo "&nbsp;&nbsp;起始&nbsp;&nbsp;<input type=\"text\" id=\"start_date\" name=\"start_date\" value='".$date_start."' size='12' class=\"it date-pick\" >
-					&nbsp;&nbsp;截止&nbsp;&nbsp;<input  type=\"text\" id=\"end_date\" name=\"end_date\" value='".$date_end."' size='12' class=\"it date-pick\" >
+				echo "&nbsp;&nbsp;起始&nbsp;&nbsp;<input type=\"text\" id=\"start_date\" name=\"start_date\" value='".$date_start."' size='12' style='width:80px' class=\"it date-pick\" >
+					&nbsp;&nbsp;截止&nbsp;&nbsp;<input  type=\"text\" id=\"end_date\" name=\"end_date\" value='".$date_end."' size='12' style='width:80px' class=\"it date-pick\" >
 					&nbsp;&nbsp;&nbsp;&nbsp;
 			</div>
 			<div class='row' align='center' style='margin-bottom:15px'>

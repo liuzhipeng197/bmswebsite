@@ -4,44 +4,47 @@
     include("../../admin/include/db_mysql.php");
 	
 		
-	if($_SESSION['cus_id']=='' && $_SERVER['PHP_SELF'] != '/index.php' && $_SERVER['PHP_SELF'] != '/login.php' && $_SERVER['PHP_SELF'] != '/cumster_reg.php' && $_SERVER['PHP_SELF'] != '/forget_pwd.php'){
+	if($_SESSION['cus_id']=='' && $_SERVER['PHP_SELF'] != '/index.php' && $_SERVER['PHP_SELF'] != '/login.php' && $_SERVER['PHP_SELF'] != '/answer_common_questions.php'&& $_SERVER['PHP_SELF'] != '/cumster_reg.php' && $_SERVER['PHP_SELF'] != '/forget_pwd.php'){
 		 header("Location: login.php");
                  exit();
 	}
 	
 
 	function iframe_head(){//头文件引入
-	echo "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-	<html>
+	echo "<!DOCTYPE html>
+        <!--[if lt IE 7]>      <html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"> <![endif]-->
+        <!--[if IE 7]>         <html class=\"no-js lt-ie9 lt-ie8\"> <![endif]-->
+        <!--[if IE 8]>         <html class=\"no-js lt-ie9\"> <![endif]-->
+        <!--[if gt IE 8]><!--> <html class=\"no-js\"> <!--<![endif]-->  
 	<head>
-	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=GB2312\">
-	<title>国家电子计算机质量监督检验中心 检测业务管理系统</title>
-	<link href=\"css/inc.css\" rel=\"stylesheet\" type=\"text/css\">
-	<link href=\"css/index.css\" rel=\"stylesheet\" type=\"text/css\">
-	<link href=\"css/content.css\" rel=\"stylesheet\" type=\"text/css\">
-	<link href=\"css/css.css\" rel=\"stylesheet\" type=\"text/css\">
-        <link href=\"css/bms.css\" rel=\"stylesheet\" type=\"text/css\">
-	<link href=\"bootstrap/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">
-        <link href=\"bootstrap/css/bootstrap-responsive.css\" rel=\"stylesheet\" type=\"text/css\">                                                                                                              
-	<script>
-	var jq = jQuery.noConflict();//解决jquery与其他js的冲突
-	</script>
-	
-	<script type=\"text/javascript\" src=\"js/nav.js\"></script>
-	<script src=\"js/function.js\" type=\"text/javascript\"></script>
-	<script src=\"js/menu2.js\" type=\"text/javascript\"></script>
-	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/datePicker.css\" />
-	<script  charset=\"utf-8\" src=\"js/jquery-second.js\" type=\"text/javascript\"></script>
-	<script  charset=\"utf-8\" src=\"js/jquery.datePicker-min.js\" type=\"text/javascript\"></script>
-	<link href=\"css/skin.css\" rel=\"stylesheet\" type=\"text/css\" />
-	<script src=\"js/upload.js\" type=\"text/javascript\"></script>
-	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/subtable.css\" />
-	<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu2.css\" />
-	<script src=\"js/prototype.lite.js\" type=\"text/javascript\"></script>
-	<script src=\"js/moo.fx.js\" type=\"text/javascript\"></script>
-	<script src=\"js/moo.fx.pack.js\" type=\"text/javascript\"></script>
-
-	
+		<meta charset=\"gb2312\">
+		<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">
+		<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+		<title>国家电子计算机质量监督检验中心 检测业务管理系统</title>
+		<link href=\"css/inc.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"css/index.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"css/content.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"css/css.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"css/bms.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"bootstrap/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\">
+		<link href=\"bootstrap/css/bootstrap-responsive.css\" rel=\"stylesheet\" type=\"text/css\">                                                                                                              
+		<script>
+		var jq = jQuery.noConflict();//解决jquery与其他js的冲突
+		</script>
+		
+		<script type=\"text/javascript\" src=\"js/nav.js\"></script>
+		<script src=\"js/function.js\" type=\"text/javascript\"></script>
+		<script src=\"js/menu2.js\" type=\"text/javascript\"></script>
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/datePicker.css\" />
+		<script  charset=\"utf-8\" src=\"js/jquery-second.js\" type=\"text/javascript\"></script>
+		<script  charset=\"utf-8\" src=\"js/jquery.datePicker-min.js\" type=\"text/javascript\"></script>
+		<link href=\"css/skin.css\" rel=\"stylesheet\" type=\"text/css\" />
+		<script src=\"js/upload.js\" type=\"text/javascript\"></script>
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/subtable.css\" />
+		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/menu2.css\" />
+		<script src=\"js/prototype.lite.js\" type=\"text/javascript\"></script>
+		<script src=\"js/moo.fx.js\" type=\"text/javascript\"></script>
+		<script src=\"js/moo.fx.pack.js\" type=\"text/javascript\"></script>
 	</head>";
 	
 	

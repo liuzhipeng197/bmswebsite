@@ -219,8 +219,8 @@ function modify(){
 	
   <div align='left'>                                                                                                                                                                          
                 <ul class="bmsbreadcrumb">                                                                                                                                                            
-                        <li><a href="index.php">首页</a> <span class="divider">/</span></li>                                                                                                          
-                        <li><a href="#">个人信息管理</a> <span class="divider">/</span></li>                                                                                                          
+                        <li><a href="index.php">首页</a> <span class="divider">>></span></li>                                                                                                          
+                        <li><a href="#">个人信息管理</a> <span class="divider">>></span></li>                                                                                                          
                         <li class="active">修改个人信息</li>                                                                                                                                          
                 </ul>                                                                                                                                                                                 
           
@@ -231,7 +231,7 @@ function modify(){
         <div class='span2'>
             <div class='left-tag'>
                 <ul class="bmsnav bmsnav-list">
-                        <li class="bmsnav-header" align='left'><i class='icon-home'></i>个人信息管理</li>
+                        <li class="bmsnav-header">个人信息管理</li>
                         <li class="active" align='left'><a href="#"><i class='icon-search'></i> &nbsp;&nbsp;修改个人信息</a></li>
                         <li align='left'><a href="modify_login_password.php"><i class='icon-tag'></i> &nbsp;&nbsp;修改登录密码</a></li>
                 </ul>

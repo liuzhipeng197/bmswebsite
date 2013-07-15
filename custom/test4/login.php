@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <?php
-	 session_start();
      include_once("./include/function.php");
      //include("./include/db_mysql.php");
      iframe_head();
+     session_unset();
 ?>
 <script src="bootstrap/js/jquery.js" type="text/javascript" ></script>
 
@@ -120,10 +121,10 @@ $.fn.extend({
      <div class='row-fluid'>
 	<div class='span6'>
 		<div class='nctc_img' style='margin-top:70px'>
-			<img src='../images/nctc_logo.png' class="img-polaroid">
+			<img src='../images/nctc_log.jpg'>
 		</div>	
 	</div>
-        <div class='span5 offset1'>	
+        <div class='span5 offset1' style='margin-left:100px'>	
           <div class="anlie_nr" style='margin-top:70px'>
              <form method='post' name='NETSJ_Login'>
 		<!--td>
@@ -139,7 +140,7 @@ $.fn.extend({
 				&nbsp;&nbsp;&nbsp;&nbsp;
 			    <div class='input-prepend'>
 				<span class="add-on"><i class="icon-user"></i></span>
-				<input type="text" placeholder="请输入用户名..." id="username" name="username" size="45" onKeyDown="if(event.keyCode==13){$('#Submit2').click();}">
+				<input type="text" tabindex='1' placeholder="请输入用户名..." id="username" name="username" size="45" onKeyDown="if(event.keyCode==13){$('#Submit2').click();}">
 			    </div>
 			</div>
 		</td>
@@ -153,7 +154,7 @@ $.fn.extend({
 			    &nbsp;&nbsp;&nbsp;&nbsp;	
 			    <div class='input-prepend'>
 				<span class="add-on"><i class="icon-lock"></i></span>
-				<input type="password" placeholder="请输入密码..." id="password" name="password" size="45" onKeyDown="if(event.keyCode==13){$('#Submit2').click();}">
+				<input type="password" tabindex='2' placeholder="请输入密码..." id="password" name="password" size="45" onKeyDown="if(event.keyCode==13){$('#Submit2').click();}">
 			    </div>
 			</div>
 		</td>
@@ -165,15 +166,15 @@ $.fn.extend({
                             </div>
                             &nbsp;&nbsp;&nbsp;&nbsp;                                                                                                                                                      		          <div class='input-prepend' align="justify">
                                 <span class="add-on"><i class="icon-picture"></i></span>
-				<input name="vercode" placeholder='请输入验证码...' id="vercode" value="" onkeydown="if(event.keyCode==13){$('#Submit2').click();}" type="text" style=""> 		
-				<img src="include/verificationImage.php" id="verificationImage"  title='看不清，换一张' onClick="chg_vcode();" width="100"  height="40" style='margin:10px 0px 0px 30px'>
-			    </div>
+				<input name="vercode" tabindex='3' placeholder='验证码...' id="vercode" value="" onkeydown="if(event.keyCode==13){$('#Submit2').click();}" type="text" style="width:70px"> 		
+				<img src="include/verificationImage.php" id="verificationImage" width="70"  height="70" style='display:inline;margin:-35px 0px 0px 5px'>
+				<a class='vcode_css' onClick="chg_vcode();">看不清<br>换一张</a>
+				</div>
 			</div>
 		</td>
 		<td class='td_inner'>
-			<span align='left'>
-				<input type="button" class="edit_buttom"  style='padding:5px 100px 5px 100px' id="Submit2" name="submit2" onClick="login();"  value="登陆" />
-          		</span>
+				<input type="button" class="login_button" style='padding:5px 100px 5px 100px' id="Submit2" name="submit2" onClick="login();"  value="登陆" />
+				<a class='forget_password' style='margin:40px 0px 0px 180px;color:green' href='cumster_reg.php' >免费注册</a>
 		</td>
 		</div>
 	     </form>
